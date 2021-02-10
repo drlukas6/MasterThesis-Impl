@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "swift-argument-parser",
+        "repositoryURL": "https://github.com/apple/swift-argument-parser",
+        "state": {
+          "branch": null,
+          "revision": "9564d61b08a5335ae0a36f789a7d71493eacadfc",
+          "version": "0.3.2"
+        }
+      },
+      {
+        "package": "SwiftImage",
+        "repositoryURL": "https://github.com/koher/swift-image.git",
+        "state": {
+          "branch": null,
+          "revision": "c61b8cf4613a7fc80d1c2a84231cef2909e837a1",
+          "version": "0.7.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

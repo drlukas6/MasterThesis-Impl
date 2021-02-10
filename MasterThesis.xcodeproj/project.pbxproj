@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2F1E2F7825D3DF87005804C1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E2F7725D3DF87005804C1 /* main.swift */; };
+		2F1E2F8125D3DFEF005804C1 /* SwiftImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1E2F8025D3DFEF005804C1 /* SwiftImage */; };
+		2F1E2F8525D3E00C005804C1 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1E2F8425D3E00C005804C1 /* ArgumentParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +34,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F1E2F8525D3E00C005804C1 /* ArgumentParser in Frameworks */,
+				2F1E2F8125D3DFEF005804C1 /* SwiftImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +82,10 @@
 			dependencies = (
 			);
 			name = MasterThesis;
+			packageProductDependencies = (
+				2F1E2F8025D3DFEF005804C1 /* SwiftImage */,
+				2F1E2F8425D3E00C005804C1 /* ArgumentParser */,
+			);
 			productName = MasterThesis;
 			productReference = 2F1E2F7425D3DF87005804C1 /* MasterThesis */;
 			productType = "com.apple.product-type.tool";
@@ -105,6 +113,10 @@
 				Base,
 			);
 			mainGroup = 2F1E2F6B25D3DF87005804C1;
+			packageReferences = (
+				2F1E2F7F25D3DFEF005804C1 /* XCRemoteSwiftPackageReference "swift-image" */,
+				2F1E2F8325D3E00C005804C1 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+			);
 			productRefGroup = 2F1E2F7525D3DF87005804C1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -285,6 +297,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2F1E2F7F25D3DFEF005804C1 /* XCRemoteSwiftPackageReference "swift-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/koher/swift-image.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.1;
+			};
+		};
+		2F1E2F8325D3E00C005804C1 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2F1E2F8025D3DFEF005804C1 /* SwiftImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F1E2F7F25D3DFEF005804C1 /* XCRemoteSwiftPackageReference "swift-image" */;
+			productName = SwiftImage;
+		};
+		2F1E2F8425D3E00C005804C1 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F1E2F8325D3E00C005804C1 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2F1E2F6C25D3DF87005804C1 /* Project object */;
 }
