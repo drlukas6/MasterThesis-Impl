@@ -14,6 +14,8 @@ class CGPGraph {
         let columns: Int
     }
 
+    var fitness = Double.infinity
+
     private let levelsBack: Int
     private let inputs: Int
     private let outputs: Int
@@ -34,8 +36,6 @@ class CGPGraph {
         self.inputs = inputs
         self.outputs = outputs
         self.dimension = dimension
-
-        // Step 1: Add input nodes
 
         nodes = (0 ..< 1 + dimension.columns + 1).map { index in
 
@@ -58,6 +58,7 @@ class CGPGraph {
         }
     }
 
+    /// Performs initial node connecting
     func compile() {
         connectNodes()
     }
@@ -92,6 +93,26 @@ class CGPGraph {
 
     func mutate() {
         fatalError("Implement me")
+    }
+
+    func process(inputs: [Double]) -> [Double] {
+
+        guard inputs.count == self.inputs else {
+            fatalError("Number of inputs does not match networks specification. \(inputs.count) != \(self.inputs)")
+        }
+
+        for (input, inputNode) in zip(inputs, inputNodes) {
+            inputNode.input = input
+            inputNode.calculateOutput()
+        }
+
+        for nodeColumn in nodes.suffix(from: 1) {
+            for node in nodeColumn {
+                node.calculateOutput()
+            }
+        }
+
+        return outputNodes.map { node in node.output }
     }
 }
 
