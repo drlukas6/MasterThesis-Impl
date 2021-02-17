@@ -7,5 +7,7 @@
 
 import Foundation
 
-print("Hello, World!")
+let graph = CGPGraph(levelsBack: 3, inputs: 3, outputs: 3, dimension: .init(rows: 2, columns: 10))
+graph.compile()
 
+print(graph.description)

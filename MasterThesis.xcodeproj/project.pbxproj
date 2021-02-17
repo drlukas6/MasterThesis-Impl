@@ -10,6 +10,12 @@
 		2F1E2F7825D3DF87005804C1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E2F7725D3DF87005804C1 /* main.swift */; };
 		2F1E2F8125D3DFEF005804C1 /* SwiftImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1E2F8025D3DFEF005804C1 /* SwiftImage */; };
 		2F1E2F8525D3E00C005804C1 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1E2F8425D3E00C005804C1 /* ArgumentParser */; };
+		2FCEB5E525DD5BEC00DB5B94 /* CGPGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5E425DD5BEC00DB5B94 /* CGPGraph.swift */; };
+		2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */; };
+		2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */; };
+		2FCEB5F325DD5D6800DB5B94 /* OperationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */; };
+		2FCEB5F725DD5EBB00DB5B94 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5F625DD5EBB00DB5B94 /* Operation.swift */; };
+		2FCEB5FC25DD70E100DB5B94 /* OutputNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5FB25DD70E100DB5B94 /* OutputNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +33,12 @@
 /* Begin PBXFileReference section */
 		2F1E2F7425D3DF87005804C1 /* MasterThesis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MasterThesis; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1E2F7725D3DF87005804C1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2FCEB5E425DD5BEC00DB5B94 /* CGPGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPGraph.swift; sourceTree = "<group>"; };
+		2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPNode.swift; sourceTree = "<group>"; };
+		2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughNode.swift; sourceTree = "<group>"; };
+		2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationNode.swift; sourceTree = "<group>"; };
+		2FCEB5F625DD5EBB00DB5B94 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		2FCEB5FB25DD70E100DB5B94 /* OutputNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +73,39 @@
 		2F1E2F7625D3DF87005804C1 /* MasterThesis */ = {
 			isa = PBXGroup;
 			children = (
+				2FCEB5E325DD5BCC00DB5B94 /* CGP */,
 				2F1E2F7725D3DF87005804C1 /* main.swift */,
 			);
 			path = MasterThesis;
+			sourceTree = "<group>";
+		};
+		2FCEB5E325DD5BCC00DB5B94 /* CGP */ = {
+			isa = PBXGroup;
+			children = (
+				2FCEB5EB25DD5C9A00DB5B94 /* Nodes */,
+				2FCEB5E425DD5BEC00DB5B94 /* CGPGraph.swift */,
+			);
+			path = CGP;
+			sourceTree = "<group>";
+		};
+		2FCEB5EB25DD5C9A00DB5B94 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				2FCEB5F525DD5EAF00DB5B94 /* Operations */,
+				2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */,
+				2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */,
+				2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */,
+				2FCEB5FB25DD70E100DB5B94 /* OutputNode.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		2FCEB5F525DD5EAF00DB5B94 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				2FCEB5F625DD5EBB00DB5B94 /* Operation.swift */,
+			);
+			path = Operations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,7 +173,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FCEB5F325DD5D6800DB5B94 /* OperationNode.swift in Sources */,
+				2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */,
+				2FCEB5FC25DD70E100DB5B94 /* OutputNode.swift in Sources */,
 				2F1E2F7825D3DF87005804C1 /* main.swift in Sources */,
+				2FCEB5E525DD5BEC00DB5B94 /* CGPGraph.swift in Sources */,
+				2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */,
+				2FCEB5F725DD5EBB00DB5B94 /* Operation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
