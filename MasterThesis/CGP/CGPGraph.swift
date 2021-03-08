@@ -7,6 +7,11 @@
 
 import Foundation
 
+// 0 0 2
+// operation input1 input2
+
+// izlazi su samo npr. 0 tj index operacije
+
 class CGPGraph {
 
     struct Size {
@@ -30,6 +35,10 @@ class CGPGraph {
         nodes.last! as! [OutputNode]
     }
 
+    var graphDescription: String {
+        ""
+    }
+
     init(levelsBack: Int, inputs: Int, outputs: Int, dimension: CGPGraph.Size) {
 
         self.levelsBack = levelsBack
@@ -46,7 +55,7 @@ class CGPGraph {
                 }
             case 1...dimension.columns:
                 return (0 ..< dimension.rows).map { _ in
-                    OperationNode(operation: Operation.random)
+                    OperationNode(operation: DefaultCGPOperation.random)
                 }
             case dimension.columns + 1:
                 return (0 ..< outputs).map { _ in
@@ -81,7 +90,7 @@ class CGPGraph {
 
                     let colIndex = max(0, column - levelsBack)
 
-                    operationNode.inputs.append(nodes[colIndex].randomElement()!)
+                    operationNode.inputs.append(nodes[colIndex].randomElement()!.output)
                 }
             }
         }
@@ -100,11 +109,11 @@ class CGPGraph {
         guard inputs.count == self.inputs else {
             fatalError("Number of inputs does not match networks specification. \(inputs.count) != \(self.inputs)")
         }
-
-        for (input, inputNode) in zip(inputs, inputNodes) {
-            inputNode.input = input
-            inputNode.calculateOutput()
-        }
+//
+//        for (input, inputNode) in zip(inputs, inputNodes) {
+//            inputNode.input = input
+//            inputNode.calculateOutput()
+//        }
 
         for nodeColumn in nodes.suffix(from: 1) {
             for node in nodeColumn {

@@ -1,5 +1,5 @@
 //
-//  Operation.swift
+//  DefaultCGPOperation.swift
 //  MasterThesis
 //
 //  Created by Lukas Sestic on 17.02.2021..
@@ -7,7 +7,7 @@
 
 import Darwin
 
-enum Operation: CaseIterable {
+enum DefaultCGPOperation: Operation, CaseIterable {
 
     case add
     case substract
@@ -40,7 +40,11 @@ enum Operation: CaseIterable {
         }
     }
 
-    static var random: Operation {
+    static func at(index: Int) -> DefaultCGPOperation {
+        allCases[index]
+    }
+
+    static var random: DefaultCGPOperation {
         allCases.randomElement()!
     }
 }

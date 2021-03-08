@@ -9,6 +9,8 @@ import Foundation
 
 class OutputNode: CGPNode {
 
+    var inputs: [Double] = []
+
     var input: CGPNode!
     private(set) var output: Double = 0
 

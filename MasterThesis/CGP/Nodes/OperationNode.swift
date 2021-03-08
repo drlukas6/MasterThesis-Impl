@@ -9,8 +9,9 @@ import Foundation
 
 class OperationNode: CGPNode {
 
-    var inputs: [CGPNode] = []
-    private var operation: Operation
+    var inputs: [Double]
+
+    private var operation: DefaultCGPOperation
 
     private(set) var output: Double = 0
 
@@ -18,12 +19,12 @@ class OperationNode: CGPNode {
         operation.description + "(" + inputs.map { $0.description }.joined(separator: ", ") + ")"
     }
 
-    init(operation: Operation) {
+    init(operation: DefaultCGPOperation) {
 
         self.operation = operation
     }
 
     func calculateOutput() {
-        output = operation.execute(with: inputs.map { input in input.output })
+        output = operation.execute(with: inputs)
     }
 }

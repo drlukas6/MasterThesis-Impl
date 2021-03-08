@@ -10,5 +10,7 @@ protocol CGPNode {
     var description: String { get }
 
     var output: Double { get }
+    var inputs: [Double] { get set }
+
     func calculateOutput()
 }

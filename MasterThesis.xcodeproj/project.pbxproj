@@ -14,8 +14,9 @@
 		2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */; };
 		2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */; };
 		2FCEB5F325DD5D6800DB5B94 /* OperationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */; };
-		2FCEB5F725DD5EBB00DB5B94 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5F625DD5EBB00DB5B94 /* Operation.swift */; };
+		2FCEB5F725DD5EBB00DB5B94 /* DefaultCGPOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5F625DD5EBB00DB5B94 /* DefaultCGPOperation.swift */; };
 		2FCEB5FC25DD70E100DB5B94 /* OutputNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5FB25DD70E100DB5B94 /* OutputNode.swift */; };
+		2FE7FDAA25F6D17900BD1722 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7FDA925F6D17800BD1722 /* Operation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,8 +38,9 @@
 		2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPNode.swift; sourceTree = "<group>"; };
 		2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughNode.swift; sourceTree = "<group>"; };
 		2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationNode.swift; sourceTree = "<group>"; };
-		2FCEB5F625DD5EBB00DB5B94 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		2FCEB5F625DD5EBB00DB5B94 /* DefaultCGPOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCGPOperation.swift; sourceTree = "<group>"; };
 		2FCEB5FB25DD70E100DB5B94 /* OutputNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputNode.swift; sourceTree = "<group>"; };
+		2FE7FDA925F6D17800BD1722 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		2FCEB5E325DD5BCC00DB5B94 /* CGP */ = {
 			isa = PBXGroup;
 			children = (
+				2FCEB5F525DD5EAF00DB5B94 /* Operations */,
 				2FCEB5EB25DD5C9A00DB5B94 /* Nodes */,
 				2FCEB5E425DD5BEC00DB5B94 /* CGPGraph.swift */,
 			);
@@ -91,7 +94,6 @@
 		2FCEB5EB25DD5C9A00DB5B94 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
-				2FCEB5F525DD5EAF00DB5B94 /* Operations */,
 				2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */,
 				2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */,
 				2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */,
@@ -103,7 +105,8 @@
 		2FCEB5F525DD5EAF00DB5B94 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				2FCEB5F625DD5EBB00DB5B94 /* Operation.swift */,
+				2FCEB5F625DD5EBB00DB5B94 /* DefaultCGPOperation.swift */,
+				2FE7FDA925F6D17800BD1722 /* Operation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -176,10 +179,11 @@
 				2FCEB5F325DD5D6800DB5B94 /* OperationNode.swift in Sources */,
 				2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */,
 				2FCEB5FC25DD70E100DB5B94 /* OutputNode.swift in Sources */,
+				2FE7FDAA25F6D17900BD1722 /* Operation.swift in Sources */,
 				2F1E2F7825D3DF87005804C1 /* main.swift in Sources */,
 				2FCEB5E525DD5BEC00DB5B94 /* CGPGraph.swift in Sources */,
 				2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */,
-				2FCEB5F725DD5EBB00DB5B94 /* Operation.swift in Sources */,
+				2FCEB5F725DD5EBB00DB5B94 /* DefaultCGPOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
