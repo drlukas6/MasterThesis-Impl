@@ -57,6 +57,13 @@ class CGPGraph {
         return description
     }
 
+    var dna: [Int] {
+        graphDescription
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .split(separator: " ")
+            .compactMap { str in Int(str) }
+    }
+
     /// DNA format: nInputs nOutputs nLevelsBack nRows nColumns (nRows x nColumns) * (nOperation indexInput1 indexInput2) (nOutpus) * indexInput
     init(dna: String) {
 
