@@ -9,11 +9,13 @@ import Foundation
 
 class PassthroughNode: CGPNode {
 
-    var inputs: [Double] = []
+    var inputs: [Double] = [] {
+        didSet {
+            calculateOutput()
+        }
+    }
 
     private(set) var output: Double = 0
-
-    let description = "P\(UUID().uuidString.prefix(5))"
 
     func calculateOutput() {
         output = inputs.first!

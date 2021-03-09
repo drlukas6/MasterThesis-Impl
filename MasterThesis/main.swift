@@ -7,11 +7,12 @@
 
 import Foundation
 
-let graph = CGPGraph(levelsBack: 1, inputs: 3, outputs: 3, dimension: .init(rows: 4, columns: 10))
+let graph = CGPGraph(inputs: 3, outputs: 1, levelsBack: 1, dimension: .init(rows: 2, columns: 5))
 graph.compile()
 
-print(graph.description)
+print(graph.graphDescription)
 
 print("-----")
 
-print("OUTPUT for [2.3, 5.3, 2.4] = \(graph.process(inputs: [1, 2, 3]))")
+print("OUTPUT for [1, 2, 3] = \(graph.process(inputs: [1, 2, 3]))")
+

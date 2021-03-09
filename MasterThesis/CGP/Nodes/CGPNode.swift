@@ -5,12 +5,17 @@
 //  Created by Lukas Sestic on 17.02.2021..
 //
 
-protocol CGPNode {
+protocol CGPNode: AnyObject {
 
-    var description: String { get }
+    var operation: Operation { get }
 
     var output: Double { get }
     var inputs: [Double] { get set }
 
     func calculateOutput()
+}
+
+extension CGPNode {
+
+    var operation: Operation { .add }
 }

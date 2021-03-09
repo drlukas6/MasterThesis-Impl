@@ -9,17 +9,13 @@ import Foundation
 
 class OperationNode: CGPNode {
 
-    var inputs: [Double]
+    var inputs: [Double] = []
 
-    private var operation: DefaultCGPOperation
+    private(set) var operation: Operation
 
     private(set) var output: Double = 0
 
-    var description: String {
-        operation.description + "(" + inputs.map { $0.description }.joined(separator: ", ") + ")"
-    }
-
-    init(operation: DefaultCGPOperation) {
+    init(operation: Operation) {
 
         self.operation = operation
     }
