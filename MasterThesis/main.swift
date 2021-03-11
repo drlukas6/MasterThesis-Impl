@@ -14,4 +14,4 @@ print(graph.dna)
 
 print("-----")
 
-print("OUTPUT for [1, 2, 3] = \(graph.process(inputs: [1, 2, 3]))")
+print("OUTPUT for [1, 2, 3] = \(graph.prediction(for: [1, 2, 3]))")

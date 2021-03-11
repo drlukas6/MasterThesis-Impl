@@ -12,7 +12,7 @@ import Foundation
 
 // izlazi su samo npr. 0 tj index operacije
 
-class CGPGraph {
+class CGPGraph: GeneticSpecimen {
 
     struct Size {
         let rows: Int
@@ -28,6 +28,8 @@ class CGPGraph {
 
     private let nodes: [CGPNode]
     private var nodeInputs: [Int: [Int]]
+
+    private var activeNodes = Set<Int>()
 
     var graphDescription: String {
 
@@ -103,7 +105,34 @@ class CGPGraph {
 
             nodeInputs[index + outputIndex] = [outputNodeDna]
 
+            // We know nodes connected to outputs are active so that's a
+            // starting point
+            activeNodes.insert(outputNodeDna)
+
             nodes.append(PassthroughNode())
+        }
+
+        while true {
+
+            var didMakeAnInsertion = false
+
+            for activeNode in activeNodes {
+
+                guard let activeNodeInputs = nodeInputs[activeNode] else {
+                    continue
+                }
+
+                for activeNodeInput in activeNodeInputs {
+
+                    let (didInsert, _) = activeNodes.insert(activeNodeInput)
+
+                    didMakeAnInsertion = didInsert || didMakeAnInsertion
+                }
+            }
+
+            guard didMakeAnInsertion else {
+                break
+            }
         }
 
         self.nodeInputs = nodeInputs
@@ -143,23 +172,8 @@ class CGPGraph {
         let firstOperationNodeIndex = inputs
         let lastOperationNodeIndex = firstOperationNodeIndex + dimension.rows * dimension.columns
 
-        // 3 ulaza
-        // 5 stupca
-        // 2 retka
-        // 1 izlaz
-
-        // 9
         for nodeIndex in (firstOperationNodeIndex ... lastOperationNodeIndex) {
 
-            // in in in | op op | op op | op op | op op | op op | iz
-            //                                    ^ // < 4. stupac
-
-            //  9 - 3 = 6 // bez ulaza
-            // stupac je ceil(6 / brojredaka)
-
-            // step 1. find max connectable node index
-
-            // vraca 3 (broji se od 0)
             let nodeColumn = Int(floor(Double(nodeIndex - inputs) / Double(dimension.rows)))
 
             let maxConnectedNodeIndex = (inputs + (nodeColumn) * dimension.rows) - 1
@@ -180,7 +194,33 @@ class CGPGraph {
 
         for outputNodeIndex in (lastOperationNodeIndex + 1 ... nodes.count) {
 
-            nodeInputs[outputNodeIndex] = [(lastColumnFirstOperationNodeIndex ... lastOperationNodeIndex).randomElement()!]
+            let randomOutputInput = (lastColumnFirstOperationNodeIndex ... lastOperationNodeIndex).randomElement()!
+
+            nodeInputs[outputNodeIndex] = [randomOutputInput]
+            activeNodes.insert(randomOutputInput)
+        }
+
+        while true {
+
+            var didMakeAnInsertion = false
+
+            for activeNode in activeNodes {
+
+                guard let activeNodeInputs = nodeInputs[activeNode] else {
+                    continue
+                }
+
+                for activeNodeInput in activeNodeInputs {
+
+                    let (didInsert, _) = activeNodes.insert(activeNodeInput)
+
+                    didMakeAnInsertion = didInsert || didMakeAnInsertion
+                }
+            }
+
+            guard didMakeAnInsertion else {
+                break
+            }
         }
     }
 
@@ -188,7 +228,7 @@ class CGPGraph {
         fatalError("Implement me")
     }
 
-    func process(inputs: [Double]) -> [Double] {
+    func prediction(for inputs: [Double]) -> [Double] {
 
         guard inputs.count == self.inputs else {
             fatalError("Number of inputs does not match networks specification. \(inputs.count) != \(self.inputs)")
