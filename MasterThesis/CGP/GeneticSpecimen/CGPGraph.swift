@@ -6,12 +6,6 @@
 //
 
 import Foundation
-import os.log
-
-// 0 0 2
-// operation input1 input2
-
-// izlazi su samo npr. 0 tj index operacije
 
 class CGPGraph: GeneticSpecimen {
 
@@ -25,14 +19,14 @@ class CGPGraph: GeneticSpecimen {
         }
     }
 
-    private let logger = Logger()
-
     var fitness = -Double.infinity
 
     private let levelsBack: Int
     private let inputs: Int
     private let outputs: Int
     private let dimension: Size
+
+    private let operationSet: CGPOperationSet
 
     private let nodes: [CGPNode]
     private var nodeInputs: [Int: [Int]]
@@ -56,7 +50,7 @@ class CGPGraph: GeneticSpecimen {
 
             let nodeConnections = nodeInputs[nodeIndex]!.map(String.init)
 
-            description.append("\(Operation.index(of: node.operation)) \(nodeConnections.joined(separator: " ")) ")
+            description.append("\(operationSet.index(of: node.operation)) \(nodeConnections.joined(separator: " ")) ")
         }
 
         for nodeIndex in (nodes.count - outputs ... nodes.count - 1) {
@@ -75,9 +69,9 @@ class CGPGraph: GeneticSpecimen {
     }
 
     /// DNA format: nInputs nOutputs nLevelsBack nRows nColumns (nRows x nColumns) * (nOperation indexInput1 indexInput2) (nOutpus) * indexInput
-    init(dna: [Int]) {
+    init(dna: [Int], operationSet: CGPOperationSet) {
 
-        let dna2 = dna
+        self.operationSet = operationSet
 
         var dna = dna
 
@@ -95,13 +89,14 @@ class CGPGraph: GeneticSpecimen {
 
         var nodeInputs = [Int: [Int]]()
         var index = 0
+
         while true {
 
             guard index < (operationNodesDNAs.count + 1) / 3 else {
                 break
             }
 
-            nodes.append(OperationNode(operation: .at(index: operationNodesDNAs[index])))
+            nodes.append(OperationNode(operation: operationSet.at(index: operationNodesDNAs[index])))
 
             nodeInputs[index + inputs] = [operationNodesDNAs[3 * index + 1],
                                           operationNodesDNAs[3 * index + 2]]
@@ -128,7 +123,9 @@ class CGPGraph: GeneticSpecimen {
         recalculateActiveNodes()
     }
 
-    init(inputs: Int, outputs: Int, levelsBack: Int, dimension: CGPGraph.Size) {
+    init(inputs: Int, outputs: Int,
+         levelsBack: Int, dimension: CGPGraph.Size,
+         operationSet: CGPOperationSet) {
 
         self.inputs = inputs
         self.outputs = outputs
@@ -137,10 +134,12 @@ class CGPGraph: GeneticSpecimen {
 
         self.dimension = dimension
 
+        self.operationSet = operationSet
+
         let inputNodes: [CGPNode] = (0 ..< inputs).map { _ in PassthroughNode() }
 
         let operationNodes: [CGPNode] = (0 ..< (dimension.columns * dimension.rows)).map { _ in
-            OperationNode(operation: .random)
+            OperationNode(operation: operationSet.random)
         }
 
         let outputNodes: [CGPNode] = (0 ..< outputs).map { _ in PassthroughNode() }
@@ -295,9 +294,7 @@ class CGPGraph: GeneticSpecimen {
             .filter { (inputs ..< maxOperationNodeIndex).contains($0) }
             .randomElement()!
 
-        nodes[randomActiveOperationNode].operation = .random
-
-        logger.info("Did mutate node \(randomActiveOperationNode) operation to \(self.nodes[randomActiveOperationNode].operation.description)")
+        nodes[randomActiveOperationNode].operation = operationSet.random
     }
 
     private func mutateRandomConnection() {
@@ -327,8 +324,6 @@ class CGPGraph: GeneticSpecimen {
         nodeInputs[randomActiveNode] = Array(newConnections)
 
         recalculateActiveNodes()
-
-        logger.info("Did mutate node \(randomActiveNode) connections to \(newConnections)")
     }
 
     // MARK: - Public
@@ -360,7 +355,7 @@ class CGPGraph: GeneticSpecimen {
 
     func mutated() -> CGPGraph {
 
-        let copy = CGPGraph(dna: dna)
+        let copy = CGPGraph(dna: dna, operationSet: operationSet)
 
         copy.mutate()
 
@@ -397,13 +392,11 @@ class CGPGraph: GeneticSpecimen {
 
         let randomPoint = (5 ... left.dna.count).randomElement()!
 
-        Logger().info("Combining at point \(randomPoint)")
-
         let leftDna = left.dna.prefix(randomPoint)
         let rightDna = right.dna.suffix(right.dna.count - randomPoint)
 
         let newDna = leftDna + rightDna
 
-        return .init(dna: Array(newDna))
+        return .init(dna: Array(newDna), operationSet: left.operationSet)
     }
 }

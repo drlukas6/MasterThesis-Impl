@@ -11,6 +11,9 @@ protocol Datasource {
 
     var inputs: [[Double]] { get }
     var outputs: [[Double]] { get }
+
+    func makeSubDatasource(ofSize size: Int,
+                           offsetBy offset: Int) -> Datasource
 }
 
 extension Datasource {

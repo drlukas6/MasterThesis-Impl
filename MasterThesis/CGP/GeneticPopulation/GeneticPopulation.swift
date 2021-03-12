@@ -16,62 +16,37 @@ class CGPPopulation {
         let outputs: Int
         let levelsBack: Int
         let dimension: CGPGraph.Size
-    }
+        let operationsSet: CGPOperationSet
 
-    struct PopulationParameters {
+        func makeGraph() -> CGPGraph {
 
-        let populationSize: Int
-        let mutationRate: Double
-        let fitnessCalculator: FitnessCalculator
-        let datasource: Datasource
+            .init(inputs: inputs, outputs: outputs,
+                  levelsBack: levelsBack,
+                  dimension: dimension,
+                  operationSet: operationsSet)
+        }
     }
 
     private let logger = Logger()
 
     var population: [CGPGraph]
 
-    var best: CGPGraph {
-
-        population
-            .sorted(by: { $0.fitness < $1.fitness})
-            .last!
-    }
-
-    private let populationParameters: PopulationParameters
+    private let fitnessCalculator: FitnessCalculator
     private let graphParameters: GraphParameters
 
-    init(populationParameters: PopulationParameters, graphParameters: GraphParameters) {
+    init(fitnessCalculator: FitnessCalculator, graphParameters: GraphParameters) {
 
-        self.populationParameters = populationParameters
+        self.fitnessCalculator = fitnessCalculator
         self.graphParameters = graphParameters
 
-        population = (0 ..< 4).compactMap { _ in CGPGraph(inputs: graphParameters.inputs,
-                                                          outputs: graphParameters.outputs,
-                                                          levelsBack: graphParameters.levelsBack,
-                                                          dimension: graphParameters.dimension) }
+        population = (0 ..< 4).compactMap { _ in graphParameters.makeGraph() }
     }
 
-    func process(generations: Int) {
+    /// Processes a whole dataset for the given number of generations and returns the
+    /// best performing CGPGraph
+    func process(withDatasource datasource: Datasource, forGenerations generations: Int) -> CGPGraph {
 
-        for member in population {
-
-            let memberPredictions = (0 ..< populationParameters.datasource.size).map { row -> Double in
-
-                let input  = populationParameters.datasource.input(at: row)
-
-                let memberPrediction = member.prediction(for: input).first!
-
-                return memberPrediction
-            }
-
-            let truth = populationParameters.datasource.outputs.map { $0.first! }
-
-            let calculatedFitness = populationParameters.fitnessCalculator.calculateFitness(fromPredictions: memberPredictions, groundTruth: truth)
-
-            logger.info("Calculated fitness: \(calculatedFitness)")
-
-            member.fitness = calculatedFitness
-        }
+        process(datasource: datasource, inPopulation: population)
 
         logger.info("Calculated fitnesses: \(self.population.map(\.fitness))")
 
@@ -89,33 +64,57 @@ class CGPPopulation {
                 parent.mutated()
             }
 
-            for member in self.population {
+            let (topMember, topFitness) = process(datasource: datasource, inPopulation: population)
 
-                let memberPredictions = (0 ..< populationParameters.datasource.size).map { row -> Double in
+            logger.info("Top fitness in step \(step + 1): \(topFitness)")
 
-                    let input  = populationParameters.datasource.input(at: row)
+            if topFitness >= parent.fitness {
 
-                    let memberPrediction = member.prediction(for: input).first!
-
-                    return memberPrediction
-                }
-
-                let truth = populationParameters.datasource.outputs.map { $0.first! }
-
-                let calculatedFitness = populationParameters.fitnessCalculator.calculateFitness(fromPredictions: memberPredictions, groundTruth: truth)
-
-                logger.info("Calculated fitness in step \(step + 1): \(calculatedFitness)")
-
-                member.fitness = calculatedFitness
-
-                if calculatedFitness >= parent.fitness {
-
-                    logger.info("Setting fitness \(calculatedFitness) as parent")
-                    parent = member
-                }
+                parent = topMember
             }
         }
 
-        logger.info("Finished with fitness \(parent.fitness)")
+        logger.info("Finished with top fitness \(parent.fitness)")
+
+        return parent
+    }
+
+    // MARK: - Private
+
+    /// Performs a step with a given datasource
+    /// - Returns: Best CGP Graph and its fitness
+    @discardableResult
+    private func process(datasource: Datasource, inPopulation population: [CGPGraph]) -> (CGPGraph, Double) {
+
+        var topMember = population.first!
+        var topFitness = -Double.infinity
+
+        for member in population {
+
+            let memberPredictions = (0 ..< datasource.size).map { row -> Double in
+
+                let input  = datasource.input(at: row)
+
+                let memberPrediction = member.prediction(for: input).first!
+
+                return memberPrediction
+            }
+
+            let truth = datasource.outputs.map { $0.first! }
+
+            let (calculatedFitness, mse) = fitnessCalculator.calculateFitness(fromPredictions: memberPredictions,
+                                                                              groundTruth: truth)
+
+            logger.info("Calculated fitness: \(calculatedFitness), error: \(mse)")
+
+            member.fitness = calculatedFitness
+
+            if calculatedFitness >= topFitness {
+                topMember = member
+                topFitness = calculatedFitness
+            }
+        }
+
+        return (topMember, topFitness)
     }
 }

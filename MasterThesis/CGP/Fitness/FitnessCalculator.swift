@@ -7,5 +7,6 @@
 
 protocol FitnessCalculator {
 
-    func calculateFitness(fromPredictions predictions: [Double], groundTruth: [Double]) -> Double
+    func calculateFitness(fromPredictions predictions: [Double],
+                          groundTruth: [Double]) -> (fitness: Double, error: Double)
 }

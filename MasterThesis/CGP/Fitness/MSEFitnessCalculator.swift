@@ -9,9 +9,8 @@ import Foundation
 
 struct MSEFitnessCalculator: FitnessCalculator {
 
-    func calculateFitness(fromPredictions predictions: [Double], groundTruth: [Double]) -> Double {
-
-        // 1 / n * sum( (p - t) ^ 2 )
+    func calculateFitness(fromPredictions predictions: [Double],
+                          groundTruth: [Double]) -> (fitness: Double, error: Double) {
 
         let mse = zip(predictions, groundTruth)
             .map { prediction, trueValue in
@@ -19,6 +18,6 @@ struct MSEFitnessCalculator: FitnessCalculator {
             }
             .reduce(0, +) / Double(predictions.count)
 
-        return 1 / mse
+        return (1 / mse, mse)
     }
 }
