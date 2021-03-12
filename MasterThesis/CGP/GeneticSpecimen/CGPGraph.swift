@@ -118,12 +118,58 @@ class CGPGraph: GeneticSpecimen {
 
             nodeInputs[index + outputIndex] = [outputNodeDna]
 
-            // We know nodes connected to outputs are active so that's a
-            // starting point
-            activeNodes.insert(outputNodeDna)
-
             nodes.append(PassthroughNode())
         }
+
+        self.nodeInputs = nodeInputs
+
+        self.nodes = nodes
+
+        recalculateActiveNodes()
+    }
+
+    init(inputs: Int, outputs: Int, levelsBack: Int, dimension: CGPGraph.Size) {
+
+        self.inputs = inputs
+        self.outputs = outputs
+
+        self.levelsBack = levelsBack
+
+        self.dimension = dimension
+
+        let inputNodes: [CGPNode] = (0 ..< inputs).map { _ in PassthroughNode() }
+
+        let operationNodes: [CGPNode] = (0 ..< (dimension.columns * dimension.rows)).map { _ in
+            OperationNode(operation: .random)
+        }
+
+        let outputNodes: [CGPNode] = (0 ..< outputs).map { _ in PassthroughNode() }
+
+        nodes = [inputNodes, operationNodes, outputNodes].flatMap { $0 }
+
+        nodeInputs = [:]
+    }
+
+    private func recalculateActiveNodes() {
+
+        activeNodes.removeAll(keepingCapacity: true)
+
+        // We know nodes connected to outputs are active so that's a
+        // starting point
+        nodeInputs
+            .sorted {
+                $0.key < $1.key
+            }
+            .suffix(outputs)
+            .forEach { key, value in
+
+                guard let first = value.first, value.count == 1 else {
+                    fatalError("Output connected to multiple nodes")
+                }
+
+                self.activeNodes.insert(key)
+                self.activeNodes.insert(first)
+            }
 
         while true {
 
@@ -147,32 +193,6 @@ class CGPGraph: GeneticSpecimen {
                 break
             }
         }
-
-        self.nodeInputs = nodeInputs
-
-        self.nodes = nodes
-    }
-
-    init(inputs: Int, outputs: Int, levelsBack: Int, dimension: CGPGraph.Size) {
-
-        self.inputs = inputs
-        self.outputs = outputs
-
-        self.levelsBack = levelsBack
-
-        self.dimension = dimension
-
-        let inputNodes: [CGPNode] = (0 ..< inputs).map { _ in PassthroughNode() }
-
-        let operationNodes: [CGPNode] = (0 ..< (dimension.columns * dimension.rows)).map { _ in
-            OperationNode(operation: .random)
-        }
-
-        let outputNodes: [CGPNode] = (0 ..< outputs).map { _ in PassthroughNode() }
-
-        nodes = [inputNodes, operationNodes, outputNodes].flatMap { $0 }
-
-        nodeInputs = [:]
     }
 
     private func maxConnectedNodeIndexForOperationNode(_ node: Int) -> Int {
@@ -233,7 +253,7 @@ class CGPGraph: GeneticSpecimen {
     private func connectNodes() {
 
         let firstOperationNodeIndex = inputs
-        let lastOperationNodeIndex = firstOperationNodeIndex + dimension.items
+        let lastOperationNodeIndex = firstOperationNodeIndex + dimension.items - 1
 
         for nodeIndex in (firstOperationNodeIndex ... lastOperationNodeIndex) {
 
@@ -253,38 +273,16 @@ class CGPGraph: GeneticSpecimen {
             nodeInputs[nodeIndex] = Array(connections)
         }
 
-        let lastColumnFirstOperationNodeIndex = lastOperationNodeIndex - dimension.rows
+        let lastColumnFirstOperationNodeIndex = lastOperationNodeIndex - dimension.rows + 1
 
-        for outputNodeIndex in (lastOperationNodeIndex + 1 ... nodes.count) {
+        for outputNodeIndex in (lastOperationNodeIndex + 1 ..< nodes.count) {
 
             let randomOutputInput = (lastColumnFirstOperationNodeIndex ... lastOperationNodeIndex).randomElement()!
 
             nodeInputs[outputNodeIndex] = [randomOutputInput]
-            activeNodes.insert(randomOutputInput)
         }
 
-        while true {
-
-            var didMakeAnInsertion = false
-
-            for activeNode in activeNodes {
-
-                guard let activeNodeInputs = nodeInputs[activeNode] else {
-                    continue
-                }
-
-                for activeNodeInput in activeNodeInputs {
-
-                    let (didInsert, _) = activeNodes.insert(activeNodeInput)
-
-                    didMakeAnInsertion = didInsert || didMakeAnInsertion
-                }
-            }
-
-            guard didMakeAnInsertion else {
-                break
-            }
-        }
+        recalculateActiveNodes()
     }
 
     private func mutateRandomOperation() {
@@ -328,6 +326,8 @@ class CGPGraph: GeneticSpecimen {
         }
 
         nodeInputs[randomActiveNode] = Array(newConnections)
+
+        recalculateActiveNodes()
 
         logger.info("Did mutate node \(randomActiveNode) connections to \(newConnections)")
     }
