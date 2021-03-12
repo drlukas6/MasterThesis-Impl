@@ -1,0 +1,4 @@
+language: swift
+xcode_project: MasterThesis.xcodeproj
+xcode_scheme: MasterThesisTest
+xcode_destination: platform=macOS
