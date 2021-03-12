@@ -20,11 +20,13 @@ print("Graph1 for [1, 2, 3] = \(graph.prediction(for: [1, 2, 3]))")
 print("Graph2 for [1, 2, 3] = \(graph2.prediction(for: [1, 2, 3]))")
 print("Graph3 for [1, 2, 3] = \(graph3.prediction(for: [1, 2, 3]))")
 
-let population = CGPPopulation(populationParameters: .init(populationSize: 5, mutationRate: 0.3, fitnessCalculator: MSEFitnessCalculator(), datasource: TestSquaredDataSource()),
-                               graphParameters: .init(inputs: 1, outputs: 1, levelsBack: 2, dimension: .init(rows: 2, columns: 4)))
+let graphParameters = CGPPopulation.GraphParameters(inputs: 1, outputs: 1, levelsBack: 2,
+                                                    dimension: .init(rows: 2, columns: 4))
 
-population.process(generations: 200)
+let population = CGPPopulation(fitnessCalculator: MSEFitnessCalculator(),
+                               graphParameters: graphParameters)
 
-let best = population.best
+let datasource = TestSquaredDataSource()
+let best = population.process(withDatasource: datasource, forGenerations: 200)
 
 print()
