@@ -21,12 +21,14 @@ class CGPPopulation {
 
         let populationSize: Int
         let mutationRate: Double
+        let fitnessCalculator: FitnessCalculator
+        let datasource: Datasource
     }
 
     var population: [CGPGraph]!
 
     init(populationParameters: PopulationParameters, graphParameters: GraphParameters) {
 
-        
+
     }
 }
