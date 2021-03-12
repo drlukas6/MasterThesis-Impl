@@ -15,6 +15,7 @@
 		2F15AD2F25FB6C39008F9562 /* Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD2E25FB6C39008F9562 /* Datasource.swift */; };
 		2F15AD3225FB6CDD008F9562 /* TestSquaredDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD3125FB6CDD008F9562 /* TestSquaredDataSource.swift */; };
 		2F15AD3625FB7072008F9562 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD3525FB7072008F9562 /* Logger.swift */; };
+		2F15AD4125FB8FC9008F9562 /* MasterThesisTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD4025FB8FC9008F9562 /* MasterThesisTest.swift */; };
 		2F1E2F7825D3DF87005804C1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E2F7725D3DF87005804C1 /* main.swift */; };
 		2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */; };
 		2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */; };
@@ -43,6 +44,9 @@
 		2F15AD2E25FB6C39008F9562 /* Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datasource.swift; sourceTree = "<group>"; };
 		2F15AD3125FB6CDD008F9562 /* TestSquaredDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSquaredDataSource.swift; sourceTree = "<group>"; };
 		2F15AD3525FB7072008F9562 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		2F15AD3E25FB8FC9008F9562 /* MasterThesisTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MasterThesisTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F15AD4025FB8FC9008F9562 /* MasterThesisTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterThesisTest.swift; sourceTree = "<group>"; };
+		2F15AD4225FB8FC9008F9562 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F1E2F7425D3DF87005804C1 /* MasterThesis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MasterThesis; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1E2F7725D3DF87005804C1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPNode.swift; sourceTree = "<group>"; };
@@ -54,6 +58,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2F15AD3B25FB8FC9008F9562 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2F1E2F7125D3DF87005804C1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -100,10 +111,20 @@
 			path = Logging;
 			sourceTree = "<group>";
 		};
+		2F15AD3F25FB8FC9008F9562 /* MasterThesisTest */ = {
+			isa = PBXGroup;
+			children = (
+				2F15AD4025FB8FC9008F9562 /* MasterThesisTest.swift */,
+				2F15AD4225FB8FC9008F9562 /* Info.plist */,
+			);
+			path = MasterThesisTest;
+			sourceTree = "<group>";
+		};
 		2F1E2F6B25D3DF87005804C1 = {
 			isa = PBXGroup;
 			children = (
 				2F1E2F7625D3DF87005804C1 /* MasterThesis */,
+				2F15AD3F25FB8FC9008F9562 /* MasterThesisTest */,
 				2F1E2F7525D3DF87005804C1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				2F1E2F7425D3DF87005804C1 /* MasterThesis */,
+				2F15AD3E25FB8FC9008F9562 /* MasterThesisTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,6 +191,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2F15AD3D25FB8FC9008F9562 /* MasterThesisTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F15AD4525FB8FC9008F9562 /* Build configuration list for PBXNativeTarget "MasterThesisTest" */;
+			buildPhases = (
+				2F15AD3A25FB8FC9008F9562 /* Sources */,
+				2F15AD3B25FB8FC9008F9562 /* Frameworks */,
+				2F15AD3C25FB8FC9008F9562 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MasterThesisTest;
+			productName = MasterThesisTest;
+			productReference = 2F15AD3E25FB8FC9008F9562 /* MasterThesisTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		2F1E2F7325D3DF87005804C1 /* MasterThesis */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F1E2F7B25D3DF87005804C1 /* Build configuration list for PBXNativeTarget "MasterThesis" */;
@@ -199,6 +238,9 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					2F15AD3D25FB8FC9008F9562 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					2F1E2F7325D3DF87005804C1 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -222,11 +264,30 @@
 			projectRoot = "";
 			targets = (
 				2F1E2F7325D3DF87005804C1 /* MasterThesis */,
+				2F15AD3D25FB8FC9008F9562 /* MasterThesisTest */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		2F15AD3C25FB8FC9008F9562 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		2F15AD3A25FB8FC9008F9562 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F15AD4125FB8FC9008F9562 /* MasterThesisTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2F1E2F7025D3DF87005804C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -250,6 +311,42 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		2F15AD4325FB8FC9008F9562 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 22AZG63582;
+				INFOPLIST_FILE = MasterThesisTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukassestic.MasterThesisTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2F15AD4425FB8FC9008F9562 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 22AZG63582;
+				INFOPLIST_FILE = MasterThesisTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukassestic.MasterThesisTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		2F1E2F7925D3DF87005804C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -390,6 +487,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2F15AD4525FB8FC9008F9562 /* Build configuration list for PBXNativeTarget "MasterThesisTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F15AD4325FB8FC9008F9562 /* Debug */,
+				2F15AD4425FB8FC9008F9562 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2F1E2F6F25D3DF87005804C1 /* Build configuration list for PBXProject "MasterThesis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
