@@ -18,21 +18,9 @@ class CGPPopulation {
         let dimension: CGPGraph.Size
     }
 
-    struct PopulationParameters {
-
-        let fitnessCalculator: FitnessCalculator
-    }
-
     private let logger = Logger()
 
     var population: [CGPGraph]
-
-    var best: CGPGraph {
-
-        population
-            .sorted(by: { $0.fitness < $1.fitness})
-            .last!
-    }
 
     private let fitnessCalculator: FitnessCalculator
     private let graphParameters: GraphParameters
@@ -90,7 +78,7 @@ class CGPPopulation {
     /// Performs a step with a given datasource
     /// - Returns: Best CGP Graph and its fitness
     @discardableResult
-    private func process(datasource: Datasource, inPopulation population: [CGPGraph]) -> (CGPGraph, Double){
+    private func process(datasource: Datasource, inPopulation population: [CGPGraph]) -> (CGPGraph, Double) {
 
         var topMember = population.first!
         var topFitness = -Double.infinity
@@ -108,10 +96,10 @@ class CGPPopulation {
 
             let truth = datasource.outputs.map { $0.first! }
 
-            let calculatedFitness = fitnessCalculator.calculateFitness(fromPredictions: memberPredictions,
-                                                                       groundTruth: truth)
+            let (calculatedFitness, mse) = fitnessCalculator.calculateFitness(fromPredictions: memberPredictions,
+                                                                              groundTruth: truth)
 
-            logger.info("Calculated fitness: \(calculatedFitness)")
+            logger.info("Calculated fitness: \(calculatedFitness), error: \(mse)")
 
             member.fitness = calculatedFitness
 
