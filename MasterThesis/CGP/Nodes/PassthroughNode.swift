@@ -9,6 +9,8 @@ import Foundation
 
 class PassthroughNode: CGPNode {
 
+    var operation: Operation = .add
+
     var inputs: [Double] = [] {
         didSet {
             calculateOutput()

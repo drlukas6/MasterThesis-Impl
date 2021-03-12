@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F15AD1C25FADE22008F9562 /* SwiftImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1E2F8025D3DFEF005804C1 /* SwiftImage */; };
+		2F15AD1D25FADE22008F9562 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1E2F8425D3E00C005804C1 /* ArgumentParser */; };
+		2F15AD2125FAE2D3008F9562 /* GeneticPopulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD2025FAE2D3008F9562 /* GeneticPopulation.swift */; };
 		2F1E2F7825D3DF87005804C1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E2F7725D3DF87005804C1 /* main.swift */; };
 		2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */; };
 		2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */; };
@@ -29,6 +32,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2F15AD2025FAE2D3008F9562 /* GeneticPopulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneticPopulation.swift; sourceTree = "<group>"; };
 		2F1E2F7425D3DF87005804C1 /* MasterThesis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MasterThesis; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1E2F7725D3DF87005804C1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPNode.swift; sourceTree = "<group>"; };
@@ -44,12 +48,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F15AD1D25FADE22008F9562 /* ArgumentParser in Frameworks */,
+				2F15AD1C25FADE22008F9562 /* SwiftImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F15AD1F25FAE2B8008F9562 /* GeneticPopulation */ = {
+			isa = PBXGroup;
+			children = (
+				2F15AD2025FAE2D3008F9562 /* GeneticPopulation.swift */,
+			);
+			path = GeneticPopulation;
+			sourceTree = "<group>";
+		};
 		2F1E2F6B25D3DF87005804C1 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +95,7 @@
 				2FCEB5F525DD5EAF00DB5B94 /* Operations */,
 				2FCEB5EB25DD5C9A00DB5B94 /* Nodes */,
 				5867BD9977E30D2DFCB31E03 /* GeneticSpecimen */,
+				2F15AD1F25FAE2B8008F9562 /* GeneticPopulation */,
 			);
 			path = CGP;
 			sourceTree = "<group>";
@@ -129,8 +144,8 @@
 			);
 			name = MasterThesis;
 			packageProductDependencies = (
-				2F1E2F8025D3DFEF005804C1,
-				2F1E2F8425D3E00C005804C1,
+				2F1E2F8025D3DFEF005804C1 /* SwiftImage */,
+				2F1E2F8425D3E00C005804C1 /* ArgumentParser */,
 			);
 			productName = MasterThesis;
 			productReference = 2F1E2F7425D3DF87005804C1 /* MasterThesis */;
@@ -160,8 +175,8 @@
 			);
 			mainGroup = 2F1E2F6B25D3DF87005804C1;
 			packageReferences = (
-				2F1E2F7F25D3DFEF005804C1,
-				2F1E2F8325D3E00C005804C1,
+				2F1E2F7F25D3DFEF005804C1 /* XCRemoteSwiftPackageReference "swift-image" */,
+				2F1E2F8325D3E00C005804C1 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 			);
 			productRefGroup = 2F1E2F7525D3DF87005804C1 /* Products */;
 			projectDirPath = "";
@@ -181,6 +196,7 @@
 				2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */,
 				2FE7FDAA25F6D17900BD1722 /* Operation.swift in Sources */,
 				2F1E2F7825D3DF87005804C1 /* main.swift in Sources */,
+				2F15AD2125FAE2D3008F9562 /* GeneticPopulation.swift in Sources */,
 				2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */,
 				5867B0D987E918B55C1F8D62 /* GeneticSpecimen.swift in Sources */,
 				5867B82790974FA768FCFEE9 /* CGPGraph.swift in Sources */,
@@ -351,7 +367,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2F1E2F7F25D3DFEF005804C1 = {
+		2F1E2F7F25D3DFEF005804C1 /* XCRemoteSwiftPackageReference "swift-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/koher/swift-image.git";
 			requirement = {
@@ -359,7 +375,7 @@
 				minimumVersion = 0.7.1;
 			};
 		};
-		2F1E2F8325D3E00C005804C1 = {
+		2F1E2F8325D3E00C005804C1 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser";
 			requirement = {
@@ -370,14 +386,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2F1E2F8025D3DFEF005804C1 = {
+		2F1E2F8025D3DFEF005804C1 /* SwiftImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2F1E2F7F25D3DFEF005804C1;
+			package = 2F1E2F7F25D3DFEF005804C1 /* XCRemoteSwiftPackageReference "swift-image" */;
 			productName = SwiftImage;
 		};
-		2F1E2F8425D3E00C005804C1 = {
+		2F1E2F8425D3E00C005804C1 /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2F1E2F8325D3E00C005804C1;
+			package = 2F1E2F8325D3E00C005804C1 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
 			productName = ArgumentParser;
 		};
 /* End XCSwiftPackageProductDependency section */

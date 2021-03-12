@@ -11,7 +11,7 @@ class OperationNode: CGPNode {
 
     var inputs: [Double] = []
 
-    private(set) var operation: Operation
+    var operation: Operation
 
     private(set) var output: Double = 0
 

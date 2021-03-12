@@ -7,7 +7,7 @@
 
 protocol CGPNode: AnyObject {
 
-    var operation: Operation { get }
+    var operation: Operation { get set }
 
     var output: Double { get }
     var inputs: [Double] { get set }

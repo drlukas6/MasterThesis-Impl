@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os.log
 
 // 0 0 2
 // operation input1 input2
@@ -15,9 +16,16 @@ import Foundation
 class CGPGraph: GeneticSpecimen {
 
     struct Size {
+
         let rows: Int
         let columns: Int
+
+        var items: Int {
+            rows * columns
+        }
     }
+
+    private let logger = Logger()
 
     var fitness = Double.infinity
 
@@ -42,7 +50,7 @@ class CGPGraph: GeneticSpecimen {
         description.append("\(dimension.rows) ")
         description.append("\(dimension.columns) ")
 
-        for nodeIndex in (inputs ... inputs + dimension.rows * dimension.columns) {
+        for nodeIndex in (inputs ..< inputs + dimension.items) {
 
             let node = nodes[nodeIndex]
 
@@ -51,7 +59,7 @@ class CGPGraph: GeneticSpecimen {
             description.append("\(Operation.index(of: node.operation)) \(nodeConnections.joined(separator: " ")) ")
         }
 
-        for nodeIndex in (nodes.count - outputs - 1 ..< nodes.count - 1) {
+        for nodeIndex in (nodes.count - outputs ... nodes.count - 1) {
 
             description.append("\(nodeInputs[nodeIndex]!.first!) ")
         }
@@ -67,9 +75,11 @@ class CGPGraph: GeneticSpecimen {
     }
 
     /// DNA format: nInputs nOutputs nLevelsBack nRows nColumns (nRows x nColumns) * (nOperation indexInput1 indexInput2) (nOutpus) * indexInput
-    init(dna: String) {
+    init(dna: [Int]) {
 
-        var dna = dna.split(separator: " ").compactMap { Int($0) }
+        let dna2 = dna
+
+        var dna = dna
 
         inputs = dna.removeFirst()
         outputs = dna.removeFirst()
@@ -77,26 +87,29 @@ class CGPGraph: GeneticSpecimen {
 
         dimension = .init(rows: dna.removeFirst(), columns: dna.removeFirst())
 
-        let operationNodesDNAs = dna.dropFirst(dimension.rows * dimension.columns)
+        let operationNodesDNAs = dna.prefix(dimension.items * 3)
+
+        dna.removeFirst(dimension.items * 3)
 
         var nodes: [CGPNode] = ( 0 ..< inputs).map { _ in PassthroughNode() }
 
         var nodeInputs = [Int: [Int]]()
-        var index = inputs
+        var index = 0
         while true {
 
-            guard index < operationNodesDNAs.count + inputs else {
+            guard index < (operationNodesDNAs.count + 1) / 3 else {
                 break
             }
 
             nodes.append(OperationNode(operation: .at(index: operationNodesDNAs[index])))
-            nodeInputs[index] = [operationNodesDNAs[index + 1],
-                                 operationNodesDNAs[index + 2]]
 
-            index += 3
+            nodeInputs[index + inputs] = [operationNodesDNAs[3 * index + 1],
+                                          operationNodesDNAs[3 * index + 2]]
+
+            index += 1
         }
 
-        index += 1
+        index = inputs + dimension.items
 
         // We removed all the other stuff
         let outputNodesDna = dna
@@ -162,15 +175,65 @@ class CGPGraph: GeneticSpecimen {
         nodeInputs = [:]
     }
 
-    /// Performs initial node connecting
-    func compile() {
-        connectNodes()
+    private func maxConnectedNodeIndexForOperationNode(_ node: Int) -> Int {
+
+        let nodeColumn = Int(floor(Double(node - inputs) / Double(dimension.rows)))
+
+        return (inputs + (nodeColumn) * dimension.rows) - 1
+    }
+
+    private func minConnectedNodeIndexForOperationNode(_ node: Int, maxConnectedNodeIndex: Int) -> Int {
+        max(0, maxConnectedNodeIndex - levelsBack * dimension.rows)
+    }
+
+    private func operationNodeConnectionRange(for node: Int) -> ClosedRange<Int> {
+
+        let max = maxConnectedNodeIndexForOperationNode(node)
+
+        return (minConnectedNodeIndexForOperationNode(node, maxConnectedNodeIndex: max) ... max)
+    }
+
+    private func outputNodeConnectionRange() -> ClosedRange<Int> {
+
+        let firstOperationNodeIndex = inputs
+        let lastOperationNodeIndex = firstOperationNodeIndex + dimension.items
+
+        let lastColumnFirstOperationNodeIndex = lastOperationNodeIndex - dimension.rows
+
+        return (lastColumnFirstOperationNodeIndex ... lastOperationNodeIndex)
+    }
+
+    private enum NodeType {
+
+        case operation
+        case input
+        case output
+    }
+
+    private func nodeType(forNodeAtIndex index: Int) -> NodeType {
+
+        guard index <= nodes.count else {
+            fatalError("Impossible index requested")
+        }
+
+        switch index {
+        case -.max ..< 0:
+            fatalError()
+        case 0 ..< inputs:
+            return .input
+        case inputs ..< inputs + dimension.columns * dimension.columns:
+            return .operation
+        case inputs + dimension.columns * dimension.columns ..< inputs + dimension.columns * dimension.columns + outputs:
+            return .output
+        default:
+            fatalError("Index unrecognized")
+        }
     }
 
     private func connectNodes() {
 
         let firstOperationNodeIndex = inputs
-        let lastOperationNodeIndex = firstOperationNodeIndex + dimension.rows * dimension.columns
+        let lastOperationNodeIndex = firstOperationNodeIndex + dimension.items
 
         for nodeIndex in (firstOperationNodeIndex ... lastOperationNodeIndex) {
 
@@ -224,8 +287,76 @@ class CGPGraph: GeneticSpecimen {
         }
     }
 
+    private func mutateRandomOperation() {
+
+        let maxOperationNodeIndex = inputs + dimension.columns * dimension.columns
+
+        let randomActiveOperationNode = activeNodes
+            .filter { (inputs ..< maxOperationNodeIndex).contains($0) }
+            .randomElement()!
+
+        nodes[randomActiveOperationNode].operation = .random
+
+        logger.info("Did mutate node \(randomActiveOperationNode) operation to \(self.nodes[randomActiveOperationNode].operation.description)")
+    }
+
+    private func mutateRandomConnection() {
+
+        let randomActiveNode = activeNodes
+            .filter { $0 >= inputs }
+            .randomElement()!
+
+        let currentConnections = nodeInputs[randomActiveNode]!
+
+        var newConnections = Set<Int>()
+
+        switch nodeType(forNodeAtIndex: randomActiveNode) {
+        case .input:
+            fatalError("Input could not be chosen")
+        case .operation:
+
+            newConnections.insert(currentConnections.randomElement()!)
+
+            while newConnections.count < 2 {
+
+                let randomRange = operationNodeConnectionRange(for: randomActiveNode)
+                newConnections.insert(randomRange.randomElement()!)
+            }
+        case .output:
+
+            newConnections.insert(outputNodeConnectionRange().randomElement()!)
+        }
+
+        nodeInputs[randomActiveNode] = Array(newConnections)
+
+        logger.info("Did mutate node \(randomActiveNode) connections to \(newConnections)")
+    }
+
+    // MARK: - Public
+
+    /// Performs initial node connecting
+    func compile() {
+        connectNodes()
+    }
+
+    private enum MutationType: CaseIterable {
+
+        case operation
+        case input
+
+        static var random: MutationType {
+            allCases.randomElement()!
+        }
+    }
+
     func mutate() {
-        fatalError("Implement me")
+
+        switch MutationType.random {
+        case .input:
+            mutateRandomConnection()
+        case .operation:
+            mutateRandomOperation()
+        }
     }
 
     func prediction(for inputs: [Double]) -> [Double] {
@@ -248,5 +379,21 @@ class CGPGraph: GeneticSpecimen {
         }
 
         return nodes.suffix(outputs).map { node in node.output }
+    }
+
+    // Mark: - Public Static
+
+    static func combine(left: CGPGraph, right: CGPGraph) -> CGPGraph {
+
+        let randomPoint = (5 ... left.dna.count).randomElement()!
+
+        Logger().info("Combining at point \(randomPoint)")
+
+        let leftDna = left.dna.prefix(randomPoint)
+        let rightDna = right.dna.suffix(right.dna.count - randomPoint)
+
+        let newDna = leftDna + rightDna
+
+        return .init(dna: Array(newDna))
     }
 }
