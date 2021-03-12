@@ -22,7 +22,7 @@ enum Operation: CaseIterable {
         case .add: return input[0] + input[1]
         case .substract: return input[0] - input[1]
         case .multiply: return input[0] * input[1]
-        case .divide: return input[0] / input[1]
+        case .divide: return input[0] / (input[1] + 1e-3)
         case .sin: return Darwin.sin(input[0])
         case .cos: return Darwin.cos(input[0])
         }

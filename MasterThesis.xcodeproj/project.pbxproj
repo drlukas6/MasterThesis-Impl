@@ -14,6 +14,7 @@
 		2F15AD2B25FB6A22008F9562 /* MSEFitnessCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD2A25FB6A22008F9562 /* MSEFitnessCalculator.swift */; };
 		2F15AD2F25FB6C39008F9562 /* Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD2E25FB6C39008F9562 /* Datasource.swift */; };
 		2F15AD3225FB6CDD008F9562 /* TestSquaredDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD3125FB6CDD008F9562 /* TestSquaredDataSource.swift */; };
+		2F15AD3625FB7072008F9562 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD3525FB7072008F9562 /* Logger.swift */; };
 		2F1E2F7825D3DF87005804C1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E2F7725D3DF87005804C1 /* main.swift */; };
 		2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */; };
 		2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */; };
@@ -41,6 +42,7 @@
 		2F15AD2A25FB6A22008F9562 /* MSEFitnessCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSEFitnessCalculator.swift; sourceTree = "<group>"; };
 		2F15AD2E25FB6C39008F9562 /* Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datasource.swift; sourceTree = "<group>"; };
 		2F15AD3125FB6CDD008F9562 /* TestSquaredDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSquaredDataSource.swift; sourceTree = "<group>"; };
+		2F15AD3525FB7072008F9562 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		2F1E2F7425D3DF87005804C1 /* MasterThesis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MasterThesis; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1E2F7725D3DF87005804C1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPNode.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 			path = Datasource;
 			sourceTree = "<group>";
 		};
+		2F15AD3425FB706C008F9562 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				2F15AD3525FB7072008F9562 /* Logger.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
 		2F1E2F6B25D3DF87005804C1 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +128,7 @@
 		2FCEB5E325DD5BCC00DB5B94 /* CGP */ = {
 			isa = PBXGroup;
 			children = (
+				2F15AD3425FB706C008F9562 /* Logging */,
 				2F15AD2D25FB6C2B008F9562 /* Datasource */,
 				2F15AD2525FB6974008F9562 /* Fitness */,
 				2FCEB5F525DD5EAF00DB5B94 /* Operations */,
@@ -229,6 +240,7 @@
 				2F1E2F7825D3DF87005804C1 /* main.swift in Sources */,
 				2F15AD2125FAE2D3008F9562 /* GeneticPopulation.swift in Sources */,
 				2F15AD2F25FB6C39008F9562 /* Datasource.swift in Sources */,
+				2F15AD3625FB7072008F9562 /* Logger.swift in Sources */,
 				2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */,
 				5867B0D987E918B55C1F8D62 /* GeneticSpecimen.swift in Sources */,
 				5867B82790974FA768FCFEE9 /* CGPGraph.swift in Sources */,

@@ -27,7 +27,7 @@ class CGPGraph: GeneticSpecimen {
 
     private let logger = Logger()
 
-    var fitness = Double.infinity
+    var fitness = -Double.infinity
 
     private let levelsBack: Int
     private let inputs: Int
@@ -148,6 +148,8 @@ class CGPGraph: GeneticSpecimen {
         nodes = [inputNodes, operationNodes, outputNodes].flatMap { $0 }
 
         nodeInputs = [:]
+
+        compile()
     }
 
     private func recalculateActiveNodes() {
@@ -241,9 +243,9 @@ class CGPGraph: GeneticSpecimen {
             fatalError()
         case 0 ..< inputs:
             return .input
-        case inputs ..< inputs + dimension.columns * dimension.columns:
+        case inputs ..< inputs + dimension.items:
             return .operation
-        case inputs + dimension.columns * dimension.columns ..< inputs + dimension.columns * dimension.columns + outputs:
+        case inputs + dimension.items ..< inputs + dimension.items + outputs:
             return .output
         default:
             fatalError("Index unrecognized")
@@ -263,14 +265,14 @@ class CGPGraph: GeneticSpecimen {
 
             let minConnectedNodeIndex = max(0, maxConnectedNodeIndex - levelsBack * dimension.rows)
 
-            var connections = Set<Int>()
+            var connections = [Int]()
 
             while connections.count < 2 {
 
-                connections.insert((minConnectedNodeIndex ... maxConnectedNodeIndex).randomElement()!)
+                connections.append((minConnectedNodeIndex ... maxConnectedNodeIndex).randomElement()!)
             }
 
-            nodeInputs[nodeIndex] = Array(connections)
+            nodeInputs[nodeIndex] = connections
         }
 
         let lastColumnFirstOperationNodeIndex = lastOperationNodeIndex - dimension.rows + 1
@@ -306,23 +308,20 @@ class CGPGraph: GeneticSpecimen {
 
         let currentConnections = nodeInputs[randomActiveNode]!
 
-        var newConnections = Set<Int>()
+        var newConnections = [Int]()
 
         switch nodeType(forNodeAtIndex: randomActiveNode) {
         case .input:
             fatalError("Input could not be chosen")
         case .operation:
 
-            newConnections.insert(currentConnections.randomElement()!)
+            newConnections.append(currentConnections.randomElement()!)
 
-            while newConnections.count < 2 {
-
-                let randomRange = operationNodeConnectionRange(for: randomActiveNode)
-                newConnections.insert(randomRange.randomElement()!)
-            }
+            let randomRange = operationNodeConnectionRange(for: randomActiveNode)
+            newConnections.append(randomRange.randomElement()!)
         case .output:
 
-            newConnections.insert(outputNodeConnectionRange().randomElement()!)
+            newConnections.append(outputNodeConnectionRange().randomElement()!)
         }
 
         nodeInputs[randomActiveNode] = Array(newConnections)
@@ -357,6 +356,17 @@ class CGPGraph: GeneticSpecimen {
         case .operation:
             mutateRandomOperation()
         }
+    }
+
+    func mutated() -> CGPGraph {
+
+        let copy = CGPGraph(dna: dna)
+
+        copy.mutate()
+
+        copy.fitness = -.infinity
+
+        return copy
     }
 
     func prediction(for inputs: [Double]) -> [Double] {

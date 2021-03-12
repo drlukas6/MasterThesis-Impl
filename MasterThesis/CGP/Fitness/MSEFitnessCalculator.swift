@@ -13,10 +13,12 @@ struct MSEFitnessCalculator: FitnessCalculator {
 
         // 1 / n * sum( (p - t) ^ 2 )
 
-        zip(predictions, groundTruth)
+        let mse = zip(predictions, groundTruth)
             .map { prediction, trueValue in
                 pow((prediction - trueValue), 2)
             }
             .reduce(0, +) / Double(predictions.count)
+
+        return 1 / mse
     }
 }
