@@ -2,5 +2,6 @@ language: swift
 xcode_project: MasterThesis.xcodeproj
 xcode_scheme: MasterThesisTest
 xcode_destination: platform=macOS
+osx_image: xcode12.2
 script:
     - xcodebuild test -project 'MasterThesis.xcodeproj' -scheme 'MasterThesisTest' -destination 'platform=macOS'
