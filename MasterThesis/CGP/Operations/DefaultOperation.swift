@@ -34,7 +34,7 @@ enum DefaultOperation: CaseIterable, CGPOperation {
         case .add: return input[0] + input[1]
         case .substract: return input[0] - input[1]
         case .multiply: return input[0] * input[1]
-        case .divide: return abs(input[1]) < .epsilon ? input[0] : input[0] / input[1]
+        case .divide: return abs(input[1]) < .epsilon ? input[0] : input[0] / input[1]  // !< if denominator is 0, works as identity
         case .sin: return Darwin.sin(input[0])
         case .cos: return Darwin.cos(input[0])
         }
@@ -47,18 +47,6 @@ enum DefaultOperation: CaseIterable, CGPOperation {
         }
 
         return self == rhs
-    }
-
-    var description: String {
-
-        switch self {
-        case .add: return "+"
-        case .substract: return "-"
-        case .multiply: return "x"
-        case .divide: return "/"
-        case .sin: return "sin"
-        case .cos: return "cos"
-        }
     }
 }
 

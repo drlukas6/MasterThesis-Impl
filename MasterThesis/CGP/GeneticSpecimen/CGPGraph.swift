@@ -6,12 +6,6 @@
 //
 
 import Foundation
-import os.log
-
-// 0 0 2
-// operation input1 input2
-
-// izlazi su samo npr. 0 tj index operacije
 
 class CGPGraph: GeneticSpecimen {
 
@@ -24,8 +18,6 @@ class CGPGraph: GeneticSpecimen {
             rows * columns
         }
     }
-
-    private let logger = Logger()
 
     var fitness = -Double.infinity
 
@@ -97,6 +89,7 @@ class CGPGraph: GeneticSpecimen {
 
         var nodeInputs = [Int: [Int]]()
         var index = 0
+
         while true {
 
             guard index < (operationNodesDNAs.count + 1) / 3 else {
@@ -331,8 +324,6 @@ class CGPGraph: GeneticSpecimen {
         nodeInputs[randomActiveNode] = Array(newConnections)
 
         recalculateActiveNodes()
-
-        logger.info("Did mutate node \(randomActiveNode) connections to \(newConnections)")
     }
 
     // MARK: - Public
@@ -400,8 +391,6 @@ class CGPGraph: GeneticSpecimen {
     static func combine(left: CGPGraph, right: CGPGraph) -> CGPGraph {
 
         let randomPoint = (5 ... left.dna.count).randomElement()!
-
-        Logger().info("Combining at point \(randomPoint)")
 
         let leftDna = left.dna.prefix(randomPoint)
         let rightDna = right.dna.suffix(right.dna.count - randomPoint)
