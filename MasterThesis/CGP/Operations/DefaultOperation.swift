@@ -7,7 +7,19 @@
 
 import Darwin
 
-enum Operation: CaseIterable {
+private extension Double {
+
+    static let epsilon = 1e-4
+}
+
+struct DefaultOperationSet: CGPOperationSet {
+
+    var operations: [CGPOperation] {
+        DefaultOperation.allCases
+    }
+}
+
+enum DefaultOperation: CaseIterable, CGPOperation {
 
     case add
     case substract
@@ -22,10 +34,19 @@ enum Operation: CaseIterable {
         case .add: return input[0] + input[1]
         case .substract: return input[0] - input[1]
         case .multiply: return input[0] * input[1]
-        case .divide: return input[0] / (input[1] + 1e-3)
+        case .divide: return abs(input[1]) < .epsilon ? input[0] : input[0] / input[1]
         case .sin: return Darwin.sin(input[0])
         case .cos: return Darwin.cos(input[0])
         }
+    }
+
+    func isEqual(to rhs: CGPOperation) -> Bool {
+
+        guard let rhs = rhs as? DefaultOperation else {
+            return false
+        }
+
+        return self == rhs
     }
 
     var description: String {
@@ -39,16 +60,5 @@ enum Operation: CaseIterable {
         case .cos: return "cos"
         }
     }
-
-    static func at(index: Int) -> Operation {
-        allCases[index]
-    }
-
-    static var random: Operation {
-        allCases.randomElement()!
-    }
-
-    static func index(of operation: Operation) -> Int {
-        allCases.firstIndex(of: operation)!
-    }
 }
+

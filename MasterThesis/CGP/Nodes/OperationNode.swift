@@ -11,11 +11,11 @@ class OperationNode: CGPNode {
 
     var inputs: [Double] = []
 
-    var operation: Operation
+    var operation: CGPOperation
 
     private(set) var output: Double = 0
 
-    init(operation: Operation) {
+    init(operation: CGPOperation) {
 
         self.operation = operation
     }

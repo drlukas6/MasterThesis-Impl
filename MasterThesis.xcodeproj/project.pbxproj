@@ -15,10 +15,11 @@
 		2F15AD2F25FB6C39008F9562 /* Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD2E25FB6C39008F9562 /* Datasource.swift */; };
 		2F15AD3225FB6CDD008F9562 /* TestSquaredDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD3125FB6CDD008F9562 /* TestSquaredDataSource.swift */; };
 		2F1E2F7825D3DF87005804C1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E2F7725D3DF87005804C1 /* main.swift */; };
+		2F6C347325FC10E300BEE963 /* CGPOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347225FC10E300BEE963 /* CGPOperation.swift */; };
 		2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */; };
 		2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */; };
 		2FCEB5F325DD5D6800DB5B94 /* OperationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */; };
-		2FE7FDAA25F6D17900BD1722 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7FDA925F6D17800BD1722 /* Operation.swift */; };
+		2FE7FDAA25F6D17900BD1722 /* DefaultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7FDA925F6D17800BD1722 /* DefaultOperation.swift */; };
 		5867B0D987E918B55C1F8D62 /* GeneticSpecimen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5867B93AA2F0505FD63CA77E /* GeneticSpecimen.swift */; };
 		5867B82790974FA768FCFEE9 /* CGPGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5867BCB6FD6195FCF6557CDE /* CGPGraph.swift */; };
 /* End PBXBuildFile section */
@@ -43,10 +44,11 @@
 		2F15AD3125FB6CDD008F9562 /* TestSquaredDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSquaredDataSource.swift; sourceTree = "<group>"; };
 		2F1E2F7425D3DF87005804C1 /* MasterThesis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MasterThesis; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1E2F7725D3DF87005804C1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2F6C347225FC10E300BEE963 /* CGPOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPOperation.swift; sourceTree = "<group>"; };
 		2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPNode.swift; sourceTree = "<group>"; };
 		2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughNode.swift; sourceTree = "<group>"; };
 		2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationNode.swift; sourceTree = "<group>"; };
-		2FE7FDA925F6D17800BD1722 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		2FE7FDA925F6D17800BD1722 /* DefaultOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultOperation.swift; sourceTree = "<group>"; };
 		5867B93AA2F0505FD63CA77E /* GeneticSpecimen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneticSpecimen.swift; sourceTree = "<group>"; };
 		5867BCB6FD6195FCF6557CDE /* CGPGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPGraph.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,7 +143,8 @@
 		2FCEB5F525DD5EAF00DB5B94 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				2FE7FDA925F6D17800BD1722 /* Operation.swift */,
+				2FE7FDA925F6D17800BD1722 /* DefaultOperation.swift */,
+				2F6C347225FC10E300BEE963 /* CGPOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -223,7 +226,8 @@
 				2FCEB5F325DD5D6800DB5B94 /* OperationNode.swift in Sources */,
 				2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */,
 				2F15AD3225FB6CDD008F9562 /* TestSquaredDataSource.swift in Sources */,
-				2FE7FDAA25F6D17900BD1722 /* Operation.swift in Sources */,
+				2FE7FDAA25F6D17900BD1722 /* DefaultOperation.swift in Sources */,
+				2F6C347325FC10E300BEE963 /* CGPOperation.swift in Sources */,
 				2F15AD2725FB698B008F9562 /* FitnessCalculator.swift in Sources */,
 				2F15AD2B25FB6A22008F9562 /* MSEFitnessCalculator.swift in Sources */,
 				2F1E2F7825D3DF87005804C1 /* main.swift in Sources */,
@@ -356,6 +360,7 @@
 		2F1E2F7C25D3DF87005804C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 22AZG63582;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -367,6 +372,7 @@
 		2F1E2F7D25D3DF87005804C1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 22AZG63582;
 				ENABLE_HARDENED_RUNTIME = YES;

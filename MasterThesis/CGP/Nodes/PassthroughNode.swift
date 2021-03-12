@@ -9,7 +9,7 @@ import Foundation
 
 class PassthroughNode: CGPNode {
 
-    var operation: Operation = .add
+    var operation: CGPOperation = IdentityOperation()
 
     var inputs: [Double] = [] {
         didSet {

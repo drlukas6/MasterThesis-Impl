@@ -7,7 +7,7 @@
 
 protocol CGPNode: AnyObject {
 
-    var operation: Operation { get set }
+    var operation: CGPOperation { get set }
 
     var output: Double { get }
     var inputs: [Double] { get set }
@@ -15,7 +15,3 @@ protocol CGPNode: AnyObject {
     func calculateOutput()
 }
 
-extension CGPNode {
-
-    var operation: Operation { .add }
-}

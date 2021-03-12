@@ -16,6 +16,15 @@ class CGPPopulation {
         let outputs: Int
         let levelsBack: Int
         let dimension: CGPGraph.Size
+        let operationsSet: CGPOperationSet
+
+        func makeGraph() -> CGPGraph {
+
+            .init(inputs: inputs, outputs: outputs,
+                  levelsBack: levelsBack,
+                  dimension: dimension,
+                  operationSet: operationsSet)
+        }
     }
 
     private let logger = Logger()
@@ -30,10 +39,7 @@ class CGPPopulation {
         self.fitnessCalculator = fitnessCalculator
         self.graphParameters = graphParameters
 
-        population = (0 ..< 4).compactMap { _ in CGPGraph(inputs: graphParameters.inputs,
-                                                          outputs: graphParameters.outputs,
-                                                          levelsBack: graphParameters.levelsBack,
-                                                          dimension: graphParameters.dimension) }
+        population = (0 ..< 4).compactMap { _ in graphParameters.makeGraph() }
     }
 
     /// Processes a whole dataset for the given number of generations and returns the
