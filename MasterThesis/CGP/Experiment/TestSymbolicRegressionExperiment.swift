@@ -30,8 +30,6 @@ class TestSymbolicRegressionExperiment: Experiment {
 
         let startDate = Date()
 
-
-
         let datasource = TestSquaredDataSource()
 
         let best = population.process(withDatasource: datasource, forGenerations: 200)
