@@ -40,13 +40,16 @@ extension Experiment {
         return formatter
     }
 
-    func log(withStatus status: ExperimentStatus, comment: String? = nil) {
+    func log(withStatus status: ExperimentStatus, bestFitness fitness: Double, graphDescription: String) {
 
         let developerDirectory = FileManager.default.urls(for: .developerDirectory, in: .userDomainMask).first!
 
         let logUrl = developerDirectory.appendingPathComponent(.experimentLogUrlPath)
 
-        let logEntry = "\(Self.dateFormatter.string(from: Date())) [\(name)] \(status.rawValue): \(comment ?? "/")"
+        let fitnessString = String(format: "~%.3f", fitness)
+        let dateKey = Self.dateFormatter.string(from: Date())
+
+        let logEntry = "\(dateKey) [\(name)] \(status.rawValue): FITNESS: \(fitnessString) DESCRIPTION: \(graphDescription)"
 
         do {
             try logEntry.appendLineToURL(fileURL: logUrl)

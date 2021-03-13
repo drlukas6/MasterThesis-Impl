@@ -40,7 +40,9 @@ class TestSymbolicRegressionExperiment: Experiment {
 
         logger.info("\nExperiment finished in \(duration)ms")
 
-        log(withStatus: .ok)
+        log(withStatus: .ok,
+            bestFitness: best.fitness,
+            graphDescription: best.graphDescription)
 
         return best
     }
