@@ -16,8 +16,6 @@ protocol Experiment {
 
     var name: String { get }
 
-    var population: CGPPopulation { get }
-
     @discardableResult
     func start() -> CGPGraph
 }

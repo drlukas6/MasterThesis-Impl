@@ -14,7 +14,7 @@ class TestSymbolicRegressionExperiment: Experiment {
 
     let name = "TestSymbolicRegressionExperiment"
 
-    var population: CGPPopulation
+    private var population: CGPPopulation
 
     init() {
 
