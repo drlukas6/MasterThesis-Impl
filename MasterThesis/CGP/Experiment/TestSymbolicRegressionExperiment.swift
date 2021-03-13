@@ -26,22 +26,8 @@ class TestSymbolicRegressionExperiment: Experiment {
                                    graphParameters: graphParameters)
     }
 
-    func start() -> CGPGraph {
-
-        let startDate = Date()
-
-        let datasource = TestSquaredDataSource()
-
-        let best = population.process(withDatasource: datasource, forGenerations: 200)
-
-        let duration = Date().timeIntervalSince(startDate) * 1000
-
-        logger.info("\nExperiment finished in \(duration)ms")
-
-        log(withStatus: .ok,
-            bestFitness: best.fitness,
-            graphDescription: best.graphDescription)
-
-        return best
+    func work() -> CGPGraph {
+        population.process(withDatasource: TestSquaredDataSource(),
+                           forGenerations: 200)
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os.log
 
 private extension String {
 
@@ -17,13 +18,7 @@ protocol Experiment {
     var name: String { get }
 
     @discardableResult
-    func start() -> CGPGraph
-}
-
-enum ExperimentStatus: String {
-
-    case ok = "OK"
-    case failed = "FAILED"
+    func work() -> CGPGraph
 }
 
 extension Experiment {
@@ -36,6 +31,23 @@ extension Experiment {
         formatter.timeStyle = .long
 
         return formatter
+    }
+
+    func startExperiment() -> CGPGraph {
+
+        let startDate = Date()
+
+        let best = work()
+
+        let duration = Date().timeIntervalSince(startDate) * 1000
+
+        Logger().info("\nExperiment finished in \(duration)ms")
+
+        log(withStatus: .ok,
+            bestFitness: best.fitness,
+            graphDescription: best.graphDescription)
+
+        return best
     }
 
     func log(withStatus status: ExperimentStatus, bestFitness fitness: Double, graphDescription: String) {
@@ -55,6 +67,13 @@ extension Experiment {
             print("Error writing to file: \(error.localizedDescription)")
         }
     }
+}
+
+
+enum ExperimentStatus: String {
+
+    case ok = "OK"
+    case failed = "FAILED"
 }
 
 private extension String {

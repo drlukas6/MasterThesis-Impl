@@ -9,6 +9,6 @@ import Foundation
 
 let experiment = TestSymbolicRegressionExperiment()
 
-let best = experiment.start()
+let best = experiment.startExperiment()
 
 print("Best fitness: \(best.fitness)")
