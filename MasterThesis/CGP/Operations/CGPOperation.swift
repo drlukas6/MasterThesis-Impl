@@ -25,6 +25,8 @@ struct IdentityOperation: CGPOperation {
 protocol CGPOperationSet {
 
     var operations: [CGPOperation] { get }
+
+    var numberOfInputs: Int { get }
 }
 
 extension CGPOperationSet {

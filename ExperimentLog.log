@@ -1,2 +1,6 @@
 12.03.2021. at 23:43:04 CET [TestSymbolicRegressionExperiment] OK: /
 12.03.2021. at 23:43:06 CET [TestSymbolicRegressionExperiment] OK: /
+13.03.2021. at 13:01:23 CET [TestSymbolicRegressionExperiment] OK: /
+13.03.2021. at 13:03:13 CET [TestSymbolicRegressionExperiment] OK: FITNESS: 1.4269026560255857 DNA: [1, 1, 2, 2, 4, 5, 0, 0, 3, 0, 0, 0, 1, 2, 0, 0, 1, 4, 2, 4, 3, 4, 0, 1, 5, 5, 3, 4, 3, 8]
+13.03.2021. at 13:06:03 CET [TestSymbolicRegressionExperiment] OK: FITNESS: 2.007 DESCRIPTION: 1 1 2 2 4 4 0 0 0 0 0 0 0 1 1 1 2 0 3 2 0 3 2 0 4 3 1 5 2 8 
+13.03.2021. at 13:06:28 CET [TestSymbolicRegressionExperiment] OK: FITNESS: ~1.845 DESCRIPTION: 1 1 2 2 4 4 0 0 2 0 0 5 1 0 5 2 1 2 1 1 5 3 0 0 2 6 4 4 4 7 

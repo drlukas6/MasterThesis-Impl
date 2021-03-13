@@ -266,7 +266,7 @@ class CGPGraph: GeneticSpecimen {
 
             var connections = [Int]()
 
-            while connections.count < 2 {
+            while connections.count < operationSet.numberOfInputs {
 
                 connections.append((minConnectedNodeIndex ... maxConnectedNodeIndex).randomElement()!)
             }
@@ -303,25 +303,23 @@ class CGPGraph: GeneticSpecimen {
             .filter { $0 >= inputs }
             .randomElement()!
 
-        let currentConnections = nodeInputs[randomActiveNode]!
-
-        var newConnections = [Int]()
-
         switch nodeType(forNodeAtIndex: randomActiveNode) {
         case .input:
             fatalError("Input could not be chosen")
         case .operation:
 
-            newConnections.append(currentConnections.randomElement()!)
+            var connections = nodeInputs[randomActiveNode]!
 
-            let randomRange = operationNodeConnectionRange(for: randomActiveNode)
-            newConnections.append(randomRange.randomElement()!)
+            let randomIndexToMutate = connections.indices.randomElement()!
+
+            connections[randomIndexToMutate] = operationNodeConnectionRange(for: randomActiveNode)
+                                               .randomElement()!
+
+            nodeInputs[randomActiveNode] = connections
         case .output:
 
-            newConnections.append(outputNodeConnectionRange().randomElement()!)
+            nodeInputs[randomActiveNode] = [outputNodeConnectionRange().randomElement()!]
         }
-
-        nodeInputs[randomActiveNode] = Array(newConnections)
 
         recalculateActiveNodes()
     }

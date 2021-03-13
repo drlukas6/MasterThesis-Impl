@@ -17,6 +17,8 @@ struct DefaultOperationSet: CGPOperationSet {
     var operations: [CGPOperation] {
         DefaultOperation.allCases
     }
+
+    let numberOfInputs = 2
 }
 
 enum DefaultOperation: CaseIterable, CGPOperation {
