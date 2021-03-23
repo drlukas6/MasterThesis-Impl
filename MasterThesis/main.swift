@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import SwiftImage
 
-let experiment = TestSymbolicRegressionExperiment()
+let lenaUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena.png")!
 
-let best = experiment.startExperiment()
+let image: Image<RGB<UInt8>>? = ImageLoader.load(from: lenaUrl)
 
-print("Best fitness: \(best.fitness)")
+print()

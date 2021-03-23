@@ -18,6 +18,8 @@
 		2F6C347325FC10E300BEE963 /* CGPOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347225FC10E300BEE963 /* CGPOperation.swift */; };
 		2F6C347925FC1B1B00BEE963 /* Experiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347825FC1B1B00BEE963 /* Experiment.swift */; };
 		2F6C347E25FC1DBF00BEE963 /* TestSymbolicRegressionExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347D25FC1DBF00BEE963 /* TestSymbolicRegressionExperiment.swift */; };
+		2F894FDF260AAAF200F38BC7 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FDE260AAAF200F38BC7 /* ImageLoader.swift */; };
+		2F894FE9260AAC1800F38BC7 /* MasterThesisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FE8260AAC1800F38BC7 /* MasterThesisTests.swift */; };
 		2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */; };
 		2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */; };
 		2FCEB5F325DD5D6800DB5B94 /* OperationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */; };
@@ -49,6 +51,10 @@
 		2F6C347225FC10E300BEE963 /* CGPOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPOperation.swift; sourceTree = "<group>"; };
 		2F6C347825FC1B1B00BEE963 /* Experiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experiment.swift; sourceTree = "<group>"; };
 		2F6C347D25FC1DBF00BEE963 /* TestSymbolicRegressionExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSymbolicRegressionExperiment.swift; sourceTree = "<group>"; };
+		2F894FDE260AAAF200F38BC7 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		2F894FE6260AAC1800F38BC7 /* MasterThesisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MasterThesisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F894FE8260AAC1800F38BC7 /* MasterThesisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterThesisTests.swift; sourceTree = "<group>"; };
+		2F894FEA260AAC1800F38BC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPNode.swift; sourceTree = "<group>"; };
 		2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughNode.swift; sourceTree = "<group>"; };
 		2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationNode.swift; sourceTree = "<group>"; };
@@ -64,6 +70,13 @@
 			files = (
 				2F15AD1D25FADE22008F9562 /* ArgumentParser in Frameworks */,
 				2F15AD1C25FADE22008F9562 /* SwiftImage in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F894FE3260AAC1800F38BC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				2F1E2F7625D3DF87005804C1 /* MasterThesis */,
+				2F894FE7260AAC1800F38BC7 /* MasterThesisTests */,
 				2F1E2F7525D3DF87005804C1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				2F1E2F7425D3DF87005804C1 /* MasterThesis */,
+				2F894FE6260AAC1800F38BC7 /* MasterThesisTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,6 +130,7 @@
 		2F1E2F7625D3DF87005804C1 /* MasterThesis */ = {
 			isa = PBXGroup;
 			children = (
+				2F894FDD260AAA9900F38BC7 /* Images */,
 				2FCEB5E325DD5BCC00DB5B94 /* CGP */,
 				2F1E2F7725D3DF87005804C1 /* main.swift */,
 			);
@@ -136,6 +152,23 @@
 				2F6C347825FC1B1B00BEE963 /* Experiment.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		2F894FDD260AAA9900F38BC7 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				2F894FDE260AAAF200F38BC7 /* ImageLoader.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		2F894FE7260AAC1800F38BC7 /* MasterThesisTests */ = {
+			isa = PBXGroup;
+			children = (
+				2F894FE8260AAC1800F38BC7 /* MasterThesisTests.swift */,
+				2F894FEA260AAC1800F38BC7 /* Info.plist */,
+			);
+			path = MasterThesisTests;
 			sourceTree = "<group>";
 		};
 		2FCEB5E325DD5BCC00DB5B94 /* CGP */ = {
@@ -204,6 +237,23 @@
 			productReference = 2F1E2F7425D3DF87005804C1 /* MasterThesis */;
 			productType = "com.apple.product-type.tool";
 		};
+		2F894FE5260AAC1800F38BC7 /* MasterThesisTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F894FEB260AAC1800F38BC7 /* Build configuration list for PBXNativeTarget "MasterThesisTests" */;
+			buildPhases = (
+				2F894FE2260AAC1800F38BC7 /* Sources */,
+				2F894FE3260AAC1800F38BC7 /* Frameworks */,
+				2F894FE4260AAC1800F38BC7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MasterThesisTests;
+			productName = MasterThesisTests;
+			productReference = 2F894FE6260AAC1800F38BC7 /* MasterThesisTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -214,6 +264,9 @@
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					2F1E2F7325D3DF87005804C1 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					2F894FE5260AAC1800F38BC7 = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
@@ -236,9 +289,20 @@
 			projectRoot = "";
 			targets = (
 				2F1E2F7325D3DF87005804C1 /* MasterThesis */,
+				2F894FE5260AAC1800F38BC7 /* MasterThesisTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F894FE4260AAC1800F38BC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2F1E2F7025D3DF87005804C1 /* Sources */ = {
@@ -251,6 +315,7 @@
 				2FE7FDAA25F6D17900BD1722 /* DefaultOperation.swift in Sources */,
 				2F6C347325FC10E300BEE963 /* CGPOperation.swift in Sources */,
 				2F15AD2725FB698B008F9562 /* FitnessCalculator.swift in Sources */,
+				2F894FDF260AAAF200F38BC7 /* ImageLoader.swift in Sources */,
 				2F15AD2B25FB6A22008F9562 /* MSEFitnessCalculator.swift in Sources */,
 				2F1E2F7825D3DF87005804C1 /* main.swift in Sources */,
 				2F15AD2125FAE2D3008F9562 /* GeneticPopulation.swift in Sources */,
@@ -260,6 +325,14 @@
 				5867B0D987E918B55C1F8D62 /* GeneticSpecimen.swift in Sources */,
 				2F6C347925FC1B1B00BEE963 /* Experiment.swift in Sources */,
 				5867B82790974FA768FCFEE9 /* CGPGraph.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F894FE2260AAC1800F38BC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F894FE9260AAC1800F38BC7 /* MasterThesisTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +461,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 22AZG63582;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -400,8 +474,49 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 22AZG63582;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		2F894FEC260AAC1800F38BC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MasterThesis.app/MasterThesis";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 22AZG63582;
+				INFOPLIST_FILE = MasterThesisTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukassestic.MasterThesisTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		2F894FED260AAC1800F38BC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MasterThesis.app/MasterThesis";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 22AZG63582;
+				INFOPLIST_FILE = MasterThesisTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukassestic.MasterThesisTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
 		};
@@ -422,6 +537,15 @@
 			buildConfigurations = (
 				2F1E2F7C25D3DF87005804C1 /* Debug */,
 				2F1E2F7D25D3DF87005804C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F894FEB260AAC1800F38BC7 /* Build configuration list for PBXNativeTarget "MasterThesisTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F894FEC260AAC1800F38BC7 /* Debug */,
+				2F894FED260AAC1800F38BC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
