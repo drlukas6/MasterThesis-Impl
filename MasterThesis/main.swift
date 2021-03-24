@@ -12,14 +12,13 @@ let lenaUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena
 let lenaSPUrl = URL(fileURLWithPath: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_salt_pepper.png")
 
 let image: Image<RGB<UInt8>> = ImageLoader.load(from: lenaUrl)!
+var imageG: Image<UInt8> = image.map { $0.gray }
 
-let image2 = ImageHelper.addSaltPepperNoise(to: image, withPercentage: 0.03)
+imageG[imageG.width / 2, imageG.height / 2] = 0
 
-do {
-    try ImageHelper.save(image: ImageHelper.addSaltPepperNoise(to: image, withPercentage: 0.01),
-                          to: lenaSPUrl)
-} catch {
-    print("Error: \(error)")
-}
+let test = imageG.window(forPixelAt: (x: 0, y: 0))
+let testV = Image<UInt8>(width: 3, height: 3, pixels: test.vector)
+
+let asdf = testV.cgImage
 
 print()

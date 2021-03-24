@@ -21,6 +21,7 @@
 		2F894FDF260AAAF200F38BC7 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FDE260AAAF200F38BC7 /* ImageLoader.swift */; };
 		2F894FE9260AAC1800F38BC7 /* MasterThesisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FE8260AAC1800F38BC7 /* MasterThesisTests.swift */; };
 		2F894FF7260AAF6400F38BC7 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FF6260AAF6400F38BC7 /* ImageHelper.swift */; };
+		2F894FFB260AB3A700F38BC7 /* SlidingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FFA260AB3A700F38BC7 /* SlidingWindow.swift */; };
 		2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */; };
 		2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */; };
 		2FCEB5F325DD5D6800DB5B94 /* OperationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */; };
@@ -57,6 +58,7 @@
 		2F894FE8260AAC1800F38BC7 /* MasterThesisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterThesisTests.swift; sourceTree = "<group>"; };
 		2F894FEA260AAC1800F38BC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F894FF6260AAF6400F38BC7 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		2F894FFA260AB3A700F38BC7 /* SlidingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingWindow.swift; sourceTree = "<group>"; };
 		2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPNode.swift; sourceTree = "<group>"; };
 		2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughNode.swift; sourceTree = "<group>"; };
 		2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationNode.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				2F894FDE260AAAF200F38BC7 /* ImageLoader.swift */,
 				2F894FF6260AAF6400F38BC7 /* ImageHelper.swift */,
+				2F894FFA260AB3A700F38BC7 /* SlidingWindow.swift */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				2F15AD2F25FB6C39008F9562 /* Datasource.swift in Sources */,
 				2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */,
 				5867B0D987E918B55C1F8D62 /* GeneticSpecimen.swift in Sources */,
+				2F894FFB260AB3A700F38BC7 /* SlidingWindow.swift in Sources */,
 				2F6C347925FC1B1B00BEE963 /* Experiment.swift in Sources */,
 				5867B82790974FA768FCFEE9 /* CGPGraph.swift in Sources */,
 				2F894FF7260AAF6400F38BC7 /* ImageHelper.swift in Sources */,
