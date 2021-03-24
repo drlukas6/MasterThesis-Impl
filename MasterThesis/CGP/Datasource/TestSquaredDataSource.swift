@@ -9,19 +9,16 @@ import Foundation
 
 struct TestSquaredDataSource: Datasource {
 
-    var inputs: [[Double]] = [[0], [0.5], [1], [1.5], [2]]
-    var outputs: [[Double]] = [[0], [0.25], [1], [2.25], [4]]
+    private let inputs: [[Double]] = [[0], [0.5], [1], [1.5], [2]]
+    private let outputs: [[Double]] = [[0], [0.25], [1], [2.25], [4]]
 
-    func makeSubDatasource(ofSize size: Int, offsetBy offset: Int) -> Datasource {
+    let size: Int = 5
 
-        var datasource = TestSquaredDataSource()
+    func input(at index: Int) -> [Double] {
+        inputs[index]
+    }
 
-        let newInputs = (offset ..< offset + size).map { datasource.input(at: $0) }
-        let newOutputs = (offset ..< offset + size).map { datasource.output(at: $0) }
-
-        datasource.inputs = newInputs
-        datasource.outputs = newOutputs
-
-        return datasource
+    func output(at index: Int) -> [Double] {
+        outputs[index]
     }
 }

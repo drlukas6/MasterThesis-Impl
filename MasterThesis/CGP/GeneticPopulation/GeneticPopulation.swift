@@ -58,8 +58,6 @@ class CGPPopulation {
 
         for step in (0 ..< generations) {
 
-            logger.info("Entering step \(step + 1)")
-
             self.population = [parent] + (0 ..< 4).map { _ in
                 parent.mutated()
             }
@@ -89,6 +87,8 @@ class CGPPopulation {
         var topMember = population.first!
         var topFitness = -Double.infinity
 
+        let truth = (0 ..< datasource.size).map { row in datasource.output(at: row).first! }
+
         for member in population {
 
             let memberPredictions = (0 ..< datasource.size).map { row -> Double in
@@ -99,8 +99,6 @@ class CGPPopulation {
 
                 return memberPrediction
             }
-
-            let truth = datasource.outputs.map { $0.first! }
 
             let (calculatedFitness, mse) = fitnessCalculator.calculateFitness(fromPredictions: memberPredictions,
                                                                               groundTruth: truth)
