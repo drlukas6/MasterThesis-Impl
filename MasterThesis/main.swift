@@ -10,15 +10,21 @@ import SwiftImage
 
 let lenaUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena.png")!
 let lenaSPUrl = URL(fileURLWithPath: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_salt_pepper.png")
+let lenaSmallUrl = URL(fileURLWithPath: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_small.png")
+let lenaSmallSPUrl = URL(fileURLWithPath: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_small_salt_pepper.png")
 
 let image: Image<RGB<UInt8>> = ImageLoader.load(from: lenaUrl)!
-var imageG: Image<UInt8> = image.map { $0.gray }
+let imageG: Image<UInt8> = image.map { $0.gray }
 
-imageG[imageG.width / 2, imageG.height / 2] = 0
+let imageSlice = image[image.width / 2 - 15 ..< image.width / 2 + 15,
+                  image.height / 2 - 15 ..< image.height / 2 + 15]
 
-let test = imageG.window(forPixelAt: (x: 0, y: 0))
-let testV = Image<UInt8>(width: 3, height: 3, pixels: test.vector)
+let cropped: Image<RGB<UInt8>> = Image(imageSlice)
 
-let asdf = testV.cgImage
-
-print()
+do {
+    try ImageHelper.save(image: cropped, to: lenaSmallUrl)
+    try ImageHelper.save(image: ImageHelper.addSaltPepperNoise(to: cropped, withPercentage: 0.01),
+                         to: lenaSmallSPUrl)
+} catch {
+    print("---> \(error)")
+}

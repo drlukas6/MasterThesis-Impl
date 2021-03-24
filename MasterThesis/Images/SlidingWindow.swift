@@ -18,15 +18,17 @@ struct ImageWindow {
 
         self.values = values
 
-        self.vector = [values[0][0], values[0][1], values[0][2],
-                       values[1][0], values[1][1], values[1][2],
-                       values[2][0], values[2][1], values[2][2]]
+//        self.vector = [values[0][0], values[0][1], values[0][2],
+//                       values[1][0], values[1][1], values[1][2],
+//                       values[2][0], values[2][1], values[2][2]]
+
+        self.vector = values.flatMap { $0 }
     }
 }
 
 extension Image where Pixel == UInt8 {
 
-    func window(forPixelAt location: (x: Int, y: Int)) -> ImageWindow {
+    func window(forPixelAt location: (x: Int, y: Int), takeCenter: Bool = true) -> ImageWindow {
 
         let (x, y) = (location.x, location.y)
 
@@ -35,7 +37,7 @@ extension Image where Pixel == UInt8 {
         let topRight = self[(x + 1) %% width, (y - 1) %% height]
 
         let centerLeft = self[(x - 1) %% width, y]
-        let center = self[x, y]
+        let center = takeCenter ? self[x, y] : nil
         let centerRight = self[(x + 1) %% width, y]
 
         let bottomLeft = self[(x - 1) %% width, (y + 1) %% height]
@@ -44,7 +46,7 @@ extension Image where Pixel == UInt8 {
 
         let windowValues = [
             [topLeft, topCenter, topRight],
-            [centerLeft, center, centerRight],
+            [centerLeft, center, centerRight].compactMap { $0 }, // !< compactMap so if center is nil skip it
             [bottomLeft, bottomCenter, bottomRight]
         ]
 
