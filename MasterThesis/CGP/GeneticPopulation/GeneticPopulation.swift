@@ -46,9 +46,21 @@ class CGPPopulation {
     /// best performing CGPGraph
     func process(withDatasource datasource: Datasource, forGenerations generations: Int) -> CGPGraph {
 
+        var inputs = [[Double]]()
+        inputs.reserveCapacity(datasource.size)
+
+        var outputs = [[Double]]()
+        outputs.reserveCapacity(datasource.size)
+
+        for row in (0 ..< datasource.size) {
+
+            inputs.append(datasource.input(at: row))
+            outputs.append(datasource.output(at: row))
+        }
+
         process(datasource: datasource, inPopulation: population)
 
-        logger.info("Calculated fitnesses: \(self.population.map(\.fitness))")
+//        logger.info("Calculated fitnesses: \(self.population.map(\.fitness))")
 
         var parent = population.sorted { (lhs, rhs) -> Bool in
             lhs.fitness < rhs.fitness
@@ -57,6 +69,8 @@ class CGPPopulation {
         logger.info("Best fitness: \(parent.fitness)")
 
         for step in (0 ..< generations) {
+
+            logger.debug("Doing step: \(step)")
 
             self.population = [parent] + (0 ..< 4).map { _ in
                 parent.mutated()
@@ -82,6 +96,38 @@ class CGPPopulation {
     /// Performs a step with a given datasource
     /// - Returns: Best CGP Graph and its fitness
     @discardableResult
+    private func process2(inputs: [[Double]], outputs: [Double], inPopulation population: [CGPGraph]) -> (CGPGraph, Double) {
+
+        var histories: [[Double]] = (0 ..< population.count).map { _ in [] }
+
+        for input in inputs {
+
+            for (index, member) in population.enumerated() {
+
+                let prediction = member.prediction(for: input).first!
+
+                histories[index].append(prediction)
+            }
+        }
+
+        let qualities = histories.enumerated().map { index, history -> Double in
+
+            let (fitness, _) = fitnessCalculator.calculateFitness(fromPredictions: history, groundTruth: outputs)
+
+            population[index].fitness = fitness
+
+            return fitness
+        }
+
+        let bestFitness = qualities.max()!
+        let best = population[qualities.firstIndex(of: bestFitness)!]
+
+        return (best, bestFitness)
+    }
+
+    /// Performs a step with a given datasource
+    /// - Returns: Best CGP Graph and its fitness
+    @discardableResult
     private func process(datasource: Datasource, inPopulation population: [CGPGraph]) -> (CGPGraph, Double) {
 
         var topMember = population.first!
@@ -103,7 +149,7 @@ class CGPPopulation {
             let (calculatedFitness, mse) = fitnessCalculator.calculateFitness(fromPredictions: memberPredictions,
                                                                               groundTruth: truth)
 
-            logger.info("Calculated fitness: \(calculatedFitness), error: \(mse)")
+//            logger.info("Calculated fitness: \(calculatedFitness), error: \(mse)")
 
             member.fitness = calculatedFitness
 

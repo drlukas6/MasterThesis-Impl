@@ -18,9 +18,9 @@ class SaltPepperTest: Experiment {
 
     init() {
 
-        let graphParameters = CGPPopulation.GraphParameters(inputs: 9, outputs: 1, levelsBack: 2,
+        let graphParameters = CGPPopulation.GraphParameters(inputs: 8, outputs: 1, levelsBack: 2,
                                                             dimension: .init(rows: 2, columns: 10),
-                                                            operationsSet: LenaOperationSet(numberOfInputs: 9))
+                                                            operationsSet: LenaOperationSet(numberOfInputs: 8))
 
         population = CGPPopulation(fitnessCalculator: MSEFitnessCalculator(),
                                    graphParameters: graphParameters)

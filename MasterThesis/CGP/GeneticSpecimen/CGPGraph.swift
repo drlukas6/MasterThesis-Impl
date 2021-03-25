@@ -81,9 +81,11 @@ class CGPGraph: GeneticSpecimen {
 
         dimension = .init(rows: dna.removeFirst(), columns: dna.removeFirst())
 
-        let operationNodesDNAs = dna.prefix(dimension.items * 3)
+        let numberOfInputs = operationSet.numberOfInputs
 
-        dna.removeFirst(dimension.items * 3)
+        let operationNodesDNAs = dna.prefix(dimension.items * (numberOfInputs + 1))
+
+        dna.removeFirst(dimension.items * (numberOfInputs + 1))
 
         var nodes: [CGPNode] = ( 0 ..< inputs).map { _ in PassthroughNode() }
 
@@ -92,14 +94,18 @@ class CGPGraph: GeneticSpecimen {
 
         while true {
 
-            guard index < (operationNodesDNAs.count + 1) / 3 else {
+            guard index < (operationNodesDNAs.count + 1) / (numberOfInputs + 1) else {
                 break
             }
 
-            nodes.append(OperationNode(operation: operationSet.at(index: operationNodesDNAs[index])))
+            nodes.append(OperationNode(operation: operationSet.at(index: operationNodesDNAs[(numberOfInputs + 1) * index])))
 
-            nodeInputs[index + inputs] = [operationNodesDNAs[3 * index + 1],
-                                          operationNodesDNAs[3 * index + 2]]
+//            nodeInputs[index + inputs] = [operationNodesDNAs[(numberOfInputs + 1) * index + 1],
+//                                          operationNodesDNAs[(numberOfInputs + 1) * index + 2]]
+
+            nodeInputs[index + inputs] = (1 ... numberOfInputs).map { offset in
+                operationNodesDNAs[(numberOfInputs + 1) * index + offset]
+            }
 
             index += 1
         }
@@ -303,6 +309,8 @@ class CGPGraph: GeneticSpecimen {
             .filter { $0 >= inputs }
             .randomElement()!
 
+//        print("Conns before mutation: \(nodeInputs[randomActiveNode]!.count)")
+
         switch nodeType(forNodeAtIndex: randomActiveNode) {
         case .input:
             fatalError("Input could not be chosen")
@@ -320,6 +328,8 @@ class CGPGraph: GeneticSpecimen {
 
             nodeInputs[randomActiveNode] = [outputNodeConnectionRange().randomElement()!]
         }
+
+//        print("Conns after mutation: \(nodeInputs[randomActiveNode]!.count)")
 
         recalculateActiveNodes()
     }
@@ -345,13 +355,17 @@ class CGPGraph: GeneticSpecimen {
 
         switch MutationType.random {
         case .input:
+//            print("Mutating inputs")
             mutateRandomConnection()
         case .operation:
+//            print("Mutating operations")
             mutateRandomOperation()
         }
     }
 
     func mutated() -> CGPGraph {
+
+//        print("giving a mutated with dna of size \(dna.count)")
 
         let copy = CGPGraph(dna: dna, operationSet: operationSet)
 
@@ -389,6 +403,8 @@ class CGPGraph: GeneticSpecimen {
     static func combine(left: CGPGraph, right: CGPGraph) -> CGPGraph {
 
         let randomPoint = (5 ... left.dna.count).randomElement()!
+
+//        print("Combining at point \(randomPoint)")
 
         let leftDna = left.dna.prefix(randomPoint)
         let rightDna = right.dna.suffix(right.dna.count - randomPoint)
