@@ -15,9 +15,17 @@
 		2F15AD2F25FB6C39008F9562 /* Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD2E25FB6C39008F9562 /* Datasource.swift */; };
 		2F15AD3225FB6CDD008F9562 /* TestSquaredDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15AD3125FB6CDD008F9562 /* TestSquaredDataSource.swift */; };
 		2F1E2F7825D3DF87005804C1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E2F7725D3DF87005804C1 /* main.swift */; };
+		2F625622260D600F001159E2 /* L1FitnessCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F625621260D600F001159E2 /* L1FitnessCalculator.swift */; };
 		2F6C347325FC10E300BEE963 /* CGPOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347225FC10E300BEE963 /* CGPOperation.swift */; };
 		2F6C347925FC1B1B00BEE963 /* Experiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347825FC1B1B00BEE963 /* Experiment.swift */; };
 		2F6C347E25FC1DBF00BEE963 /* TestSymbolicRegressionExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347D25FC1DBF00BEE963 /* TestSymbolicRegressionExperiment.swift */; };
+		2F894FDF260AAAF200F38BC7 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FDE260AAAF200F38BC7 /* ImageLoader.swift */; };
+		2F894FE9260AAC1800F38BC7 /* MasterThesisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FE8260AAC1800F38BC7 /* MasterThesisTests.swift */; };
+		2F894FF7260AAF6400F38BC7 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FF6260AAF6400F38BC7 /* ImageHelper.swift */; };
+		2F894FFB260AB3A700F38BC7 /* SlidingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FFA260AB3A700F38BC7 /* SlidingWindow.swift */; };
+		2F895000260ABFAF00F38BC7 /* LenaOperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FFF260ABFAF00F38BC7 /* LenaOperationSet.swift */; };
+		2F895009260AC38400F38BC7 /* SaltPepperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F895008260AC38400F38BC7 /* SaltPepperTest.swift */; };
+		2F895010260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89500F260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift */; };
 		2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */; };
 		2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */; };
 		2FCEB5F325DD5D6800DB5B94 /* OperationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */; };
@@ -46,9 +54,19 @@
 		2F15AD3125FB6CDD008F9562 /* TestSquaredDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSquaredDataSource.swift; sourceTree = "<group>"; };
 		2F1E2F7425D3DF87005804C1 /* MasterThesis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MasterThesis; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1E2F7725D3DF87005804C1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2F625621260D600F001159E2 /* L1FitnessCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L1FitnessCalculator.swift; sourceTree = "<group>"; };
 		2F6C347225FC10E300BEE963 /* CGPOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPOperation.swift; sourceTree = "<group>"; };
 		2F6C347825FC1B1B00BEE963 /* Experiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experiment.swift; sourceTree = "<group>"; };
 		2F6C347D25FC1DBF00BEE963 /* TestSymbolicRegressionExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSymbolicRegressionExperiment.swift; sourceTree = "<group>"; };
+		2F894FDE260AAAF200F38BC7 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		2F894FE6260AAC1800F38BC7 /* MasterThesisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MasterThesisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F894FE8260AAC1800F38BC7 /* MasterThesisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterThesisTests.swift; sourceTree = "<group>"; };
+		2F894FEA260AAC1800F38BC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F894FF6260AAF6400F38BC7 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		2F894FFA260AB3A700F38BC7 /* SlidingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingWindow.swift; sourceTree = "<group>"; };
+		2F894FFF260ABFAF00F38BC7 /* LenaOperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LenaOperationSet.swift; sourceTree = "<group>"; };
+		2F895008260AC38400F38BC7 /* SaltPepperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltPepperTest.swift; sourceTree = "<group>"; };
+		2F89500F260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LenaSaltPepperTest1DataSource.swift; sourceTree = "<group>"; };
 		2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPNode.swift; sourceTree = "<group>"; };
 		2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughNode.swift; sourceTree = "<group>"; };
 		2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationNode.swift; sourceTree = "<group>"; };
@@ -67,6 +85,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2F894FE3260AAC1800F38BC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -81,8 +106,8 @@
 		2F15AD2525FB6974008F9562 /* Fitness */ = {
 			isa = PBXGroup;
 			children = (
+				2F625620260D6002001159E2 /* Impl */,
 				2F15AD2625FB698B008F9562 /* FitnessCalculator.swift */,
-				2F15AD2A25FB6A22008F9562 /* MSEFitnessCalculator.swift */,
 			);
 			path = Fitness;
 			sourceTree = "<group>";
@@ -100,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				2F1E2F7625D3DF87005804C1 /* MasterThesis */,
+				2F894FE7260AAC1800F38BC7 /* MasterThesisTests */,
 				2F1E2F7525D3DF87005804C1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				2F1E2F7425D3DF87005804C1 /* MasterThesis */,
+				2F894FE6260AAC1800F38BC7 /* MasterThesisTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,10 +142,21 @@
 		2F1E2F7625D3DF87005804C1 /* MasterThesis */ = {
 			isa = PBXGroup;
 			children = (
+				2F895005260AC36700F38BC7 /* Experiments */,
+				2F894FDD260AAA9900F38BC7 /* Images */,
 				2FCEB5E325DD5BCC00DB5B94 /* CGP */,
 				2F1E2F7725D3DF87005804C1 /* main.swift */,
 			);
 			path = MasterThesis;
+			sourceTree = "<group>";
+		};
+		2F625620260D6002001159E2 /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				2F15AD2A25FB6A22008F9562 /* MSEFitnessCalculator.swift */,
+				2F625621260D600F001159E2 /* L1FitnessCalculator.swift */,
+			);
+			path = Impl;
 			sourceTree = "<group>";
 		};
 		2F6C347725FC1B1200BEE963 /* Experiment */ = {
@@ -136,6 +174,67 @@
 				2F6C347825FC1B1B00BEE963 /* Experiment.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		2F894FDD260AAA9900F38BC7 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				2F894FFE260ABF8900F38BC7 /* CGPOperations */,
+				2F894FDE260AAAF200F38BC7 /* ImageLoader.swift */,
+				2F894FF6260AAF6400F38BC7 /* ImageHelper.swift */,
+				2F894FFA260AB3A700F38BC7 /* SlidingWindow.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		2F894FE7260AAC1800F38BC7 /* MasterThesisTests */ = {
+			isa = PBXGroup;
+			children = (
+				2F894FE8260AAC1800F38BC7 /* MasterThesisTests.swift */,
+				2F894FEA260AAC1800F38BC7 /* Info.plist */,
+			);
+			path = MasterThesisTests;
+			sourceTree = "<group>";
+		};
+		2F894FFE260ABF8900F38BC7 /* CGPOperations */ = {
+			isa = PBXGroup;
+			children = (
+				2F894FFF260ABFAF00F38BC7 /* LenaOperationSet.swift */,
+			);
+			path = CGPOperations;
+			sourceTree = "<group>";
+		};
+		2F895005260AC36700F38BC7 /* Experiments */ = {
+			isa = PBXGroup;
+			children = (
+				2F895006260AC36F00F38BC7 /* Lena */,
+			);
+			path = Experiments;
+			sourceTree = "<group>";
+		};
+		2F895006260AC36F00F38BC7 /* Lena */ = {
+			isa = PBXGroup;
+			children = (
+				2F895007260AC37200F38BC7 /* GrainRemoval */,
+			);
+			path = Lena;
+			sourceTree = "<group>";
+		};
+		2F895007260AC37200F38BC7 /* GrainRemoval */ = {
+			isa = PBXGroup;
+			children = (
+				2F89500E260AC42E00F38BC7 /* Test1 */,
+			);
+			path = GrainRemoval;
+			sourceTree = "<group>";
+		};
+		2F89500E260AC42E00F38BC7 /* Test1 */ = {
+			isa = PBXGroup;
+			children = (
+				2F895008260AC38400F38BC7 /* SaltPepperTest.swift */,
+				2F89500F260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift */,
+			);
+			path = Test1;
 			sourceTree = "<group>";
 		};
 		2FCEB5E325DD5BCC00DB5B94 /* CGP */ = {
@@ -204,6 +303,23 @@
 			productReference = 2F1E2F7425D3DF87005804C1 /* MasterThesis */;
 			productType = "com.apple.product-type.tool";
 		};
+		2F894FE5260AAC1800F38BC7 /* MasterThesisTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F894FEB260AAC1800F38BC7 /* Build configuration list for PBXNativeTarget "MasterThesisTests" */;
+			buildPhases = (
+				2F894FE2260AAC1800F38BC7 /* Sources */,
+				2F894FE3260AAC1800F38BC7 /* Frameworks */,
+				2F894FE4260AAC1800F38BC7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MasterThesisTests;
+			productName = MasterThesisTests;
+			productReference = 2F894FE6260AAC1800F38BC7 /* MasterThesisTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -214,6 +330,9 @@
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					2F1E2F7325D3DF87005804C1 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					2F894FE5260AAC1800F38BC7 = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
@@ -236,9 +355,20 @@
 			projectRoot = "";
 			targets = (
 				2F1E2F7325D3DF87005804C1 /* MasterThesis */,
+				2F894FE5260AAC1800F38BC7 /* MasterThesisTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F894FE4260AAC1800F38BC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2F1E2F7025D3DF87005804C1 /* Sources */ = {
@@ -248,18 +378,33 @@
 				2FCEB5F325DD5D6800DB5B94 /* OperationNode.swift in Sources */,
 				2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */,
 				2F15AD3225FB6CDD008F9562 /* TestSquaredDataSource.swift in Sources */,
+				2F895009260AC38400F38BC7 /* SaltPepperTest.swift in Sources */,
 				2FE7FDAA25F6D17900BD1722 /* DefaultOperation.swift in Sources */,
+				2F895010260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift in Sources */,
 				2F6C347325FC10E300BEE963 /* CGPOperation.swift in Sources */,
 				2F15AD2725FB698B008F9562 /* FitnessCalculator.swift in Sources */,
+				2F894FDF260AAAF200F38BC7 /* ImageLoader.swift in Sources */,
 				2F15AD2B25FB6A22008F9562 /* MSEFitnessCalculator.swift in Sources */,
+				2F895000260ABFAF00F38BC7 /* LenaOperationSet.swift in Sources */,
 				2F1E2F7825D3DF87005804C1 /* main.swift in Sources */,
 				2F15AD2125FAE2D3008F9562 /* GeneticPopulation.swift in Sources */,
 				2F6C347E25FC1DBF00BEE963 /* TestSymbolicRegressionExperiment.swift in Sources */,
 				2F15AD2F25FB6C39008F9562 /* Datasource.swift in Sources */,
 				2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */,
 				5867B0D987E918B55C1F8D62 /* GeneticSpecimen.swift in Sources */,
+				2F894FFB260AB3A700F38BC7 /* SlidingWindow.swift in Sources */,
 				2F6C347925FC1B1B00BEE963 /* Experiment.swift in Sources */,
 				5867B82790974FA768FCFEE9 /* CGPGraph.swift in Sources */,
+				2F894FF7260AAF6400F38BC7 /* ImageHelper.swift in Sources */,
+				2F625622260D600F001159E2 /* L1FitnessCalculator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F894FE2260AAC1800F38BC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F894FE9260AAC1800F38BC7 /* MasterThesisTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +533,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 22AZG63582;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -400,8 +546,49 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 22AZG63582;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		2F894FEC260AAC1800F38BC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MasterThesis.app/MasterThesis";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 22AZG63582;
+				INFOPLIST_FILE = MasterThesisTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukassestic.MasterThesisTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		2F894FED260AAC1800F38BC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MasterThesis.app/MasterThesis";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 22AZG63582;
+				INFOPLIST_FILE = MasterThesisTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukassestic.MasterThesisTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
 		};
@@ -422,6 +609,15 @@
 			buildConfigurations = (
 				2F1E2F7C25D3DF87005804C1 /* Debug */,
 				2F1E2F7D25D3DF87005804C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F894FEB260AAC1800F38BC7 /* Build configuration list for PBXNativeTarget "MasterThesisTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F894FEC260AAC1800F38BC7 /* Debug */,
+				2F894FED260AAC1800F38BC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import SwiftImage
 
-let experiment = TestSymbolicRegressionExperiment()
+let experiment = SaltPepperTest()
 
 let best = experiment.startExperiment()
 
-print("Best fitness: \(best.fitness)")
+print()
