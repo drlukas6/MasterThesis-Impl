@@ -59,7 +59,8 @@ class CGPPopulation {
         }
 
 //        process(datasource: datasource, inPopulation: population)
-        var parent = process(inputs: inputs, outputs: outputs, inPopulation: population).0
+        var (parent, fitness) = process(inputs: inputs, outputs: outputs, inPopulation: population)
+        var lastStepChange = 0
 
 //        logger.info("Calculated fitnesses: \(self.population.map(\.fitness))")
 
@@ -82,10 +83,17 @@ class CGPPopulation {
                 logger.info("Top fitness in step \(step + 1): \(topFitness)")
             }
 
-            if topFitness >= parent.fitness {
-
-                parent = topMember
+            guard step - lastStepChange < 151 else {
+                break
             }
+
+            guard topFitness >= parent.fitness && topMember != parent else {
+                continue
+            }
+
+            lastStepChange = step
+
+            parent = topMember
         }
 
         logger.info("Finished with top fitness \(parent.fitness)")

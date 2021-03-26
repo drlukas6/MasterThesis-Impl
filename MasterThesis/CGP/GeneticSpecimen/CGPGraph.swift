@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CGPGraph: GeneticSpecimen {
+class CGPGraph: GeneticSpecimen, Equatable {
 
     struct Size {
 
@@ -18,6 +18,8 @@ class CGPGraph: GeneticSpecimen {
             rows * columns
         }
     }
+
+    private let id = UUID().uuidString
 
     var fitness = -Double.infinity
 
@@ -412,5 +414,9 @@ class CGPGraph: GeneticSpecimen {
         let newDna = leftDna + rightDna
 
         return .init(dna: Array(newDna), operationSet: left.operationSet)
+    }
+
+    static func == (lhs: CGPGraph, rhs: CGPGraph) -> Bool {
+        lhs.id == rhs.id
     }
 }
