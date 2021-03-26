@@ -7,6 +7,7 @@
 
 import Foundation
 import os.log
+import SwiftImage
 
 class SaltPepperTest: Experiment {
 
@@ -28,8 +29,23 @@ class SaltPepperTest: Experiment {
 
     func work() -> CGPGraph {
 
-        population.process(withDatasource: LenaSaltPepperTest1DataSource(),
-                           forGenerations: 400)
+        let dataSource = LenaSaltPepperTest1DataSource()
+
+        let best = population.process(withDatasource: dataSource,
+                                      forGenerations: 1000)
+
+        let pixels = (0 ..< dataSource.size).map { row -> UInt8 in
+
+            let prediction = best.prediction(for: dataSource.input(at: row)).first!
+
+            return UInt8( round(prediction) )
+        }
+
+        let image = Image<UInt8>(width: 30, height: 30, pixels: pixels)
+
+        let cgimage = image.cgImage
+
+        return best
     }
 }
 

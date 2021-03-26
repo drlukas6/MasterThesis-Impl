@@ -28,6 +28,7 @@ enum LenaOperation: CaseIterable, CGPOperation {
     case mean
     case modSum
     case sqrtSum
+    case maxMinDiff
 
     func execute(with input: [Double]) -> Double {
 
@@ -38,6 +39,7 @@ enum LenaOperation: CaseIterable, CGPOperation {
         case .mean: return input.sorted()[input.count / 2]
         case .modSum: return input.reduce(0, +).truncatingRemainder(dividingBy: 256)
         case .sqrtSum: return input.reduce(0, +).squareRoot()
+        case .maxMinDiff: return input.max()! - input.min()!
         }
     }
 
