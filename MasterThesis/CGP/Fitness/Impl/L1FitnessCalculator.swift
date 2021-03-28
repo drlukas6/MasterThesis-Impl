@@ -16,7 +16,7 @@ struct L1FitnessCalculator: FitnessCalculator {
             .map { prediction, trueValue in
                 abs(prediction - trueValue)
             }
-            .reduce(0, +) / Double(predictions.count)
+            .reduce(0, +) / Double(predictions.count * 255)
 
         return (1 / mse, mse)
     }
