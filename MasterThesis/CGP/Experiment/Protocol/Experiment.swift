@@ -11,6 +11,7 @@ import os.log
 private extension String {
 
     static let experimentLogUrlPath = "MasterThesis/ExperimentLog.log"
+    static let historyUrlPath = "MasterThesis/.history"
 }
 
 protocol Experiment {
@@ -38,7 +39,7 @@ extension Experiment {
 
         let startDate = Date()
 
-        let (best, _) = work()
+        let (best, history) = work()
 
         let duration = Date().timeIntervalSince(startDate) * 1000
 
@@ -48,10 +49,12 @@ extension Experiment {
             bestFitness: best.fitness,
             graphDescription: best.graphDescription)
 
+        log(history: history)
+
         return best
     }
 
-    func log(withStatus status: ExperimentStatus, bestFitness fitness: Double, graphDescription: String) {
+    private func log(withStatus status: ExperimentStatus, bestFitness fitness: Double, graphDescription: String) {
 
         let developerDirectory = FileManager.default.urls(for: .developerDirectory, in: .userDomainMask).first!
 
@@ -67,6 +70,30 @@ extension Experiment {
         } catch {
             print("Error writing to file: \(error.localizedDescription)")
         }
+    }
+
+    private func log(history: History) {
+
+        let developerDirectory = FileManager.default.urls(for: .developerDirectory, in: .userDomainMask).first!
+
+        let historyUrl = developerDirectory.appendingPathComponent(.historyUrlPath)
+
+        do {
+            try history.fitnesses.map { String($0) }.joined(separator: " ").appendLineToURL(fileURL: historyUrl)
+            try history.errors.map { String($0) }.joined(separator: " ").appendLineToURL(fileURL: historyUrl)
+        } catch {
+            print("Error writing to file: \(error.localizedDescription)")
+        }
+    }
+
+    private func showGraph() {
+
+        let task = Process()
+
+        task.launchPath = "python3"
+        task.arguments = ["show_graph.py"]
+
+        task.launch()
     }
 }
 

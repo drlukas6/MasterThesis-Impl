@@ -32,25 +32,25 @@ class EdgeDetectionTest: Experiment {
         let dataSource = LenaEdgeDetectionDataSource()
 
         let (best, history) = population.process(withDatasource: dataSource,
-                                           forGenerations: 1500)
+                                                 forGenerations: 50)
 
-        let pixels = (0 ..< dataSource.size).map { row -> UInt8 in
+//        let pixels = (0 ..< dataSource.size).map { row -> UInt8 in
+//
+//            let prediction = best.prediction(for: dataSource.input(at: row)).first!
+//
+//            return UInt8( round(prediction) )
+//        }
+//
+//        let pixels2 = (0 ..< dataSource.fullSize).map { row -> UInt8 in
+//
+//            let prediction = best.prediction(for: dataSource.full(at: row)).first!
+//
+//            return UInt8( round(prediction) )
+//        }
 
-            let prediction = best.prediction(for: dataSource.input(at: row)).first!
+//        let image = Image<UInt8>(width: dataSource.fullW, height: dataSource.fullH, pixels: pixels2)
 
-            return UInt8( round(prediction) )
-        }
-
-        let pixels2 = (0 ..< dataSource.fullSize).map { row -> UInt8 in
-
-            let prediction = best.prediction(for: dataSource.full(at: row)).first!
-
-            return UInt8( round(prediction) )
-        }
-
-        let image = Image<UInt8>(width: dataSource.fullW, height: dataSource.fullH, pixels: pixels2)
-
-        let cgimage = image.cgImage
+//        let cgimage = image.cgImage
 
         return (best, history)
     }
