@@ -26,7 +26,7 @@ class TestSymbolicRegressionExperiment: Experiment {
                                    graphParameters: graphParameters)
     }
 
-    func work() -> CGPGraph {
+    func work() -> (CGPGraph, History) {
         population.process(withDatasource: TestSquaredDataSource(),
                            forGenerations: 200)
     }

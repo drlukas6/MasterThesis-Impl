@@ -27,12 +27,12 @@ class SaltPepperTest: Experiment {
                                    graphParameters: graphParameters)
     }
 
-    func work() -> CGPGraph {
+    func work() -> (CGPGraph, History) {
 
         let dataSource = LenaSaltPepperTest1DataSource()
 
-        let best = population.process(withDatasource: dataSource,
-                                      forGenerations: 500)
+        let (best, history) = population.process(withDatasource: dataSource,
+                                           forGenerations: 100)
 
         let pixels = (0 ..< dataSource.size).map { row -> UInt8 in
 
@@ -52,7 +52,7 @@ class SaltPepperTest: Experiment {
 
         let cgimage = image.cgImage
 
-        return best
+        return (best, history)
     }
 }
 
