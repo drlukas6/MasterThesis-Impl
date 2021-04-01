@@ -1,27 +1,27 @@
 //
-//  SaltPepperTest.swift
+//  EdgeDetectionTest.swift
 //  MasterThesis
 //
-//  Created by Lukas Sestic on 24.03.2021..
+//  Created by Lukas Sestic on 01.04.2021..
 //
 
 import Foundation
 import os.log
 import SwiftImage
 
-class SaltPepperTest: Experiment {
+class EdgeDetectionTest: Experiment {
 
     private let logger = Logger()
 
-    let name = "SaltPepperTestExperiment"
+    let name = "EdgeDetectionTestExperiment"
 
     private var population: CGPPopulation
 
     init() {
 
-        let graphParameters = CGPPopulation.GraphParameters(inputs: 8, outputs: 1, levelsBack: 3,
-                                                            dimension: .init(rows: 2, columns: 10),
-                                                            operationsSet: LenaOperationSet(numberOfInputs: 8))
+        let graphParameters = CGPPopulation.GraphParameters(inputs: 9, outputs: 1, levelsBack: 4,
+                                                            dimension: .init(rows: 2, columns: 15),
+                                                            operationsSet: LenaOperationSet(numberOfInputs: 9))
 
         population = CGPPopulation(fitnessCalculator: L1FitnessCalculator(),
                                    graphParameters: graphParameters)
@@ -29,10 +29,10 @@ class SaltPepperTest: Experiment {
 
     func work() -> (CGPGraph, History) {
 
-        let dataSource = LenaSaltPepperTest1DataSource()
+        let dataSource = LenaEdgeDetectionDataSource()
 
         let (best, history) = population.process(withDatasource: dataSource,
-                                           forGenerations: 100)
+                                           forGenerations: 1500)
 
         let pixels = (0 ..< dataSource.size).map { row -> UInt8 in
 

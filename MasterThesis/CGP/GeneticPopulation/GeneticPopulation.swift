@@ -44,7 +44,9 @@ class CGPPopulation {
 
     /// Processes a whole dataset for the given number of generations and returns the
     /// best performing CGPGraph
-    func process(withDatasource datasource: Datasource, forGenerations generations: Int) -> CGPGraph {
+    func process(withDatasource datasource: Datasource, forGenerations generations: Int) -> (CGPGraph, History) {
+
+        let history = History()
 
         var inputs = [[Double]]()
         inputs.reserveCapacity(datasource.size)
@@ -58,15 +60,7 @@ class CGPPopulation {
             outputs.append(datasource.output(at: row).first!)
         }
 
-//        process(datasource: datasource, inPopulation: population)
-        var (parent, fitness) = process(inputs: inputs, outputs: outputs, inPopulation: population)
-        var lastStepChange = 0
-
-//        logger.info("Calculated fitnesses: \(self.population.map(\.fitness))")
-
-//        var parent = population.sorted { (lhs, rhs) -> Bool in
-//            lhs.fitness < rhs.fitness
-//        }.last!
+        var (parent, _) = process(inputs: inputs, outputs: outputs, inPopulation: population)
 
         logger.info("Best fitness: \(parent.fitness)")
 
@@ -76,37 +70,32 @@ class CGPPopulation {
                 parent.mutated()
             }
 
-//            let (topMember, topFitness) = process(datasource: datasource, inPopulation: population)
-            let (topMember, topFitness) = process(inputs: inputs, outputs: outputs, inPopulation: population)
+            let (topMember, stat) = process(inputs: inputs, outputs: outputs, inPopulation: population)
+
+            history.add(fitness: stat.0, error: stat.1)
 
             if step % 10 == 0 {
-                logger.info("Top fitness in step \(step + 1): \(topFitness)")
+                logger.info("Top fitness in step \(step + 1): \(stat.0)")
             }
 
-            guard step - lastStepChange < 151 else {
-                break
-            }
-
-            guard topFitness >= parent.fitness && topMember != parent else {
+            guard stat.0 >= parent.fitness && topMember != parent else {
                 continue
             }
-
-            lastStepChange = step
 
             parent = topMember
         }
 
         logger.info("Finished with top fitness \(parent.fitness)")
 
-        return parent
+        return (parent, history)
     }
 
     // MARK: - Private
 
     /// Performs a step with a given datasource
-    /// - Returns: Best CGP Graph and its fitness
+    /// - Returns: Best CGP Graph, (Fitness and error)
     @discardableResult
-    private func process(inputs: [[Double]], outputs: [Double], inPopulation population: [CGPGraph]) -> (CGPGraph, Double) {
+    private func process(inputs: [[Double]], outputs: [Double], inPopulation population: [CGPGraph]) -> (CGPGraph, (Double, Double)) {
 
         var histories: [[Double]] = (0 ..< population.count).map { _ in [] }
 
@@ -120,18 +109,21 @@ class CGPPopulation {
             }
         }
 
-        let qualities = histories.enumerated().map { index, history -> Double in
+        let qualities = histories.enumerated().map { index, history -> (Double, Double) in
 
-            let (fitness, _) = fitnessCalculator.calculateFitness(fromPredictions: history, groundTruth: outputs)
+            let (fitness, error) = fitnessCalculator.calculateFitness(fromPredictions: history, groundTruth: outputs)
 
             population[index].fitness = fitness
 
-            return fitness
+            return (fitness, error)
         }
 
-        let bestFitness = qualities.max()!
-        let best = population[qualities.firstIndex(of: bestFitness)!]
+        let bestFitnessAndError = qualities.max { history1, history2 -> Bool in
+            history1.0 < history2.0
+        }!
 
-        return (best, bestFitness)
+        let best = population[qualities.map(\.0).firstIndex(of: bestFitnessAndError.0)!]
+
+        return (best, bestFitnessAndError)
     }
 }

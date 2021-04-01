@@ -18,7 +18,7 @@ protocol Experiment {
     var name: String { get }
 
     @discardableResult
-    func work() -> CGPGraph
+    func work() -> (CGPGraph, History)
 }
 
 extension Experiment {
@@ -33,11 +33,12 @@ extension Experiment {
         return formatter
     }
 
+    @discardableResult
     func startExperiment() -> CGPGraph {
 
         let startDate = Date()
 
-        let best = work()
+        let (best, _) = work()
 
         let duration = Date().timeIntervalSince(startDate) * 1000
 

@@ -8,8 +8,16 @@
 import Foundation
 import SwiftImage
 
-let experiment = SaltPepperTest()
+//let experiment = SaltPepperTest()
+//
+//let best = experiment.startExperiment()
+//
+//print()
+//
+//
 
-let best = experiment.startExperiment()
+let experiment = EdgeDetectionTest()
+
+experiment.startExperiment()
 
 print()
