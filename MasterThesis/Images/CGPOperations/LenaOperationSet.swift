@@ -30,6 +30,12 @@ enum LenaOperation: CaseIterable, CGPOperation {
     case sqrtSum
     case maxMinDiff
     case none
+    case white
+    case sin
+    case cos
+    case rsqrt
+    case exp
+    case sqrtDivided
 
     func execute(with input: [Double]) -> Double {
 
@@ -42,6 +48,12 @@ enum LenaOperation: CaseIterable, CGPOperation {
         case .sqrtSum: return input.reduce(0, +).squareRoot()
         case .maxMinDiff: return input.max()! - input.min()!
         case .none: return 0
+        case .white: return 255
+        case .sin: return Darwin.sin(input.first!) * 255
+        case .cos: return Darwin.cos(input.first!) * 255
+        case .rsqrt: return 1 / sqrt(input.first!)
+        case .exp: return Darwin.exp(input[0] + input[1]).truncatingRemainder(dividingBy: 256)
+        case .sqrtDivided: return sqrt((pow(input[0], 2) + pow(input[1], 2)) / 2)
         }
     }
 

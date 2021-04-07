@@ -19,7 +19,7 @@ class EdgeDetectionTest: Experiment {
 
     init() {
 
-        let graphParameters = CGPPopulation.GraphParameters(inputs: 9, outputs: 1, levelsBack: 4,
+        let graphParameters = CGPPopulation.GraphParameters(inputs: 9, outputs: 1, levelsBack: 15,
                                                             dimension: .init(rows: 2, columns: 15),
                                                             operationsSet: LenaOperationSet(numberOfInputs: 9))
 
@@ -32,7 +32,7 @@ class EdgeDetectionTest: Experiment {
         let dataSource = LenaEdgeDetectionDataSource()
 
         let (best, history) = population.process(withDatasource: dataSource,
-                                                 forGenerations: 50)
+                                                 forGenerations: 100)
 
 //        let pixels = (0 ..< dataSource.size).map { row -> UInt8 in
 //
@@ -41,16 +41,16 @@ class EdgeDetectionTest: Experiment {
 //            return UInt8( round(prediction) )
 //        }
 //
-//        let pixels2 = (0 ..< dataSource.fullSize).map { row -> UInt8 in
-//
-//            let prediction = best.prediction(for: dataSource.full(at: row)).first!
-//
-//            return UInt8( round(prediction) )
-//        }
+        let pixels2 = (0 ..< dataSource.fullSize).map { row -> UInt8 in
 
-//        let image = Image<UInt8>(width: dataSource.fullW, height: dataSource.fullH, pixels: pixels2)
+            let prediction = best.prediction(for: dataSource.full(at: row)).first!
 
-//        let cgimage = image.cgImage
+            return UInt8( round(prediction) )
+        }
+
+        let image = Image<UInt8>(width: dataSource.fullW, height: dataSource.fullH, pixels: pixels2).map { pix -> UInt8 in pix > 127 ? 255 : 0}
+
+        let cgimage = image.cgImage
 
         return (best, history)
     }

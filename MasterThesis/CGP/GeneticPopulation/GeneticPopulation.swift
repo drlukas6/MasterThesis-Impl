@@ -60,9 +60,9 @@ class CGPPopulation {
             outputs.append(datasource.output(at: row).first!)
         }
 
-        var (parent, _) = process(inputs: inputs, outputs: outputs, inPopulation: population)
+        var (parent, result) = process(inputs: inputs, outputs: outputs, inPopulation: population)
 
-        logger.info("Best fitness: \(parent.fitness)")
+        logger.info("Best error: \(result.1)")
 
         for step in (0 ..< generations) {
 
@@ -75,7 +75,7 @@ class CGPPopulation {
             history.add(fitness: stat.0, error: stat.1)
 
             if step % 10 == 0 {
-                logger.info("Top fitness in step \(step + 1): \(stat.0)")
+                logger.info("Top error in step \(step + 1): \(stat.1)")
             }
 
             guard stat.0 >= parent.fitness && topMember != parent else {
@@ -85,7 +85,7 @@ class CGPPopulation {
             parent = topMember
         }
 
-        logger.info("Finished with top fitness \(parent.fitness)")
+        logger.info("Finished with top error \(history.errors.last!)")
 
         return (parent, history)
     }
