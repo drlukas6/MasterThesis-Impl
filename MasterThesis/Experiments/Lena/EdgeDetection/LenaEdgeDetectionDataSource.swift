@@ -13,24 +13,29 @@ private extension URL {
     static let lenaSmallUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_512_slice.jpg")!
     static let lenaSmallEdgeUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_Edge_slice.png")!
 
-    static let lenaEdgesUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_edges.png")!
+    static let lenaValUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_val_slice.png")!
+    static let lenaValEdgeUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_edge_slice_val.png")!
+
+    static let lenaFullUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_512.jpg")!
 }
 
 struct LenaEdgeDetectionDataSource: Datasource {
 
-    private static let fullImage: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaEdgesUrl)
+    private static let fullImage: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaFullUrl)
 
-    private static let inputImage: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaSmallEdgeUrl)
-    private static let outputImage: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaSmallUrl)
+    private static let inputImage: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaSmallUrl)
+    private static let outputImage: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaSmallEdgeUrl)
+
+    private static let inputVal: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaValUrl)
+    private static let outputVal: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaValEdgeUrl)
 
     private static let inputGrayscaleImage: Image<UInt8> = inputImage.map { $0.gray }
     private static let outputGrayscaleImage: Image<UInt8> = outputImage.map { $0.gray }
 
-    static let fullGrayscaleImage: Image<UInt8> = fullImage.map { $0.gray }
+    private static let inputGrayscaleValImage: Image<UInt8> = inputVal.map { $0.gray }
+    private static let outputGrayscaleValImage: Image<UInt8> = outputVal.map { $0.gray }
 
-    static let fullCG = fullGrayscaleImage.cgImage
-    static let inputCG = inputImage.cgImage
-    static let outputCG = outputImage.cgImage
+    static let fullGrayscaleImage: Image<UInt8> = fullImage.map { $0.gray }
 
     let size: Int = 1600
 
@@ -52,10 +57,6 @@ struct LenaEdgeDetectionDataSource: Datasource {
 
     func input(at index: Int) -> [Double] {
 
-        let fullCG = Self.fullGrayscaleImage.cgImage
-        let inputCG = Self.inputImage.cgImage
-        let outputCG = Self.outputImage.cgImage
-
         let row = index / Self.inputImage.width
         let column = index % Self.inputImage.width
 
@@ -73,4 +74,3 @@ struct LenaEdgeDetectionDataSource: Datasource {
         return [Double(Self.outputGrayscaleImage[column, row])]
     }
 }
-

@@ -64,7 +64,13 @@ class CGPPopulation {
 
         logger.info("Best error: \(result.1)")
 
+        var debuggerBreak = false
+
         for step in (0 ..< generations) {
+
+            guard !debuggerBreak else {
+                break
+            }
 
             self.population = [parent] + (0 ..< 4).map { _ in
                 parent.mutated()

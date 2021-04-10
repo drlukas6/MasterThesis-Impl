@@ -39,22 +39,32 @@ enum LenaOperation: CaseIterable, CGPOperation {
 
     func execute(with input: [Double]) -> Double {
 
+        let result: Double
+
         switch self {
-        case .max: return input.max()!
-        case .min: return input.min()!
-        case .average: return input.reduce(0, +) / Double(input.count)
-        case .mean: return input.sorted()[input.count / 2]
-        case .modSum: return input.reduce(0, +).truncatingRemainder(dividingBy: 256)
-        case .sqrtSum: return input.reduce(0, +).squareRoot()
-        case .maxMinDiff: return input.max()! - input.min()!
-        case .none: return 0
-        case .white: return 255
-        case .sin: return Darwin.sin(input.first!) * 255
-        case .cos: return Darwin.cos(input.first!) * 255
-        case .rsqrt: return 1 / sqrt(input.first!)
-        case .exp: return Darwin.exp(input[0] + input[1]).truncatingRemainder(dividingBy: 256)
-        case .sqrtDivided: return sqrt((pow(input[0], 2) + pow(input[1], 2)) / 2)
+        case .max: result = input.max()!
+        case .min: result = input.min()!
+        case .average: result = input.reduce(0, +) / Double(input.count)
+        case .mean: result = input.sorted()[input.count / 2]
+        case .modSum: result = input.reduce(0, +).truncatingRemainder(dividingBy: 256)
+        case .sqrtSum: result = input.reduce(0, +).squareRoot()
+        case .maxMinDiff: result = input.max()! - input.min()!
+        case .none: result = 0
+        case .white: result = 255
+        case .sin: result = Darwin.sin(input.first!) * 255
+        case .cos: result = Darwin.cos(input.first!) * 255
+        case .rsqrt: result = 1 / sqrt(input.first!)
+        case .exp: result = Darwin.exp(input[0] + input[1]).truncatingRemainder(dividingBy: 256)
+        case .sqrtDivided: result = sqrt((pow(input[0], 2) + pow(input[1], 2)) / 2)
         }
+
+        guard result != .nan else {
+            fatalError("WHAT")
+        }
+
+        let result2 = Double.maximum(Double.minimum(result, 255), 0)
+
+        return result2
     }
 
     func isEqual(to rhs: CGPOperation) -> Bool {
