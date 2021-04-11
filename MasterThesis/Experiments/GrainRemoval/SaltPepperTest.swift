@@ -19,9 +19,9 @@ class SaltPepperTest: Experiment {
 
     init() {
 
-        let graphParameters = CGPPopulation.GraphParameters(inputs: 8, outputs: 1, levelsBack: 3,
-                                                            dimension: .init(rows: 2, columns: 10),
-                                                            operationsSet: LenaOperationSet(numberOfInputs: 8))
+        let graphParameters = CGPPopulation.GraphParameters(inputs: 8, outputs: 1, levelsBack: 15,
+                                                            dimension: .init(rows: 2, columns: 15),
+                                                            operationsSet: LenaGrainRemovalOperationSet(numberOfInputs: 8))
 
         population = CGPPopulation(fitnessCalculator: L1FitnessCalculator(),
                                    graphParameters: graphParameters)
@@ -32,23 +32,16 @@ class SaltPepperTest: Experiment {
         let dataSource = LenaSaltPepperTest1DataSource()
 
         let (best, history) = population.process(withDatasource: dataSource,
-                                           forGenerations: 100)
+                                                 runParameters: .init(generations: 600, error: 0.005))
 
-        let pixels = (0 ..< dataSource.size).map { row -> UInt8 in
-
-            let prediction = best.prediction(for: dataSource.input(at: row)).first!
-
-            return UInt8( round(prediction) )
-        }
-
-        let pixels2 = (0 ..< dataSource.fullSize).map { row -> UInt8 in
+        let pixels = (0 ..< dataSource.fullSize * dataSource.fullSize).map { row -> UInt8 in
 
             let prediction = best.prediction(for: dataSource.full(at: row)).first!
 
             return UInt8( round(prediction) )
         }
 
-        let image = Image<UInt8>(width: dataSource.fullW, height: dataSource.fullH, pixels: pixels2)
+        let image = Image<UInt8>(width: dataSource.fullSize, height: dataSource.fullSize, pixels: pixels)
 
         let cgimage = image.cgImage
 

@@ -27,6 +27,12 @@ class CGPPopulation {
         }
     }
 
+    struct RunParameters {
+
+        let generations: Int
+        let error: Double
+    }
+
     private let logger = Logger()
 
     var population: [CGPGraph]
@@ -44,12 +50,17 @@ class CGPPopulation {
 
     /// Processes a whole dataset for the given number of generations and returns the
     /// best performing CGPGraph
-    func process(withDatasource datasource: Datasource, forGenerations generations: Int) -> (CGPGraph, History) {
+    func process(withDatasource datasource: Datasource, runParameters: RunParameters) -> (CGPGraph, History) {
 
         let history = History()
 
         var inputs = [[Double]]()
         inputs.reserveCapacity(datasource.size)
+
+        var valInputs = [[Double]]()
+        var valOutputs = [[Double]]()
+
+        var lastValError = Double.infinity
 
         var outputs = [Double]()
         outputs.reserveCapacity(datasource.size)
@@ -58,15 +69,23 @@ class CGPPopulation {
 
             inputs.append(datasource.input(at: row))
             outputs.append(datasource.output(at: row).first!)
+
+            guard let valInput = datasource.valInput(at: row),
+                  let valOutput = datasource.valOutput(at: row) else {
+                continue
+            }
+
+            valInputs.append(valInput)
+            valOutputs.append(valOutput)
         }
 
-        var (parent, result) = process(inputs: inputs, outputs: outputs, inPopulation: population)
+        var (parent, result, _) = process(inputs: inputs, outputs: outputs, inPopulation: population)
 
-        logger.info("Best error: \(result.1)")
+        logger.info("Min error: \(result.1)")
 
         var debuggerBreak = false
 
-        for step in (0 ..< generations) {
+        for step in (0 ..< runParameters.generations) {
 
             guard !debuggerBreak else {
                 break
@@ -76,12 +95,33 @@ class CGPPopulation {
                 parent.mutated()
             }
 
-            let (topMember, stat) = process(inputs: inputs, outputs: outputs, inPopulation: population)
+            let (topMember, stat, _) = process(inputs: inputs, outputs: outputs, inPopulation: population)
 
             history.add(fitness: stat.0, error: stat.1)
 
+            if !valInputs.isEmpty {
+
+                let (_, valError) = fitnessCalculator.calculateFitness(fromPredictions: valInputs.map { input in topMember.prediction(for: input).first! },
+                                                                       groundTruth: valOutputs.map(\.first!))
+
+                history.add(valError: valError)
+
+//                guard valError <= lastValError else {
+//
+//                    logger.info("Validation error started growing \(lastValError) -> \(valError)")
+//
+//                    break
+//                }
+
+                lastValError = valError
+            }
+
             if step % 10 == 0 {
-                logger.info("Top error in step \(step + 1): \(stat.1)")
+                logger.info("Error in step \(step + 1): \(stat.1)")
+            }
+
+            guard stat.1 >= runParameters.error else {
+                break
             }
 
             guard stat.0 >= parent.fitness && topMember != parent else {
@@ -91,7 +131,7 @@ class CGPPopulation {
             parent = topMember
         }
 
-        logger.info("Finished with top error \(history.errors.last!)")
+        logger.info("Finished with error \(history.errors.last!)")
 
         return (parent, history)
     }
@@ -101,7 +141,10 @@ class CGPPopulation {
     /// Performs a step with a given datasource
     /// - Returns: Best CGP Graph, (Fitness and error)
     @discardableResult
-    private func process(inputs: [[Double]], outputs: [Double], inPopulation population: [CGPGraph]) -> (CGPGraph, (Double, Double)) {
+    private func process(inputs: [[Double]],
+                         outputs: [Double],
+                         valInputOutputPair: ([Double], [Double])? = nil,
+                         inPopulation population: [CGPGraph]) -> (CGPGraph, (Double, Double), Double?) {
 
         var histories: [[Double]] = (0 ..< population.count).map { _ in [] }
 
@@ -130,6 +173,6 @@ class CGPPopulation {
 
         let best = population[qualities.map(\.0).firstIndex(of: bestFitnessAndError.0)!]
 
-        return (best, bestFitnessAndError)
+        return (best, bestFitnessAndError, nil)
     }
 }

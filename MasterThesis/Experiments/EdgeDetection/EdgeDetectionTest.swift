@@ -32,7 +32,7 @@ class EdgeDetectionTest: Experiment {
         let dataSource = LenaEdgeDetectionDataSource()
 
         let (best, history) = population.process(withDatasource: dataSource,
-                                                 forGenerations: 200)
+                                                 runParameters: .init(generations: 200, error: 1))
 
         let pixels2 = (0 ..< dataSource.fullSize).map { row -> UInt8 in
 

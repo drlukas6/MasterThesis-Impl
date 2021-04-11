@@ -14,12 +14,12 @@ protocol Datasource {
     func input(at index: Int) -> [Double]
     func output(at index: Int) -> [Double]
 
-    func valInput(at index: Int) -> [Double]
-    func valOutput(at index: Int) -> [Double]
+    func valInput(at index: Int) -> [Double]?
+    func valOutput(at index: Int) -> [Double]?
 }
 
 extension Datasource {
 
-    func valInput(at index: Int) -> [Double] { [] }
-    func valOutput(at index: Int) -> [Double] { [] }
+    func valInput(at index: Int) -> [Double]? { nil }
+    func valOutput(at index: Int) -> [Double]? { nil }
 }

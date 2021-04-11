@@ -79,8 +79,8 @@ extension Experiment {
         let historyUrl = developerDirectory.appendingPathComponent(.historyUrlPath)
 
         do {
-            try history.fitnesses.map { String($0) }.joined(separator: " ").appendLineToURL(fileURL: historyUrl)
             try history.errors.map { String($0) }.joined(separator: " ").appendLineToURL(fileURL: historyUrl)
+            try history.valErrors.map { String($0) }.joined(separator: " ").appendLineToURL(fileURL: historyUrl)
         } catch {
             print("Error writing to file: \(error.localizedDescription)")
         }

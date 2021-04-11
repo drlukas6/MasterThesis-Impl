@@ -10,19 +10,20 @@ import SwiftImage
 
 struct ImageWindow {
 
-    let values: [[UInt8]]
-
     let vector: [UInt8]
 
     init(values: [[UInt8]]) {
-
-        self.values = values
 
         self.vector = values.flatMap { $0 }
     }
 }
 
-extension Image where Pixel == UInt8 {
+protocol ImageWindowProvider {
+
+    func window(forPixelAt location: (x: Int, y: Int), takeCenter: Bool) -> ImageWindow
+}
+
+extension Image: ImageWindowProvider where Pixel == UInt8 {
 
     func window(forPixelAt location: (x: Int, y: Int), takeCenter: Bool = true) -> ImageWindow {
 
@@ -50,23 +51,23 @@ extension Image where Pixel == UInt8 {
     }
 }
 
-extension ImageSlice where Pixel == UInt8 {
+extension ImageSlice: ImageWindowProvider where Pixel == UInt8 {
 
     func window(forPixelAt location: (x: Int, y: Int), takeCenter: Bool = true) -> ImageWindow {
 
-        let (x, y) = (location.x, location.y)
+        let (x, y) = (xRange.startIndex + location.x, yRange.startIndex + location.y)
 
-        let topLeft = self[(x - 1) %% width, (y - 1) %% height]
-        let topCenter = self[x, (y - 1) %% height]
-        let topRight = self[(x + 1) %% width, (y - 1) %% height]
+        let topLeft = self[((x - 1) %% width) + xRange.startIndex,      ((y - 1) %% height) + yRange.startIndex]
+        let topCenter = self[x,                                         ((y - 1) %% height) + yRange.startIndex]
+        let topRight = self[((x + 1) %% width) + xRange.startIndex,     ((y - 1) %% height) + yRange.startIndex]
 
-        let centerLeft = self[(x - 1) %% width, y]
+        let centerLeft = self[((x - 1) %% width) + xRange.startIndex,   y]
         let center = takeCenter ? self[x, y] : nil
-        let centerRight = self[(x + 1) %% width, y]
+        let centerRight = self[((x + 1) %% width) + xRange.startIndex,  y]
 
-        let bottomLeft = self[(x - 1) %% width, (y + 1) %% height]
-        let bottomCenter = self[x, (y + 1) %% height]
-        let bottomRight = self[(x + 1) %% width, (y + 1) %% height]
+        let bottomLeft = self[((x - 1) %% width) + xRange.startIndex,   ((y + 1) %% height) + yRange.startIndex]
+        let bottomCenter = self[x, ((y + 1) %% height) +                yRange.startIndex]
+        let bottomRight = self[((x + 1) %% width) + xRange.startIndex,  ((y + 1) %% height) + yRange.startIndex]
 
         let windowValues = [
             [topLeft, topCenter, topRight],

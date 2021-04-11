@@ -8,7 +8,7 @@
 import Foundation
 import SwiftImage
 
-let experiment = EdgeDetectionTest()
+let experiment = SaltPepperTest()
 
 experiment.startExperiment()
 

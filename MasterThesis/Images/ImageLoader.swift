@@ -26,4 +26,13 @@ struct ImageLoader {
 
         return image
     }
+
+    static func loadGrayscale(from url: URL) -> Image<UInt8> {
+
+        guard let image: Image<RGB<UInt8>> = load(from: url) else {
+            fatalError("Please check input image type")
+        }
+
+        return image.map(\.gray)
+    }
 }

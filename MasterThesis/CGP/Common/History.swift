@@ -12,9 +12,16 @@ class History {
     var fitnesses = [Double]()
     var errors = [Double]()
 
+    var valErrors = [Double]()
+
     func add(fitness: Double, error: Double) {
 
         fitnesses.append(fitness)
         errors.append(error)
+    }
+
+    func add(valError: Double) {
+
+        valErrors.append(valError)
     }
 }
