@@ -1,8 +1,8 @@
 //
-//  LenaSaltPepperTest1DataSource.swift
+//  LargeSaltPepperExperimentDataSource.swift
 //  MasterThesis
 //
-//  Created by Lukas Sestic on 24.03.2021..
+//  Created by Lukas Sestic on 11.04.2021..
 //
 
 import Foundation
@@ -19,7 +19,7 @@ private extension Int {
     static let windowHalfStep = windowSize / 2
 }
 
-struct LenaSaltPepperTest1DataSource: Datasource {
+struct LargeSaltPepperExperimentDataSource: Datasource {
 
     private let lenaImage: Image<UInt8> = ImageLoader.loadGrayscale(from: .lena)
     private let grainedImage: Image<UInt8>
@@ -34,7 +34,7 @@ struct LenaSaltPepperTest1DataSource: Datasource {
 
     let size: Int = .windowSize * .windowSize
 
-    init(grain: Double = 0.01) {
+    init(grain: Double = 0.4) {
 
         grainedImage = lenaImage.map { pixel in
 

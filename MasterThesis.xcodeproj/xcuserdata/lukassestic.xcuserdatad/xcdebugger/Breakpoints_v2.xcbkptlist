@@ -39,16 +39,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2AA4C781-DFE7-4E73-8050-C246E9AA3B0D"
-            shouldBeEnabled = "No"
+            uuid = "2842FA4C-BFCB-4EDD-ACFE-A1CAFCA9ECEF"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MasterThesis/CGP/GeneticPopulation/GeneticPopulation.swift"
+            filePath = "MasterThesis/Experiments/LargeGrainRemoval/LargeSaltPepperExperiment.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "process(withDatasource:runParameters:)"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "work()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3C0404D6-CBCB-435C-87C8-7EE4BC2798BC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MasterThesis/Experiments/EdgeDetection/EdgeDetectionTest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "work()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

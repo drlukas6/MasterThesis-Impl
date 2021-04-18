@@ -7,11 +7,17 @@
 
 protocol CGPOperation {
 
+    var inputs: Int { get }
+
     func execute(with input: [Double]) -> Double
     func isEqual(to rhs: CGPOperation) -> Bool
 }
 
 struct IdentityOperation: CGPOperation {
+
+    var inputs: Int {
+        1
+    }
 
     func execute(with input: [Double]) -> Double {
         1
@@ -41,5 +47,9 @@ extension CGPOperationSet {
 
     func index(of operation: CGPOperation) -> Int {
         operations.firstIndex(where: { $0.isEqual(to: operation) } )!
+    }
+
+    func numberOfInputs(for operation: CGPOperation) -> Int {
+        at(index: index(of: operation)).inputs
     }
 }

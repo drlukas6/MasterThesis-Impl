@@ -320,7 +320,9 @@ class CGPGraph: GeneticSpecimen, Equatable {
 
             var connections = nodeInputs[randomActiveNode]!
 
-            let randomIndexToMutate = connections.indices.randomElement()!
+            let randomIndexToMutate = connections.indices
+                                                 .prefix(operationSet.numberOfInputs(for: nodes[randomActiveNode].operation))
+                                                 .randomElement()!
 
             connections[randomIndexToMutate] = operationNodeConnectionRange(for: randomActiveNode)
                                                .randomElement()!
@@ -397,7 +399,14 @@ class CGPGraph: GeneticSpecimen, Equatable {
             node.calculateOutput()
         }
 
-        return nodes.suffix(outputs).map { node in node.output }
+        return nodes.suffix(outputs).map { node in
+
+            guard !node.output.isNaN else {
+                return 0
+            }
+
+            return max(min(node.output, 255), 0)
+        }
     }
 
     // Mark: - Public Static

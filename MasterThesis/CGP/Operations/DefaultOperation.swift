@@ -30,6 +30,16 @@ enum DefaultOperation: CaseIterable, CGPOperation {
     case sin
     case cos
 
+    var inputs: Int {
+
+        switch self {
+        case .add, .substract, .multiply, .divide:
+            return 2
+        case .sin, .cos:
+            return 1
+        }
+    }
+
     func execute(with input: [Double]) -> Double {
 
         switch self {

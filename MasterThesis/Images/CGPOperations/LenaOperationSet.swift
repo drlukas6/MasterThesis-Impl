@@ -37,6 +37,18 @@ enum LenaOperation: CaseIterable, CGPOperation {
     case exp
     case sqrtDivided
 
+    var inputs: Int {
+
+        switch self {
+        case .max, .min, .average, .mean, .modSum, .sqrtSum, .maxMinDiff:
+            return .max
+        case .none, .white, .sin, .cos, .rsqrt, .exp:
+            return 1
+        case .sqrtDivided:
+            return 2
+        }
+    }
+
     func execute(with input: [Double]) -> Double {
 
         let result: Double

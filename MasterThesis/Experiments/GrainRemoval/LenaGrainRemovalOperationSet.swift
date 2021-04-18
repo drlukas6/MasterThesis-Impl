@@ -31,6 +31,16 @@ enum LenaGrainRemovalOperation: CaseIterable, CGPOperation {
     case maxMinDiff
     case none
 
+    var inputs: Int {
+
+        switch self {
+        case .none:
+            return 1
+        case .max, .min, .average, .mean, .modSum, .sqrtSum, .maxMinDiff:
+            return .max
+        }
+    }
+
     func execute(with input: [Double]) -> Double {
 
         switch self {

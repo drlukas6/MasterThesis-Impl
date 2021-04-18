@@ -60,8 +60,6 @@ class CGPPopulation {
         var valInputs = [[Double]]()
         var valOutputs = [[Double]]()
 
-        var lastValError = Double.infinity
-
         var outputs = [Double]()
         outputs.reserveCapacity(datasource.size)
 
@@ -83,13 +81,7 @@ class CGPPopulation {
 
         logger.info("Min error: \(result.1)")
 
-        var debuggerBreak = false
-
         for step in (0 ..< runParameters.generations) {
-
-            guard !debuggerBreak else {
-                break
-            }
 
             self.population = [parent] + (0 ..< 4).map { _ in
                 parent.mutated()
@@ -105,15 +97,6 @@ class CGPPopulation {
                                                                        groundTruth: valOutputs.map(\.first!))
 
                 history.add(valError: valError)
-
-//                guard valError <= lastValError else {
-//
-//                    logger.info("Validation error started growing \(lastValError) -> \(valError)")
-//
-//                    break
-//                }
-
-                lastValError = valError
             }
 
             if step % 10 == 0 {

@@ -10,67 +10,111 @@ import SwiftImage
 
 private extension URL {
 
-    static let lenaSmallUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_512_slice.jpg")!
-    static let lenaSmallEdgeUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_Edge_slice.png")!
-
-    static let lenaValUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_val_slice.png")!
-    static let lenaValEdgeUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_edge_slice_val.png")!
-
-    static let lenaFullUrl = URL(string: "/Users/lukassestic/Developer/MasterThesis/Assets/lena_512.jpg")!
+    static let lena = URL.assetsDirectory.appendingPathComponent("lena_512.jpg")
+//    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lenacanny-full.jpg")
+    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lena_edges.png")
 }
+
+private extension Int {
+
+    static let windowSize = 50
+    static let windowHalfStep = windowSize / 2
+}
+
 
 struct LenaEdgeDetectionDataSource: Datasource {
 
-    private static let fullImage: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaFullUrl)
+    private let lenaImage = ImageLoader.loadGrayscale(from: .lena)
+    private let cannyLenaImage = ImageLoader.loadGrayscale(from: .cannyLena)
 
-    private static let inputImage: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaSmallUrl)
-    private static let outputImage: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaSmallEdgeUrl)
+    private let inputImage: ImageSlice<UInt8>
+    private let outputImage: ImageSlice<UInt8>
 
-    private static let inputVal: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaValUrl)
-    private static let outputVal: Image<RGB<UInt8>>! = ImageLoader.load(from: .lenaValEdgeUrl)
+    private let inputValImage: ImageSlice<UInt8>
+    private let outputValImage: ImageSlice<UInt8>
 
-    private static let inputGrayscaleImage: Image<UInt8> = inputImage.map { $0.gray }
-    private static let outputGrayscaleImage: Image<UInt8> = outputImage.map { $0.gray }
+    let size: Int = .windowSize * .windowSize
 
-    private static let inputGrayscaleValImage: Image<UInt8> = inputVal.map { $0.gray }
-    private static let outputGrayscaleValImage: Image<UInt8> = outputVal.map { $0.gray }
+    init() {
 
-    static let fullGrayscaleImage: Image<UInt8> = fullImage.map { $0.gray }
+        let (centerX, centerY) = (lenaImage.width / 2, lenaImage.height / 2)
 
-    let size: Int = 1600
+        let quarterXVal = lenaImage.width / 4
+        let yVal = Int(Double(lenaImage.height) / 1.98)
 
-    let fullW = fullGrayscaleImage.width
-    let fullH = fullGrayscaleImage.height
+//        inputImage = lenaImage[163 - .windowHalfStep ..< 163 + .windowHalfStep,
+//                               312 - .windowHalfStep ..< 312 + .windowHalfStep]
+//
+//        let ccc = inputImage.cgImage
+//
+//        outputImage = cannyLenaImage[163 - .windowHalfStep ..< 163 + .windowHalfStep,
+//                                     312 - .windowHalfStep ..< 312 + .windowHalfStep]
+//
+//        let ccc2 = outputImage.cgImage
 
-    let fullSize: Int = fullGrayscaleImage.width * fullGrayscaleImage.height
+        inputImage = lenaImage[centerX - .windowHalfStep ..< centerX + .windowHalfStep,
+                               centerY - .windowHalfStep ..< centerY + .windowHalfStep]
+
+        let ccc = inputImage.cgImage
+
+        outputImage = cannyLenaImage[centerX - .windowHalfStep ..< centerX + .windowHalfStep,
+                                     centerY - .windowHalfStep ..< centerY + .windowHalfStep]
+
+        let ccc2 = outputImage.cgImage
+
+        inputValImage = lenaImage[quarterXVal - .windowHalfStep ..< quarterXVal + .windowHalfStep,
+                                  centerY - .windowHalfStep ..< centerY + .windowHalfStep]
+
+        outputValImage = cannyLenaImage[quarterXVal - .windowHalfStep ..< quarterXVal + .windowHalfStep,
+                                        centerY - .windowHalfStep ..< centerY + .windowHalfStep]
+    }
 
     func full(at index: Int) -> [Double] {
 
-        let row = index / Self.fullGrayscaleImage.width
-        let column = index % Self.fullGrayscaleImage.width
+        let row = index / lenaImage.width
+        let column = index % lenaImage.width
 
-        return Self.fullGrayscaleImage
-                   .window(forPixelAt: (x: column, y: row), takeCenter: true)
-                   .vector
-                   .map { Double($0) }
+        return lenaImage.window(forPixelAt: (x: column, y: row), takeCenter: true)
+                        .vector
+                        .map { Double($0) }
     }
 
     func input(at index: Int) -> [Double] {
 
-        let row = index / Self.inputImage.width
-        let column = index % Self.inputImage.width
+        let row = index / inputImage.width
+        let column = index % inputImage.width
 
-        return Self.inputGrayscaleImage
-                   .window(forPixelAt: (x: column, y: row), takeCenter: true)
-                   .vector
-                   .map { Double($0) }
+        return inputImage.window(forPixelAt: (x: column, y: row), takeCenter: true)
+                         .vector
+                         .map { Double($0) }
     }
 
     func output(at index: Int) -> [Double] {
 
-        let row = index / Self.outputImage.width
-        let column = index % Self.outputImage.width
+        let row = index / outputImage.width
+        let column = index % outputImage.width
 
-        return [Double(Self.outputGrayscaleImage[column, row])]
+        return [Double(outputImage[column + outputImage.xRange.startIndex,
+                                   row + outputImage.yRange.startIndex])]
+    }
+
+    func valInput(at index: Int) -> [Double]? {
+
+        let row = index / inputValImage.width
+        let column = index % inputValImage.width
+
+        return inputValImage.window(forPixelAt: (x: column, y: row), takeCenter: true)
+                            .vector
+                            .map { Double($0) }
+    }
+
+
+    func valOutput(at index: Int) -> [Double]? {
+
+        let row = index / outputValImage.width
+        let column = index % outputValImage.width
+
+        return [Double(outputValImage[column + outputValImage.xRange.startIndex,
+                                      row + outputValImage.yRange.startIndex])]
     }
 }
