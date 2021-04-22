@@ -39,18 +39,24 @@ class CGPPopulation {
 
     private let fitnessCalculator: FitnessCalculator
     private let graphParameters: GraphParameters
+    private let populationSize: Int
 
-    init(fitnessCalculator: FitnessCalculator, graphParameters: GraphParameters) {
+    init(fitnessCalculator: FitnessCalculator, graphParameters: GraphParameters, populationSize: Int = 4) {
 
         self.fitnessCalculator = fitnessCalculator
         self.graphParameters = graphParameters
+        self.populationSize = populationSize
 
-        population = (0 ..< 4).compactMap { _ in graphParameters.makeGraph() }
+        population = (0 ..< populationSize).compactMap { _ in graphParameters.makeGraph() }
     }
+
+    typealias OnCheckpointBlock = (CGPGraph, Int) -> Void
 
     /// Processes a whole dataset for the given number of generations and returns the
     /// best performing CGPGraph
-    func process(withDatasource datasource: Datasource, runParameters: RunParameters) -> (CGPGraph, History) {
+    func process(withDatasource datasource: Datasource,
+                 runParameters: RunParameters,
+                 onCheckpoint: OnCheckpointBlock? = nil) -> (CGPGraph, History) {
 
         let history = History()
 
@@ -83,7 +89,7 @@ class CGPPopulation {
 
         for step in (0 ..< runParameters.generations) {
 
-            self.population = [parent] + (0 ..< 4).map { _ in
+            self.population = [parent] + (0 ..< populationSize).map { _ in
                 parent.mutated()
             }
 
@@ -100,7 +106,11 @@ class CGPPopulation {
             }
 
             if step % 10 == 0 {
-                logger.info("Error in step \(step + 1): \(stat.1)")
+                logger.info("Step \(step + 1, align: .left(columns: 5)) ERROR: \(stat.1)")
+            }
+
+            if step % 100 == 0 {
+                onCheckpoint?(topMember, step)
             }
 
             guard stat.1 >= runParameters.error else {

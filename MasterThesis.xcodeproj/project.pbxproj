@@ -22,6 +22,7 @@
 		2F1E2F7825D3DF87005804C1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E2F7725D3DF87005804C1 /* main.swift */; };
 		2F32EF95262428390073EE11 /* EdgeDetectionOperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F32EF94262428390073EE11 /* EdgeDetectionOperationSet.swift */; };
 		2F3597C52611302A007A2C49 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3597C42611302A007A2C49 /* History.swift */; };
+		2F504599262F66F800E71D9B /* ImageProcessingCGPOperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F504598262F66F800E71D9B /* ImageProcessingCGPOperationSet.swift */; };
 		2F625622260D600F001159E2 /* L1FitnessCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F625621260D600F001159E2 /* L1FitnessCalculator.swift */; };
 		2F6C347325FC10E300BEE963 /* CGPOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347225FC10E300BEE963 /* CGPOperation.swift */; };
 		2F6C347925FC1B1B00BEE963 /* Experiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347825FC1B1B00BEE963 /* Experiment.swift */; };
@@ -33,6 +34,8 @@
 		2F895000260ABFAF00F38BC7 /* LenaOperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FFF260ABFAF00F38BC7 /* LenaOperationSet.swift */; };
 		2F895009260AC38400F38BC7 /* SaltPepperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F895008260AC38400F38BC7 /* SaltPepperTest.swift */; };
 		2F895010260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89500F260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift */; };
+		2FC50DB5262CB464008DFFF9 /* SteadyStateAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC50DB4262CB464008DFFF9 /* SteadyStateAlgorithm.swift */; };
+		2FC50DB9262CDCB2008DFFF9 /* LibraryEdgeDetectionOperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC50DB8262CDCB2008DFFF9 /* LibraryEdgeDetectionOperationSet.swift */; };
 		2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */; };
 		2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */; };
 		2FCEB5F325DD5D6800DB5B94 /* OperationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */; };
@@ -70,6 +73,7 @@
 		2F1E2F7725D3DF87005804C1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2F32EF94262428390073EE11 /* EdgeDetectionOperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeDetectionOperationSet.swift; sourceTree = "<group>"; };
 		2F3597C42611302A007A2C49 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		2F504598262F66F800E71D9B /* ImageProcessingCGPOperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingCGPOperationSet.swift; sourceTree = "<group>"; };
 		2F625621260D600F001159E2 /* L1FitnessCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L1FitnessCalculator.swift; sourceTree = "<group>"; };
 		2F6C347225FC10E300BEE963 /* CGPOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPOperation.swift; sourceTree = "<group>"; };
 		2F6C347825FC1B1B00BEE963 /* Experiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experiment.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 		2F894FFF260ABFAF00F38BC7 /* LenaOperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LenaOperationSet.swift; sourceTree = "<group>"; };
 		2F895008260AC38400F38BC7 /* SaltPepperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltPepperTest.swift; sourceTree = "<group>"; };
 		2F89500F260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LenaSaltPepperTest1DataSource.swift; sourceTree = "<group>"; };
+		2FC50DB4262CB464008DFFF9 /* SteadyStateAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteadyStateAlgorithm.swift; sourceTree = "<group>"; };
+		2FC50DB8262CDCB2008DFFF9 /* LibraryEdgeDetectionOperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryEdgeDetectionOperationSet.swift; sourceTree = "<group>"; };
 		2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPNode.swift; sourceTree = "<group>"; };
 		2FCEB5EF25DD5CEA00DB5B94 /* PassthroughNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughNode.swift; sourceTree = "<group>"; };
 		2FCEB5F225DD5D6800DB5B94 /* OperationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationNode.swift; sourceTree = "<group>"; };
@@ -194,6 +200,7 @@
 		2F1E2F7625D3DF87005804C1 /* MasterThesis */ = {
 			isa = PBXGroup;
 			children = (
+				2FC50DAB262CB447008DFFF9 /* Algorithms */,
 				2F1A537A262239CB00445B79 /* Extensions */,
 				2F895005260AC36700F38BC7 /* Experiments */,
 				2F894FDD260AAA9900F38BC7 /* Images */,
@@ -285,6 +292,14 @@
 			path = GrainRemoval;
 			sourceTree = "<group>";
 		};
+		2FC50DAB262CB447008DFFF9 /* Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				2FC50DB4262CB464008DFFF9 /* SteadyStateAlgorithm.swift */,
+			);
+			path = Algorithms;
+			sourceTree = "<group>";
+		};
 		2FCEB5E325DD5BCC00DB5B94 /* CGP */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +340,8 @@
 				2FFFCB332615C6BE005CE618 /* EdgeDetectionTest.swift */,
 				2FFFCB392615C6C8005CE618 /* LenaEdgeDetectionDataSource.swift */,
 				2F32EF94262428390073EE11 /* EdgeDetectionOperationSet.swift */,
+				2FC50DB8262CDCB2008DFFF9 /* LibraryEdgeDetectionOperationSet.swift */,
+				2F504598262F66F800E71D9B /* ImageProcessingCGPOperationSet.swift */,
 			);
 			path = EdgeDetection;
 			sourceTree = "<group>";
@@ -435,12 +452,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FCEB5F325DD5D6800DB5B94 /* OperationNode.swift in Sources */,
+				2FC50DB9262CDCB2008DFFF9 /* LibraryEdgeDetectionOperationSet.swift in Sources */,
 				2FCEB5F025DD5CEA00DB5B94 /* PassthroughNode.swift in Sources */,
 				2F15AD3225FB6CDD008F9562 /* TestSquaredDataSource.swift in Sources */,
 				2F895009260AC38400F38BC7 /* SaltPepperTest.swift in Sources */,
 				2FE7FDAA25F6D17900BD1722 /* DefaultOperation.swift in Sources */,
 				2F895010260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift in Sources */,
 				2FFFCB342615C6BE005CE618 /* EdgeDetectionTest.swift in Sources */,
+				2FC50DB5262CB464008DFFF9 /* SteadyStateAlgorithm.swift in Sources */,
 				2F6C347325FC10E300BEE963 /* CGPOperation.swift in Sources */,
 				2F15AD2725FB698B008F9562 /* FitnessCalculator.swift in Sources */,
 				2F894FDF260AAAF200F38BC7 /* ImageLoader.swift in Sources */,
@@ -464,6 +483,7 @@
 				2F625622260D600F001159E2 /* L1FitnessCalculator.swift in Sources */,
 				2F1A5387262393C200445B79 /* LargeSaltPepperExperiment.swift in Sources */,
 				2F1A538226224C9A00445B79 /* UInt8+Colors.swift in Sources */,
+				2F504599262F66F800E71D9B /* ImageProcessingCGPOperationSet.swift in Sources */,
 				2F1A53752622366000445B79 /* LenaGrainRemovalOperationSet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

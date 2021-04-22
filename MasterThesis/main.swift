@@ -11,5 +11,6 @@ import SwiftImage
 let experiment = EdgeDetectionTest()
 
 experiment.startExperiment()
+//experiment.work2()
 
 print()

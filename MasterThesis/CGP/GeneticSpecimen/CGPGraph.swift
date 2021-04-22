@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CGPGraph: GeneticSpecimen, Equatable {
+class CGPGraph: GeneticSpecimen, Equatable, Hashable {
 
     struct Size {
 
@@ -336,6 +336,10 @@ class CGPGraph: GeneticSpecimen, Equatable {
 //        print("Conns after mutation: \(nodeInputs[randomActiveNode]!.count)")
 
         recalculateActiveNodes()
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 
     // MARK: - Public

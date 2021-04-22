@@ -11,13 +11,17 @@ import SwiftImage
 private extension URL {
 
     static let lena = URL.assetsDirectory.appendingPathComponent("lena_512.jpg")
-//    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lenacanny-full.jpg")
-    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lena_edges.png")
+    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lenacanny-full.jpg")
+//    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lena_edges.png")
+//    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lena_edges3.png")
+//        static let cannyLena = URL.assetsDirectory.appendingPathComponent("lena_edges2.png")
 }
 
 private extension Int {
 
-    static let windowSize = 50
+//    static let windowSize = 30
+    static let windowSize = 30
+//    static let windowSize = 50
     static let windowHalfStep = windowSize / 2
 }
 
@@ -37,7 +41,11 @@ struct LenaEdgeDetectionDataSource: Datasource {
 
     init() {
 
-        let (centerX, centerY) = (lenaImage.width / 2, lenaImage.height / 2)
+//        let (centerX, centerY) = (lenaImage.width / 2, lenaImage.height / 2)
+        let (centerX, centerY) = (132, 238)
+//        let (centerX, centerY) = (344, 144)
+//        let (centerX, centerY) = (193, 317)
+//        let (centerX, centerY) = (163, 410)
 
         let quarterXVal = lenaImage.width / 4
         let yVal = Int(Double(lenaImage.height) / 1.98)

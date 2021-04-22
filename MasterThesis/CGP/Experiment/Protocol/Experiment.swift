@@ -11,6 +11,7 @@ import os.log
 private extension String {
 
     static let experimentLogUrlPath = "MasterThesis/ExperimentLog.log"
+    static let checkpointsPath = "MasterThesis/Checkpoints"
     static let historyUrlPath = "MasterThesis/.history"
 }
 
@@ -23,6 +24,11 @@ protocol Experiment {
 }
 
 extension Experiment {
+
+    static var checkpointsPath: URL { FileManager.default.urls(for: .developerDirectory, in: .userDomainMask)
+                                                    .first!
+                                                    .appendingPathComponent(.checkpointsPath)
+    }
 
     private static var dateFormatter: DateFormatter {
 
