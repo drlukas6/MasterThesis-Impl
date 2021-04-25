@@ -42,7 +42,7 @@ enum ImageProcessingCGPEdgeDetectionOperation: CaseIterable, CGPOperation {
     case log2
     case recip
     case rsqrt
-//    case avg
+    case avg
 
     var inputs: Int {
 
@@ -59,15 +59,15 @@ enum ImageProcessingCGPEdgeDetectionOperation: CaseIterable, CGPOperation {
         case .sin:      return 1
         case .nop:      return 1
         case .absolute: return 1
-        case .min:      return 2
-        case .max:      return 2
+        case .min:      return 9
+        case .max:      return 9
         case .ceil:     return 1
         case .floor:    return 1
         case .frac:     return 1
         case .log2:     return 1
         case .recip:    return 1
         case .rsqrt:    return 1
-//        case .avg:      return 2
+        case .avg:      return 8
         }
     }
 
@@ -94,7 +94,7 @@ enum ImageProcessingCGPEdgeDetectionOperation: CaseIterable, CGPOperation {
         case .log2:     return Darwin.log2(input[0])
         case .recip:    return 1 / input[0]
         case .rsqrt:    return 1 / Darwin.sqrt(input[0])
-//        case .avg:      return Double(input.reduce(0, +)) / Double(input.count)
+        case .avg:      return Double(input.reduce(0, +)) / Double(input.count)
         }
     }
 

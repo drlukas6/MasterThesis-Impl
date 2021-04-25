@@ -10,17 +10,24 @@ import SwiftImage
 
 private extension URL {
 
-    static let lena = URL.assetsDirectory.appendingPathComponent("lena_512.jpg")
-    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lenacanny-full.jpg")
+//    static let lena = URL.assetsDirectory.appendingPathComponent("lena_512.jpg")
+    static let lena = URL.assetsDirectory.appendingPathComponent("lena_256.jpg")
+    static let cameraman = URL.assetsDirectory.appendingPathComponent("cameraman.jpg")
+//    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lenacanny-full.jpg")
+    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lenacanny-full-256.jpg")
+    static let cannyCameraman = URL.assetsDirectory.appendingPathComponent("cameraman_canny.jpg")
+//    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lena_sobel.png")
 //    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lena_edges.png")
+//    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lena_edges_256.png")
 //    static let cannyLena = URL.assetsDirectory.appendingPathComponent("lena_edges3.png")
 //        static let cannyLena = URL.assetsDirectory.appendingPathComponent("lena_edges2.png")
 }
 
 private extension Int {
 
-//    static let windowSize = 30
-    static let windowSize = 30
+//    static let windowSize = 20
+    static let windowSize = 40
+//    static let windowSize = 70
 //    static let windowSize = 50
     static let windowHalfStep = windowSize / 2
 }
@@ -29,10 +36,16 @@ private extension Int {
 struct LenaEdgeDetectionDataSource: Datasource {
 
     private let lenaImage = ImageLoader.loadGrayscale(from: .lena)
+    private let cameramanImage = ImageLoader.loadGrayscale(from: .cameraman)
+
     private let cannyLenaImage = ImageLoader.loadGrayscale(from: .cannyLena)
+    private let cannyCameramanImage = ImageLoader.loadGrayscale(from: .cannyCameraman)
 
     private let inputImage: ImageSlice<UInt8>
     private let outputImage: ImageSlice<UInt8>
+//
+//    private let inputImage2: ImageSlice<UInt8>
+//    private let outputImage2: ImageSlice<UInt8>
 
     private let inputValImage: ImageSlice<UInt8>
     private let outputValImage: ImageSlice<UInt8>
@@ -42,7 +55,9 @@ struct LenaEdgeDetectionDataSource: Datasource {
     init() {
 
 //        let (centerX, centerY) = (lenaImage.width / 2, lenaImage.height / 2)
-        let (centerX, centerY) = (132, 238)
+        let (centerX, centerY) = (135, 115)
+//        let (centerX2, centerY2) = (132, 238)
+//        let (centerX, centerY) = (331, 269)
 //        let (centerX, centerY) = (344, 144)
 //        let (centerX, centerY) = (193, 317)
 //        let (centerX, centerY) = (163, 410)
@@ -63,18 +78,24 @@ struct LenaEdgeDetectionDataSource: Datasource {
         inputImage = lenaImage[centerX - .windowHalfStep ..< centerX + .windowHalfStep,
                                centerY - .windowHalfStep ..< centerY + .windowHalfStep]
 
-        let ccc = inputImage.cgImage
-
         outputImage = cannyLenaImage[centerX - .windowHalfStep ..< centerX + .windowHalfStep,
                                      centerY - .windowHalfStep ..< centerY + .windowHalfStep]
 
-        let ccc2 = outputImage.cgImage
+//
+//        inputImage2 = lenaImage[centerX2 - .windowHalfStep ..< centerX2 + .windowHalfStep,
+//                               centerY2 - .windowHalfStep ..< centerY2 + .windowHalfStep]
+//
+//        outputImage2 = cannyLenaImage[centerX2 - .windowHalfStep ..< centerX2 + .windowHalfStep,
+//                                     centerY2 - .windowHalfStep ..< centerY2 + .windowHalfStep]
 
-        inputValImage = lenaImage[quarterXVal - .windowHalfStep ..< quarterXVal + .windowHalfStep,
-                                  centerY - .windowHalfStep ..< centerY + .windowHalfStep]
+//        let cc3 = inputImage2.cgImage
+//        let cc4 = outputImage2.cgImage
 
-        outputValImage = cannyLenaImage[quarterXVal - .windowHalfStep ..< quarterXVal + .windowHalfStep,
-                                        centerY - .windowHalfStep ..< centerY + .windowHalfStep]
+        inputValImage = cameramanImage[quarterXVal - .windowHalfStep ..< quarterXVal + .windowHalfStep,
+                                       centerY - .windowHalfStep ..< centerY + .windowHalfStep]
+
+        outputValImage = cannyCameramanImage[quarterXVal - .windowHalfStep ..< quarterXVal + .windowHalfStep,
+                                             centerY - .windowHalfStep ..< centerY + .windowHalfStep]
     }
 
     func full(at index: Int) -> [Double] {
@@ -87,9 +108,23 @@ struct LenaEdgeDetectionDataSource: Datasource {
                         .map { Double($0) }
     }
 
+    func fullCameraman(at index: Int) -> [Double] {
+
+        let row = index / cameramanImage.width
+        let column = index % cameramanImage.width
+
+        return cameramanImage.window(forPixelAt: (x: column, y: row), takeCenter: true)
+                             .vector
+                             .map { Double($0) }
+    }
+
     func input(at index: Int) -> [Double] {
 
-        let row = index / inputImage.width
+//        let inputImage = index > (Int.windowSize * Int.windowSize) ? self.inputImage : inputImage2
+
+        let index = index % (Int.windowSize * Int.windowSize)
+
+        let row = index / (inputImage.width)
         let column = index % inputImage.width
 
         return inputImage.window(forPixelAt: (x: column, y: row), takeCenter: true)
@@ -98,6 +133,10 @@ struct LenaEdgeDetectionDataSource: Datasource {
     }
 
     func output(at index: Int) -> [Double] {
+
+//        let outputImage = index > (Int.windowSize * Int.windowSize) ? self.outputImage : outputImage2
+
+        let index = index % (Int.windowSize * Int.windowSize)
 
         let row = index / outputImage.width
         let column = index % outputImage.width

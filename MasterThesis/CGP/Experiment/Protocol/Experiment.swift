@@ -85,6 +85,7 @@ extension Experiment {
         let historyUrl = developerDirectory.appendingPathComponent(.historyUrlPath)
 
         do {
+            try Self.dateFormatter.string(from: Date()).appendLineToURL(fileURL: historyUrl)
             try history.errors.map { String($0) }.joined(separator: " ").appendLineToURL(fileURL: historyUrl)
             try history.valErrors.map { String($0) }.joined(separator: " ").appendLineToURL(fileURL: historyUrl)
         } catch {

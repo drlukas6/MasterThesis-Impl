@@ -31,10 +31,10 @@ class EdgeDetectionTest: Experiment {
     init() {
 
         let graphParameters = CGPPopulation.GraphParameters(inputs: 9, outputs: 1, levelsBack: 2,
-                                                            dimension: .init(rows: 4, columns: 8),
-                                                            operationsSet: EdgeDetectionOperationSet())
+                                                            dimension: .init(rows: 2, columns: 10),
+                                                            operationsSet: EdgeDetectionOperationSet()) // EDGE DAJE OK REZ
 
-        population = CGPPopulation(fitnessCalculator: L1FitnessCalculator(),
+        population = CGPPopulation(fitnessCalculator: MSEFitnessCalculator(),
                                    graphParameters: graphParameters,
                                    populationSize: 8)
     }
@@ -47,26 +47,22 @@ class EdgeDetectionTest: Experiment {
 
         try! FileManager.default.createDirectory(at: baseDirectory, withIntermediateDirectories: true, attributes: nil)
 
-        let imageWindows = (0 ..< 512 * 512 ).map { row in dataSource.full(at: row) }
+        let imageWindows = (0 ..< 256 * 256 ).map { row in dataSource.full(at: row) }
+        let cameramanWindows = (0 ..< 256 * 256 ).map { row in dataSource.fullCameraman(at: row) }
 
         let (best, history) = population.process(withDatasource: dataSource,
-                                                 runParameters: .init(generations: 2000, error: 0.04)) { graph, iteration in
+                                                 runParameters: .init(generations: 25, error: 0.04)) { graph, iteration in
 
-            let image = Image<UInt8>(width: 512, height: 512, pixels: imageWindows.map { window -> UInt8 in UInt8(round(graph.prediction(for: window).first!)) })
+            let image = Image<UInt8>(width: 256, height: 256, pixels: imageWindows.map { window -> UInt8 in UInt8(round(graph.prediction(for: window).first!)) })
+            let imageVal = Image<UInt8>(width: 256, height: 256, pixels: cameramanWindows.map { window -> UInt8 in UInt8(round(graph.prediction(for: window).first!)) })
 
             try! ImageHelper.save(image: image, to: baseDirectory.appendingPathComponent("gen-\(iteration).png"))
+            try! ImageHelper.save(image: imageVal, to: baseDirectory.appendingPathComponent("val-gen-\(iteration).png"))
         }
 
         let bestPixels = imageWindows.map { window -> UInt8 in UInt8(round(best.prediction(for: window).first!)) }
-//            .map { row -> UInt8 in
-//
-//            let prediction = best.prediction(for: dataSource.full(at: row)).first!
-//
-//            return UInt8( round(prediction) )
-//        }
 
-
-        let image = Image<UInt8>(width: 512, height: 512, pixels: bestPixels)
+        let image = Image<UInt8>(width: 256, height: 256, pixels: bestPixels)
 
         let cgimage = image.cgImage
         print(cgimage.bitsPerComponent)
@@ -75,23 +71,31 @@ class EdgeDetectionTest: Experiment {
 
     func work2() {
 
+        let graphParameters = CGPPopulation.GraphParameters(inputs: 9, outputs: 1, levelsBack: 2,
+                                                            dimension: .init(rows: 2, columns: 10),
+                                                            operationsSet: ImageProcessingCGPEdgeDetectionOperationSet())
+
+        let population = CGPPopulation(fitnessCalculator: MSEFitnessCalculator(),
+                                       graphParameters: graphParameters,
+                                       populationSize: 400)
+
         let dataSource = LenaEdgeDetectionDataSource()
 
         let algorithm = SteadyStateAlgorithm(population: population.population,
                                              runParameters: .init(generations: 250, error: 0.05,
                                                                   mProbability: 0.1),
-                                             fitnessCalculator: L1FitnessCalculator())
+                                             fitnessCalculator: MAEFitnessCalculator())
 
         let best = algorithm.work(datasource: dataSource)
 
-        let pixels = (0 ..< 512 * 512 ).map { row -> UInt8 in
+        let pixels = (0 ..< 256 * 256 ).map { row -> UInt8 in
 
             let prediction = best.prediction(for: dataSource.full(at: row)).first!
 
             return UInt8( round(prediction) )
         }
 
-        let image = Image<UInt8>(width: 512, height: 512, pixels: pixels)
+        let image = Image<UInt8>(width: 256, height: 256, pixels: pixels)
 
         let cgimage = image.cgImage
 

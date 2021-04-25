@@ -8,9 +8,9 @@
 import Foundation
 import SwiftImage
 
-let experiment = EdgeDetectionTest()
+for _ in (0..<20) {
 
-experiment.startExperiment()
-//experiment.work2()
+    let experiment = EdgeDetectionTest()
 
-print()
+    experiment.startExperiment()
+}

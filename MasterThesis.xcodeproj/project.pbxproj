@@ -23,6 +23,7 @@
 		2F32EF95262428390073EE11 /* EdgeDetectionOperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F32EF94262428390073EE11 /* EdgeDetectionOperationSet.swift */; };
 		2F3597C52611302A007A2C49 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3597C42611302A007A2C49 /* History.swift */; };
 		2F504599262F66F800E71D9B /* ImageProcessingCGPOperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F504598262F66F800E71D9B /* ImageProcessingCGPOperationSet.swift */; };
+		2F52479E2635FADF00ECBDAB /* MAEFitnessCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F52479D2635FADF00ECBDAB /* MAEFitnessCalculator.swift */; };
 		2F625622260D600F001159E2 /* L1FitnessCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F625621260D600F001159E2 /* L1FitnessCalculator.swift */; };
 		2F6C347325FC10E300BEE963 /* CGPOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347225FC10E300BEE963 /* CGPOperation.swift */; };
 		2F6C347925FC1B1B00BEE963 /* Experiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347825FC1B1B00BEE963 /* Experiment.swift */; };
@@ -74,6 +75,7 @@
 		2F32EF94262428390073EE11 /* EdgeDetectionOperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeDetectionOperationSet.swift; sourceTree = "<group>"; };
 		2F3597C42611302A007A2C49 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		2F504598262F66F800E71D9B /* ImageProcessingCGPOperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingCGPOperationSet.swift; sourceTree = "<group>"; };
+		2F52479D2635FADF00ECBDAB /* MAEFitnessCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAEFitnessCalculator.swift; sourceTree = "<group>"; };
 		2F625621260D600F001159E2 /* L1FitnessCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L1FitnessCalculator.swift; sourceTree = "<group>"; };
 		2F6C347225FC10E300BEE963 /* CGPOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPOperation.swift; sourceTree = "<group>"; };
 		2F6C347825FC1B1B00BEE963 /* Experiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experiment.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			children = (
 				2F15AD2A25FB6A22008F9562 /* MSEFitnessCalculator.swift */,
 				2F625621260D600F001159E2 /* L1FitnessCalculator.swift */,
+				2F52479D2635FADF00ECBDAB /* MAEFitnessCalculator.swift */,
 			);
 			path = Impl;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				2FE7FDAA25F6D17900BD1722 /* DefaultOperation.swift in Sources */,
 				2F895010260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift in Sources */,
 				2FFFCB342615C6BE005CE618 /* EdgeDetectionTest.swift in Sources */,
+				2F52479E2635FADF00ECBDAB /* MAEFitnessCalculator.swift in Sources */,
 				2FC50DB5262CB464008DFFF9 /* SteadyStateAlgorithm.swift in Sources */,
 				2F6C347325FC10E300BEE963 /* CGPOperation.swift in Sources */,
 				2F15AD2725FB698B008F9562 /* FitnessCalculator.swift in Sources */,

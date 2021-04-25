@@ -90,17 +90,33 @@ class SteadyStateAlgorithm {
                 logger.info("Generation \(generation + 1, align: .left(columns: 5)) F: \(fitness), E: \(1/fitness)")
             }
 
-            let tournamentResult = tournament(selectFrom: population, members: 3)
+            var newMembers = [CGPGraph]()
 
-            // TODO: Sto ako dobijes dva djeteta
-            let newMember = CGPGraph.combine(left: tournamentResult[0], right: tournamentResult[1])
+            for _ in (0 ..< 10) {
 
-            if Double.random(in: (0 ... 1)) <= runParameters.mProbability {
-                newMember.mutate()
+                let tournamentResult = tournament(selectFrom: population, members: 3)
+
+                // TODO: Sto ako dobijes dva djeteta
+                let newMember = CGPGraph.combine(left: tournamentResult[0], right: tournamentResult[1])
+
+                if Double.random(in: (0 ... 1)) <= runParameters.mProbability {
+                    newMember.mutate()
+                }
+
+                newMembers.append(newMember)
+
             }
 
-            population.remove(population.randomElement()!)
-            population.insert(newMember)
+            while !newMembers.isEmpty {
+
+                guard let randomElement = population.randomElement(),
+                      randomElement.fitness != -.infinity else {
+                    continue
+                }
+
+                population.remove(randomElement)
+                population.insert(newMembers.popLast()!)
+            }
         }
 
         return bestMember!
@@ -140,3 +156,4 @@ class SteadyStateAlgorithm {
         lhs.fitness > rhs.fitness
     }
 }
+

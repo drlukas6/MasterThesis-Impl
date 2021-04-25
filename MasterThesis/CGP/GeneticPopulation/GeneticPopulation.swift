@@ -89,7 +89,9 @@ class CGPPopulation {
 
         for step in (0 ..< runParameters.generations) {
 
-            self.population = [parent] + (0 ..< populationSize).map { _ in
+            onCheckpoint?(parent, step)
+
+            self.population = (0 ..< populationSize).map { _ in
                 parent.mutated()
             }
 
@@ -105,12 +107,8 @@ class CGPPopulation {
                 history.add(valError: valError)
             }
 
-            if step % 10 == 0 {
+            if step % 2 == 0 {
                 logger.info("Step \(step + 1, align: .left(columns: 5)) ERROR: \(stat.1)")
-            }
-
-            if step % 100 == 0 {
-                onCheckpoint?(topMember, step)
             }
 
             guard stat.1 >= runParameters.error else {

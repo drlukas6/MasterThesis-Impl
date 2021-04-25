@@ -19,7 +19,7 @@ class CGPGraph: GeneticSpecimen, Equatable, Hashable {
         }
     }
 
-    private let id = UUID().uuidString
+    let id = UUID().uuidString
 
     var fitness = -Double.infinity
 
@@ -101,9 +101,6 @@ class CGPGraph: GeneticSpecimen, Equatable, Hashable {
             }
 
             nodes.append(OperationNode(operation: operationSet.at(index: operationNodesDNAs[(numberOfInputs + 1) * index])))
-
-//            nodeInputs[index + inputs] = [operationNodesDNAs[(numberOfInputs + 1) * index + 1],
-//                                          operationNodesDNAs[(numberOfInputs + 1) * index + 2]]
 
             nodeInputs[index + inputs] = (1 ... numberOfInputs).map { offset in
                 operationNodesDNAs[(numberOfInputs + 1) * index + offset]
@@ -311,8 +308,6 @@ class CGPGraph: GeneticSpecimen, Equatable, Hashable {
             .filter { $0 >= inputs }
             .randomElement()!
 
-//        print("Conns before mutation: \(nodeInputs[randomActiveNode]!.count)")
-
         switch nodeType(forNodeAtIndex: randomActiveNode) {
         case .input:
             fatalError("Input could not be chosen")
@@ -363,17 +358,13 @@ class CGPGraph: GeneticSpecimen, Equatable, Hashable {
 
         switch MutationType.random {
         case .input:
-//            print("Mutating inputs")
             mutateRandomConnection()
         case .operation:
-//            print("Mutating operations")
             mutateRandomOperation()
         }
     }
 
     func mutated() -> CGPGraph {
-
-//        print("giving a mutated with dna of size \(dna.count)")
 
         let copy = CGPGraph(dna: dna, operationSet: operationSet)
 
@@ -418,8 +409,6 @@ class CGPGraph: GeneticSpecimen, Equatable, Hashable {
     static func combine(left: CGPGraph, right: CGPGraph) -> CGPGraph {
 
         let randomPoint = (5 ... left.dna.count).randomElement()!
-
-//        print("Combining at point \(randomPoint)")
 
         let leftDna = left.dna.prefix(randomPoint)
         let rightDna = right.dna.suffix(right.dna.count - randomPoint)
