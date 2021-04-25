@@ -2,10 +2,13 @@ import matplotlib.pyplot as plt
 
 file_name = ".history"
 
+times = []
 errors = []
 val_errors = []
 
 with open(file_name, 'r') as f:
+
+    times.append(f.readline())
 
     error_line = f.readline()
     val_error_line = f.readline()
@@ -14,12 +17,6 @@ with open(file_name, 'r') as f:
     val_errors = list(map(lambda x: float(x), val_error_line.split(' ')))
 
     f.close()
-
-# with open(file_name, 'w') as f:
-
-#     f.write('')
-
-#     f.close()
 
 print(f'Len errors: {len(errors)}')
 
