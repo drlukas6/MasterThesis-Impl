@@ -26,3 +26,10 @@ struct ImageHelper {
         try image.data(using: format)?.write(to: url)
     }
 }
+
+extension Image {
+
+    var pixelVector: [Pixel] {
+        map { $0 }
+    }
+}

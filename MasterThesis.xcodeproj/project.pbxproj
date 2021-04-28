@@ -24,6 +24,8 @@
 		2F3597C52611302A007A2C49 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3597C42611302A007A2C49 /* History.swift */; };
 		2F504599262F66F800E71D9B /* ImageProcessingCGPOperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F504598262F66F800E71D9B /* ImageProcessingCGPOperationSet.swift */; };
 		2F52479E2635FADF00ECBDAB /* MAEFitnessCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F52479D2635FADF00ECBDAB /* MAEFitnessCalculator.swift */; };
+		2F59128D2639F7730061B0AC /* SmallAutoencoderExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F59128C2639F7730061B0AC /* SmallAutoencoderExperiment.swift */; };
+		2F5912912639FB390061B0AC /* SingleCGPEvolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5912902639FB390061B0AC /* SingleCGPEvolution.swift */; };
 		2F625622260D600F001159E2 /* L1FitnessCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F625621260D600F001159E2 /* L1FitnessCalculator.swift */; };
 		2F6C347325FC10E300BEE963 /* CGPOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347225FC10E300BEE963 /* CGPOperation.swift */; };
 		2F6C347925FC1B1B00BEE963 /* Experiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C347825FC1B1B00BEE963 /* Experiment.swift */; };
@@ -76,6 +78,8 @@
 		2F3597C42611302A007A2C49 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		2F504598262F66F800E71D9B /* ImageProcessingCGPOperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingCGPOperationSet.swift; sourceTree = "<group>"; };
 		2F52479D2635FADF00ECBDAB /* MAEFitnessCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAEFitnessCalculator.swift; sourceTree = "<group>"; };
+		2F59128C2639F7730061B0AC /* SmallAutoencoderExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallAutoencoderExperiment.swift; sourceTree = "<group>"; };
+		2F5912902639FB390061B0AC /* SingleCGPEvolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCGPEvolution.swift; sourceTree = "<group>"; };
 		2F625621260D600F001159E2 /* L1FitnessCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L1FitnessCalculator.swift; sourceTree = "<group>"; };
 		2F6C347225FC10E300BEE963 /* CGPOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPOperation.swift; sourceTree = "<group>"; };
 		2F6C347825FC1B1B00BEE963 /* Experiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experiment.swift; sourceTree = "<group>"; };
@@ -220,6 +224,23 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		2F59128A2639F7170061B0AC /* Autoencoder */ = {
+			isa = PBXGroup;
+			children = (
+				2F59128B2639F71E0061B0AC /* SmallAutoencoderExperiment */,
+				2F5912902639FB390061B0AC /* SingleCGPEvolution.swift */,
+			);
+			path = Autoencoder;
+			sourceTree = "<group>";
+		};
+		2F59128B2639F71E0061B0AC /* SmallAutoencoderExperiment */ = {
+			isa = PBXGroup;
+			children = (
+				2F59128C2639F7730061B0AC /* SmallAutoencoderExperiment.swift */,
+			);
+			path = SmallAutoencoderExperiment;
+			sourceTree = "<group>";
+		};
 		2F625620260D6002001159E2 /* Impl */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +299,7 @@
 		2F895005260AC36700F38BC7 /* Experiments */ = {
 			isa = PBXGroup;
 			children = (
+				2F59128A2639F7170061B0AC /* Autoencoder */,
 				2F1A5385262393AF00445B79 /* LargeGrainRemoval */,
 				2FFFCB322615C6A8005CE618 /* EdgeDetection */,
 				2F895007260AC37200F38BC7 /* GrainRemoval */,
@@ -466,6 +488,7 @@
 				2FC50DB5262CB464008DFFF9 /* SteadyStateAlgorithm.swift in Sources */,
 				2F6C347325FC10E300BEE963 /* CGPOperation.swift in Sources */,
 				2F15AD2725FB698B008F9562 /* FitnessCalculator.swift in Sources */,
+				2F59128D2639F7730061B0AC /* SmallAutoencoderExperiment.swift in Sources */,
 				2F894FDF260AAAF200F38BC7 /* ImageLoader.swift in Sources */,
 				2F15AD2B25FB6A22008F9562 /* MSEFitnessCalculator.swift in Sources */,
 				2F32EF95262428390073EE11 /* EdgeDetectionOperationSet.swift in Sources */,
@@ -475,6 +498,7 @@
 				2FFFCB3A2615C6C8005CE618 /* LenaEdgeDetectionDataSource.swift in Sources */,
 				2F3597C52611302A007A2C49 /* History.swift in Sources */,
 				2F6C347E25FC1DBF00BEE963 /* TestSymbolicRegressionExperiment.swift in Sources */,
+				2F5912912639FB390061B0AC /* SingleCGPEvolution.swift in Sources */,
 				2F15AD2F25FB6C39008F9562 /* Datasource.swift in Sources */,
 				2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */,
 				2F1A538B262393D900445B79 /* LargeSaltPepperExperimentDataSource.swift in Sources */,

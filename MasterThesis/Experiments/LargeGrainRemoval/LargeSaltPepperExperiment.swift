@@ -45,6 +45,8 @@ class LargeSaltPepperExperiment: Experiment {
 
         let cgimage = image.cgImage
 
+        print(cgimage.bitsPerComponent)
+
         return (best, history)
     }
 }

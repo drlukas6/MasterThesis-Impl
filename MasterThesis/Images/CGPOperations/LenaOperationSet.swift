@@ -70,10 +70,6 @@ enum LenaOperation: CaseIterable, CGPOperation {
         case .sqrtDivided: result = sqrt((pow(input[0], 2) + pow(input[1], 2)) / 2)
         }
 
-        guard result != .nan else {
-            fatalError("WHAT")
-        }
-
         let result2 = Double.maximum(Double.minimum(result, 255), 0)
 
         return result2
