@@ -15,7 +15,7 @@ struct MSEFitnessCalculator: FitnessCalculator {
 
         let mse = zip(predictions, groundTruth)
             .map { prediction, trueValue in
-                pow((abs(prediction - trueValue)), 2) // TODO : tu je bilo 2
+                pow(prediction - trueValue, 2)
             }
             .reduce(0, +) / Double(predictions.count)
 
