@@ -7,9 +7,9 @@
 
 SmallAutoencoderExperiment().startExperiment()
 
-//for _ in (0..<20) {
-//
-//    let experiment = EdgeDetectionTest()
-//
-//    experiment.startExperiment()
-//}
+for _ in (0..<20) {
+
+    let experiment = EdgeDetectionTest()
+
+    experiment.startExperiment()
+}
