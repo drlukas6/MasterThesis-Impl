@@ -18,7 +18,13 @@ struct ImageProcessingCGPEdgeDetectionOperationSet: CGPOperationSet {
         ImageProcessingCGPEdgeDetectionOperation.allCases
     }
 
-    let numberOfInputs = 9
+    let numberOfInputs: Int
+
+    init(numberOfInputs: Int = 9) {
+
+        self.numberOfInputs = numberOfInputs
+    }
+
 }
 
 enum ImageProcessingCGPEdgeDetectionOperation: CaseIterable, CGPOperation {

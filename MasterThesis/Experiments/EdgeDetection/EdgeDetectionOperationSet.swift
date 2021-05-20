@@ -18,7 +18,12 @@ struct EdgeDetectionOperationSet: CGPOperationSet {
         EdgeDetectionOperation.allCases
     }
 
-    let numberOfInputs = 9
+    let numberOfInputs: Int
+
+    init(numberOfInputs: Int = 9) {
+
+        self.numberOfInputs = numberOfInputs
+    }
 }
 
 enum EdgeDetectionOperation: CaseIterable, CGPOperation {

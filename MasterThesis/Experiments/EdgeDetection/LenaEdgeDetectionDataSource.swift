@@ -42,16 +42,9 @@ struct LenaEdgeDetectionDataSource: Datasource {
 
     init() {
 
-//        let (centerX, centerY) = (lenaImage.width / 2, lenaImage.height / 2)
         let (centerX, centerY) = (135, 115)
-//        let (centerX2, centerY2) = (132, 238)
-//        let (centerX, centerY) = (331, 269)
-//        let (centerX, centerY) = (344, 144)
-//        let (centerX, centerY) = (193, 317)
-//        let (centerX, centerY) = (163, 410)
 
         let quarterXVal = lenaImage.width / 4
-//        let yVal = Int(Double(lenaImage.height) / 1.98)
 
         inputImage = lenaImage[centerX - .windowHalfStep ..< centerX + .windowHalfStep,
                                centerY - .windowHalfStep ..< centerY + .windowHalfStep]
