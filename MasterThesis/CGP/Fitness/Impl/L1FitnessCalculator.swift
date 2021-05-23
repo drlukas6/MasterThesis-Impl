@@ -14,7 +14,7 @@ struct L1FitnessCalculator: FitnessCalculator {
 
         let mse = zip(predictions, groundTruth)
             .map { prediction, trueValue in
-                pow(abs(prediction - trueValue), 2)
+                abs(prediction - trueValue)
             }
             .reduce(0, +) / Double(predictions.count * 255)
 

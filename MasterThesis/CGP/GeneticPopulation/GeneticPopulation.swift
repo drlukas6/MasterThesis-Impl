@@ -122,6 +122,8 @@ class CGPPopulation {
             parent = topMember
         }
 
+        onCheckpoint?(parent, runParameters.generations)
+
         logger.info("Finished with error \(history.errors.last!)")
 
         return (parent, history)

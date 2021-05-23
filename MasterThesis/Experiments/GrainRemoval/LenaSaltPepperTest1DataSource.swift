@@ -11,7 +11,9 @@ import AppKit
 
 private extension URL {
 
-    static let lena = URL.assetsDirectory.appendingPathComponent("lena_256.jpg")
+    static let lenaSmall = URL.assetsDirectory.appendingPathComponent("lena_256.jpg")
+    static let lenaC = URL.assetsDirectory.appendingPathComponent("lena.png")
+    static let lena = URL.assetsDirectory.appendingPathComponent("lena_salt_pepper.png")
     static let cameraman = URL.assetsDirectory.appendingPathComponent("cameraman.jpg")
 }
 
@@ -23,7 +25,8 @@ private extension Int {
 
 struct LenaSaltPepperTest1DataSource: Datasource {
 
-    private let lenaImage: Image<UInt8> = ImageLoader.loadGrayscale(from: .lena)
+    private let lenaImage: Image<UInt8> = ImageLoader.loadGrayscale(from: .lenaSmall)
+    private let lenaCleanImage: Image<UInt8> = ImageLoader.loadGrayscale(from: .lenaSmall)
     private let cameramanImage: Image<UInt8> = ImageLoader.loadGrayscale(from: .cameraman)
 
     private let grainedImage: Image<UInt8>
@@ -39,12 +42,16 @@ struct LenaSaltPepperTest1DataSource: Datasource {
         grainedImage
     }
 
-    let fullSize = 256
+    var fullSize: Int {
+        lenaImage.width
+    }
+//    let fullSize = 256
 
     let size: Int = .windowSize * .windowSize
 
-    init(grain: Double = 0.01) {
+    init(grain: Double = 0.05) {
 
+//        grainedImage = lenaImage
         grainedImage = lenaImage.map { pixel in
 
             guard Double.random(in: 0 ..< 1) > grain else {
@@ -65,28 +72,34 @@ struct LenaSaltPepperTest1DataSource: Datasource {
             return pixel
         }
 
-        let (centerX, centerY) = (grainedImage.width / 2, grainedImage.height / 2)
+//        let (centerX, centerY) = (grainedImage.width / 2, grainedImage.height / 2)
+
+//        let (centerX, centerY) = (300, 330)
+        let (centerX, centerY) = (161, 178)
+//        let (centerX, centerY) = (37, 18)
+//
+        let (centerXVal, centerYVal) = (grainedValImage.width / 2, grainedValImage.height / 2)
 
         inputImage = grainedImage[centerX - .windowHalfStep ..< centerX + .windowHalfStep,
                                   centerY - .windowHalfStep ..< centerY + .windowHalfStep]
 
-        outputImage = lenaImage[centerX - .windowHalfStep ..< centerX + .windowHalfStep,
+        outputImage = lenaCleanImage[centerX - .windowHalfStep ..< centerX + .windowHalfStep,
                                 centerY - .windowHalfStep ..< centerY + .windowHalfStep]
 
         let quarterXVal = grainedImage.width / 4
 
-        inputValImage = grainedImage[quarterXVal - .windowHalfStep ..< quarterXVal + .windowHalfStep,
-                                     centerY - .windowHalfStep ..< centerY + .windowHalfStep]
+        inputValImage = grainedValImage[centerXVal - .windowHalfStep ..< centerXVal + .windowHalfStep,
+                                        centerYVal - .windowHalfStep ..< centerYVal + .windowHalfStep]
 
-        outputValImage = lenaImage[quarterXVal - .windowHalfStep ..< quarterXVal + .windowHalfStep,
-                                   centerY - .windowHalfStep ..< centerY + .windowHalfStep]
+        outputValImage = cameramanImage[centerXVal - .windowHalfStep ..< centerXVal + .windowHalfStep,
+                                        centerYVal - .windowHalfStep ..< centerYVal + .windowHalfStep]
 
-//        let im1 = NSImage(cgImage: inputImage.cgImage, size: .init(width: 40, height: 40))
-//        let im2 = NSImage(cgImage: outputImage.cgImage, size: .init(width: 40, height: 40))
-//        let im3 = NSImage(cgImage: inputValImage.cgImage, size: .init(width: 40, height: 40))
-//        let im4 = NSImage(cgImage: outputValImage.cgImage, size: .init(width: 40, height: 40))
+        let im1 = NSImage(cgImage: inputImage.cgImage, size: .init(width: 40, height: 40))
+        let im2 = NSImage(cgImage: outputImage.cgImage, size: .init(width: 40, height: 40))
+        let im3 = NSImage(cgImage: inputValImage.cgImage, size: .init(width: 40, height: 40))
+        let im4 = NSImage(cgImage: outputValImage.cgImage, size: .init(width: 40, height: 40))
 //
-//        print()
+        print()
     }
 
     func full(at index: Int) -> [Double] {
@@ -101,8 +114,8 @@ struct LenaSaltPepperTest1DataSource: Datasource {
 
     func fullVal(at index: Int) -> [Double] {
 
-        let row = index / grainedImage.width
-        let column = index % grainedImage.width
+        let row = index / grainedValImage.width
+        let column = index % grainedValImage.width
 
         return grainedValImage.window(forPixelAt: (x: column, y: row), takeCenter: false)
                            .vector
