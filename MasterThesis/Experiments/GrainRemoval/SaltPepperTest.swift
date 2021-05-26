@@ -32,7 +32,7 @@ class SaltPepperTest: Experiment {
 
         let graphParameters = CGPPopulation.GraphParameters(inputs: 8, outputs: 1, levelsBack: 3,
                                                             dimension: .init(rows: 2, columns: 10),
-                                                            operationsSet: ImageProcessingCGPEdgeDetectionOperationSet(numberOfInputs: 8))
+                                                            operationsSet: EdgeDetectionOperationSet(numberOfInputs: 8))
 
         population = CGPPopulation(fitnessCalculator: L1FitnessCalculator(),
                                    graphParameters: graphParameters)

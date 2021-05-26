@@ -91,7 +91,7 @@ class CGPPopulation {
 
             onCheckpoint?(parent, step)
 
-            self.population = (0 ..< populationSize).map { _ in
+            self.population = [parent] + (0 ..< populationSize).map { _ in
                 parent.mutated()
             }
 

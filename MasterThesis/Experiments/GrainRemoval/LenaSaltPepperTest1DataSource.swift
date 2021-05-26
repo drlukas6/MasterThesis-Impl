@@ -19,14 +19,14 @@ private extension URL {
 
 private extension Int {
 
-    static let windowSize = 30
+    static let windowSize = 40
     static let windowHalfStep = windowSize / 2
 }
 
 struct LenaSaltPepperTest1DataSource: Datasource {
 
-    private let lenaImage: Image<UInt8> = ImageLoader.loadGrayscale(from: .lenaSmall)
-    private let lenaCleanImage: Image<UInt8> = ImageLoader.loadGrayscale(from: .lenaSmall)
+    private let lenaImage: Image<UInt8> = ImageLoader.loadGrayscale(from: .lena)
+    private let lenaCleanImage: Image<UInt8> = ImageLoader.loadGrayscale(from: .lenaC)
     private let cameramanImage: Image<UInt8> = ImageLoader.loadGrayscale(from: .cameraman)
 
     private let grainedImage: Image<UInt8>
@@ -51,16 +51,16 @@ struct LenaSaltPepperTest1DataSource: Datasource {
 
     init(grain: Double = 0.05) {
 
-//        grainedImage = lenaImage
-        grainedImage = lenaImage.map { pixel in
-
-            guard Double.random(in: 0 ..< 1) > grain else {
-
-                return Bool.random() ? .black : .white
-            }
-
-            return pixel
-        }
+        grainedImage = lenaImage
+//        grainedImage = lenaImage.map { pixel in
+//
+//            guard Double.random(in: 0 ..< 1) > grain else {
+//
+//                return Bool.random() ? .black : .white
+//            }
+//
+//            return pixel
+//        }
 
         grainedValImage = cameramanImage.map { pixel in
 
@@ -71,12 +71,12 @@ struct LenaSaltPepperTest1DataSource: Datasource {
 
             return pixel
         }
-
-//        let (centerX, centerY) = (grainedImage.width / 2, grainedImage.height / 2)
+//
+        let (centerX, centerY) = (grainedImage.width / 2, grainedImage.height / 2)
 
 //        let (centerX, centerY) = (300, 330)
-        let (centerX, centerY) = (161, 178)
-//        let (centerX, centerY) = (37, 18)
+//        let (centerX, centerY) = (161, 178)
+//        let (centerX, centerY) = (37, 30)
 //
         let (centerXVal, centerYVal) = (grainedValImage.width / 2, grainedValImage.height / 2)
 
