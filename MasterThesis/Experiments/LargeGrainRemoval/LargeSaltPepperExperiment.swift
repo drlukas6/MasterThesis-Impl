@@ -8,6 +8,7 @@
 import Foundation
 import os.log
 import SwiftImage
+import AppKit
 
 class LargeSaltPepperExperiment: Experiment {
 
@@ -16,6 +17,17 @@ class LargeSaltPepperExperiment: Experiment {
     let name = "LargeSaltPepperExperiment"
 
     private var population: CGPPopulation
+
+    private static let dateFormatter: DateFormatter = {
+
+        let dateFormatter = DateFormatter()
+
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+
+        return dateFormatter
+
+    }()
 
     init() {
 
@@ -31,21 +43,25 @@ class LargeSaltPepperExperiment: Experiment {
 
         let dataSource = LargeSaltPepperExperimentDataSource()
 
+        let baseDirectory = Self.checkpointsPath.appendingPathComponent("\(name)-\(Self.dateFormatter.string(from: Date()))")
+
+        try! FileManager.default.createDirectory(at: baseDirectory, withIntermediateDirectories: true, attributes: nil)
+
+        let imageWindows = (0 ..< dataSource.fullSize * dataSource.fullSize ).map { row in dataSource.full(at: row) }
+
+        try! ImageHelper.save(image: dataSource.grainedImage, to: baseDirectory.appendingPathComponent("org.png"))
+
         let (best, history) = population.process(withDatasource: dataSource,
-                                                 runParameters: .init(generations: 600, error: 0.005))
+                                                 runParameters: .init(generations: 500, error: 0.005)) { graph, iteration in
 
-        let pixels = (0 ..< dataSource.fullSize * dataSource.fullSize).map { row -> UInt8 in
+            guard iteration % 50 == 0 else {
+                return
+            }
 
-            let prediction = best.prediction(for: dataSource.full(at: row)).first!
+            let image = Image<UInt8>(width: dataSource.fullSize, height: dataSource.fullSize, pixels: imageWindows.map { window -> UInt8 in UInt8(round(graph.prediction(for: window).first!)) })
 
-            return UInt8( round(prediction) )
+            try! ImageHelper.save(image: image, to: baseDirectory.appendingPathComponent("gen-\(iteration).png"))
         }
-
-        let image = Image<UInt8>(width: dataSource.fullSize, height: dataSource.fullSize, pixels: pixels)
-
-        let cgimage = image.cgImage
-
-        print(cgimage.bitsPerComponent)
 
         return (best, history)
     }

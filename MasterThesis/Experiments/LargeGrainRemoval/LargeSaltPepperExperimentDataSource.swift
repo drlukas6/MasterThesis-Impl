@@ -22,7 +22,7 @@ private extension Int {
 struct LargeSaltPepperExperimentDataSource: Datasource {
 
     private let lenaImage: Image<UInt8> = ImageLoader.loadGrayscale(from: .lena)
-    private let grainedImage: Image<UInt8>
+    let grainedImage: Image<UInt8>
 
     private let inputImage: ImageSlice<UInt8>
     private let outputImage: ImageSlice<UInt8>

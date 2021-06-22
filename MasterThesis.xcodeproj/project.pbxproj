@@ -37,6 +37,7 @@
 		2F895000260ABFAF00F38BC7 /* LenaOperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F894FFF260ABFAF00F38BC7 /* LenaOperationSet.swift */; };
 		2F895009260AC38400F38BC7 /* SaltPepperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F895008260AC38400F38BC7 /* SaltPepperTest.swift */; };
 		2F895010260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89500F260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift */; };
+		2F958F872664FFCD0004BE64 /* SmallAutoencoderDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F958F862664FFCC0004BE64 /* SmallAutoencoderDataSet.swift */; };
 		2FC50DB5262CB464008DFFF9 /* SteadyStateAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC50DB4262CB464008DFFF9 /* SteadyStateAlgorithm.swift */; };
 		2FC50DB9262CDCB2008DFFF9 /* LibraryEdgeDetectionOperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC50DB8262CDCB2008DFFF9 /* LibraryEdgeDetectionOperationSet.swift */; };
 		2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */; };
@@ -93,6 +94,7 @@
 		2F894FFF260ABFAF00F38BC7 /* LenaOperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LenaOperationSet.swift; sourceTree = "<group>"; };
 		2F895008260AC38400F38BC7 /* SaltPepperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltPepperTest.swift; sourceTree = "<group>"; };
 		2F89500F260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LenaSaltPepperTest1DataSource.swift; sourceTree = "<group>"; };
+		2F958F862664FFCC0004BE64 /* SmallAutoencoderDataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallAutoencoderDataSet.swift; sourceTree = "<group>"; };
 		2FC50DB4262CB464008DFFF9 /* SteadyStateAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteadyStateAlgorithm.swift; sourceTree = "<group>"; };
 		2FC50DB8262CDCB2008DFFF9 /* LibraryEdgeDetectionOperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryEdgeDetectionOperationSet.swift; sourceTree = "<group>"; };
 		2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPNode.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				2F59128C2639F7730061B0AC /* SmallAutoencoderExperiment.swift */,
+				2F958F862664FFCC0004BE64 /* SmallAutoencoderDataSet.swift */,
 			);
 			path = SmallAutoencoderExperiment;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				2F15AD3225FB6CDD008F9562 /* TestSquaredDataSource.swift in Sources */,
 				2F895009260AC38400F38BC7 /* SaltPepperTest.swift in Sources */,
 				2FE7FDAA25F6D17900BD1722 /* DefaultOperation.swift in Sources */,
+				2F958F872664FFCD0004BE64 /* SmallAutoencoderDataSet.swift in Sources */,
 				2F895010260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift in Sources */,
 				2FFFCB342615C6BE005CE618 /* EdgeDetectionTest.swift in Sources */,
 				2F52479E2635FADF00ECBDAB /* MAEFitnessCalculator.swift in Sources */,

@@ -35,6 +35,8 @@ class CGPGraph: GeneticSpecimen, Equatable, Hashable {
 
     private var activeNodes = Set<Int>()
 
+    var shouldFitOutputToUInt8 = true
+
     var graphDescription: String {
 
         var description = ""
@@ -372,6 +374,8 @@ class CGPGraph: GeneticSpecimen, Equatable, Hashable {
 
         copy.fitness = -.infinity
 
+        copy.shouldFitOutputToUInt8 = shouldFitOutputToUInt8
+
         return copy
     }
 
@@ -400,7 +404,7 @@ class CGPGraph: GeneticSpecimen, Equatable, Hashable {
                 return 0
             }
 
-            return max(min(node.output, 255), 0)
+            return shouldFitOutputToUInt8 ? max(min(node.output, 255), 0) :  node.output
         }
     }
 

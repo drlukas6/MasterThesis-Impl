@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftImage
+import AppKit
 
 private extension URL {
 
@@ -43,6 +44,7 @@ struct LenaEdgeDetectionDataSource: Datasource {
     init() {
 
         let (centerX, centerY) = (135, 115)
+        let (centerXV, centerYV) = (133, 66)
 
         let quarterXVal = lenaImage.width / 4
 
@@ -52,11 +54,23 @@ struct LenaEdgeDetectionDataSource: Datasource {
         outputImage = cannyLenaImage[centerX - .windowHalfStep ..< centerX + .windowHalfStep,
                                      centerY - .windowHalfStep ..< centerY + .windowHalfStep]
 
-        inputValImage = cameramanImage[quarterXVal - .windowHalfStep ..< quarterXVal + .windowHalfStep,
-                                       centerY - .windowHalfStep ..< centerY + .windowHalfStep]
+        inputValImage = cameramanImage[centerXV - .windowHalfStep ..< centerXV + .windowHalfStep,
+                                       centerYV - .windowHalfStep ..< centerYV + .windowHalfStep]
 
-        outputValImage = cannyCameramanImage[quarterXVal - .windowHalfStep ..< quarterXVal + .windowHalfStep,
-                                             centerY - .windowHalfStep ..< centerY + .windowHalfStep]
+        outputValImage = cannyCameramanImage[centerXV - .windowHalfStep ..< centerXV + .windowHalfStep,
+                                             centerYV - .windowHalfStep ..< centerYV + .windowHalfStep]
+
+        let im1 = inputImage.cgImage
+        let im2 = outputImage.cgImage
+        let im3 = inputValImage.cgImage
+        let im4 = outputValImage.cgImage
+
+        let im11 = NSImage(cgImage: im1, size: .init(width: 40, height: 40))
+        let im12 = NSImage(cgImage: im2, size: .init(width: 40, height: 40))
+        let im13 = NSImage(cgImage: im3, size: .init(width: 40, height: 40))
+        let im14 = NSImage(cgImage: im4, size: .init(width: 40, height: 40))
+
+        print()
     }
 
     func full(at index: Int) -> [Double] {
