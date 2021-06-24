@@ -38,7 +38,7 @@ class CGPPopulation {
     var population: [CGPGraph]
 
     private let fitnessCalculator: FitnessCalculator
-    private let graphParameters: GraphParameters
+    var graphParameters: GraphParameters
     private let populationSize: Int
 
     init(fitnessCalculator: FitnessCalculator, graphParameters: GraphParameters, populationSize: Int = 4) {

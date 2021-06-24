@@ -14,13 +14,22 @@ private extension Double {
 
 struct EdgeDetectionOperationSet: CGPOperationSet {
 
-    var operations: [CGPOperation] {
-        EdgeDetectionOperation.allCases
-    }
+    let operations: [CGPOperation]
 
     let numberOfInputs: Int
 
-    init(numberOfInputs: Int = 9) {
+    init(numberOfInputs: Int = 9, removingAtIndex indexToRemove: Int? = nil) {
+
+        if let index = indexToRemove {
+            var cases = EdgeDetectionOperation.allCases
+            var removedItem = cases.remove(at: index)
+
+            print("REMOVED: \(removedItem)")
+
+            operations = cases
+        } else {
+            operations = EdgeDetectionOperation.allCases
+        }
 
         self.numberOfInputs = numberOfInputs
     }
