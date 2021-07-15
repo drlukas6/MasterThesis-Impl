@@ -38,6 +38,8 @@
 		2F895009260AC38400F38BC7 /* SaltPepperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F895008260AC38400F38BC7 /* SaltPepperTest.swift */; };
 		2F895010260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89500F260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift */; };
 		2F958F872664FFCD0004BE64 /* SmallAutoencoderDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F958F862664FFCC0004BE64 /* SmallAutoencoderDataSet.swift */; };
+		2FB03098269D0AB1009F8D12 /* LargeAutoencoderDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB03097269D0AB1009F8D12 /* LargeAutoencoderDataSet.swift */; };
+		2FB0309A269D0F77009F8D12 /* LargeAutoencoderExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB03099269D0F77009F8D12 /* LargeAutoencoderExperiment.swift */; };
 		2FC50DB5262CB464008DFFF9 /* SteadyStateAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC50DB4262CB464008DFFF9 /* SteadyStateAlgorithm.swift */; };
 		2FC50DB9262CDCB2008DFFF9 /* LibraryEdgeDetectionOperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC50DB8262CDCB2008DFFF9 /* LibraryEdgeDetectionOperationSet.swift */; };
 		2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */; };
@@ -95,6 +97,8 @@
 		2F895008260AC38400F38BC7 /* SaltPepperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltPepperTest.swift; sourceTree = "<group>"; };
 		2F89500F260AC44B00F38BC7 /* LenaSaltPepperTest1DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LenaSaltPepperTest1DataSource.swift; sourceTree = "<group>"; };
 		2F958F862664FFCC0004BE64 /* SmallAutoencoderDataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallAutoencoderDataSet.swift; sourceTree = "<group>"; };
+		2FB03097269D0AB1009F8D12 /* LargeAutoencoderDataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeAutoencoderDataSet.swift; sourceTree = "<group>"; };
+		2FB03099269D0F77009F8D12 /* LargeAutoencoderExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeAutoencoderExperiment.swift; sourceTree = "<group>"; };
 		2FC50DB4262CB464008DFFF9 /* SteadyStateAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteadyStateAlgorithm.swift; sourceTree = "<group>"; };
 		2FC50DB8262CDCB2008DFFF9 /* LibraryEdgeDetectionOperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryEdgeDetectionOperationSet.swift; sourceTree = "<group>"; };
 		2FCEB5EC25DD5CAE00DB5B94 /* CGPNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPNode.swift; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 		2F59128A2639F7170061B0AC /* Autoencoder */ = {
 			isa = PBXGroup;
 			children = (
+				2FB03096269D0A9A009F8D12 /* LargeAutoencoderExperiment */,
 				2F59128B2639F71E0061B0AC /* SmallAutoencoderExperiment */,
 				2F5912902639FB390061B0AC /* SingleCGPEvolution.swift */,
 			);
@@ -318,6 +323,15 @@
 				2F1A53742622366000445B79 /* LenaGrainRemovalOperationSet.swift */,
 			);
 			path = GrainRemoval;
+			sourceTree = "<group>";
+		};
+		2FB03096269D0A9A009F8D12 /* LargeAutoencoderExperiment */ = {
+			isa = PBXGroup;
+			children = (
+				2FB03097269D0AB1009F8D12 /* LargeAutoencoderDataSet.swift */,
+				2FB03099269D0F77009F8D12 /* LargeAutoencoderExperiment.swift */,
+			);
+			path = LargeAutoencoderExperiment;
 			sourceTree = "<group>";
 		};
 		2FC50DAB262CB447008DFFF9 /* Algorithms */ = {
@@ -506,10 +520,12 @@
 				2F15AD2F25FB6C39008F9562 /* Datasource.swift in Sources */,
 				2FCEB5ED25DD5CAE00DB5B94 /* CGPNode.swift in Sources */,
 				2F1A538B262393D900445B79 /* LargeSaltPepperExperimentDataSource.swift in Sources */,
+				2FB03098269D0AB1009F8D12 /* LargeAutoencoderDataSet.swift in Sources */,
 				5867B0D987E918B55C1F8D62 /* GeneticSpecimen.swift in Sources */,
 				2F894FFB260AB3A700F38BC7 /* SlidingWindow.swift in Sources */,
 				2F1A537D262239D500445B79 /* URL+Assets.swift in Sources */,
 				2F6C347925FC1B1B00BEE963 /* Experiment.swift in Sources */,
+				2FB0309A269D0F77009F8D12 /* LargeAutoencoderExperiment.swift in Sources */,
 				5867B82790974FA768FCFEE9 /* CGPGraph.swift in Sources */,
 				2F894FF7260AAF6400F38BC7 /* ImageHelper.swift in Sources */,
 				2F625622260D600F001159E2 /* L1FitnessCalculator.swift in Sources */,

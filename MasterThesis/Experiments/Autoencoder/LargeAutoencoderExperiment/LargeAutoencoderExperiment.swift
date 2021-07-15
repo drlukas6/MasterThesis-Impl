@@ -1,22 +1,16 @@
 //
-//  SmallAutoencoderExperiment.swift
+//  LargeAutoencoderExperiment.swift
 //  MasterThesis
 //
-//  Created by Lukas Sestic on 28.04.2021..
+//  Created by Lukas Sestic on 13.07.2021..
 //
 
 import Foundation
 import SwiftImage
-import os.log
 
-private extension URL {
+class LargeAutoencoderExperiment: Experiment {
 
-    static let mnistImage = URL.assetsDirectory.appendingPathComponent("mnist_1_4_4.png")
-}
-
-class SmallAutoencoderExperiment: Experiment {
-
-    let name = "SmallAutoencoderExperiment"
+    let name = "LargeAutoencoderExperiment"
 
     private let dateFormatter: DateFormatter = {
 
@@ -29,9 +23,7 @@ class SmallAutoencoderExperiment: Experiment {
 
     }()
 
-    private let dataset = SmallAutoEncoderDataSet().dataset
-
-    private let pixels = ImageLoader.loadGrayscale(from: .mnistImage).pixelVector.map { pixel in Double(pixel) }
+    private let dataset = LargeAutoEncoderDataSet().dataset
 
     private let imageSize = CGSize(width: 4, height: 4)
 
@@ -42,16 +34,16 @@ class SmallAutoencoderExperiment: Experiment {
         try! FileManager.default.createDirectory(at: baseDirectory, withIntermediateDirectories: true, attributes: nil)
 
 
-        let features = 2 // 3 kao radi a
-        let graph1Build = CGPGraphBuild(inputs: SmallAutoEncoderDataSet.size * SmallAutoEncoderDataSet.size, outputs: features,
+        let features = 6 // 3 kao radi a
+        let graph1Build = CGPGraphBuild(inputs: LargeAutoEncoderDataSet.size * LargeAutoEncoderDataSet.size, outputs: features,
                                         levelsBack: 2,
                                         dimension: .init(rows: 6, columns: 10),
-                                        operationSet: ImageProcessingCGPEdgeDetectionOperationSet(numberOfInputs: 9))
+                                        operationSet: ImageProcessingCGPEdgeDetectionOperationSet(numberOfInputs: 16))
 
-        let graph2Build = CGPGraphBuild(inputs: features, outputs: SmallAutoEncoderDataSet.size * SmallAutoEncoderDataSet.size,
+        let graph2Build = CGPGraphBuild(inputs: features, outputs: LargeAutoEncoderDataSet.size * LargeAutoEncoderDataSet.size,
                                         levelsBack: 2,
                                         dimension: .init(rows: 9, columns: 10),
-                                        operationSet: ImageProcessingCGPEdgeDetectionOperationSet(numberOfInputs: 9))
+                                        operationSet: ImageProcessingCGPEdgeDetectionOperationSet(numberOfInputs: 16))
 
         let (encoder, decoder) = evolve(graph1Build: graph1Build, graph2Build: graph2Build,
                                         truth: dataset,
@@ -60,6 +52,10 @@ class SmallAutoencoderExperiment: Experiment {
                                          switchStep: 8,
                                          checkpointHandler: .init(checkpointCallStep: 2, checkpointHandler: { iteration, encoder, decoder in
 
+                                            guard iteration % 20 == 0 else {
+                                                return
+                                            }
+
                                             for (index, item) in self.dataset.enumerated() {
 
                                                 let encoderOutput = encoder.prediction(for: item)
@@ -67,42 +63,16 @@ class SmallAutoencoderExperiment: Experiment {
                                                 let encoderImage = Image<UInt8>.init(width: 1, height: features, pixels: encoderUint8Pixels)
 
 
-                                                let size = SmallAutoEncoderDataSet.size
+                                                let size = LargeAutoEncoderDataSet.size
                                                 let decoderOutput = decoder.prediction(for: encoderOutput)
                                                 let decoderUint8Pixels = decoderOutput.map { pixel in UInt8(round(pixel)) }
                                                 let decoderImage = Image<UInt8>(width: size, height: size, pixels: decoderUint8Pixels)
 
                                                 try! ImageHelper.save(image: encoderImage, to: baseDirectory.appendingPathComponent("gen-\(iteration)-\(index)-encoder.png"))
                                                 try! ImageHelper.save(image: decoderImage, to: baseDirectory.appendingPathComponent("gen-\(iteration)-\(index)-decoder.png"))
-
                                             }
                                          }))
 
         return (decoder, .init())
     }
-}
-
-func roundDouble(_ double: Double) -> UInt8 {
-
-    guard double != -.infinity else {
-        return 0
-    }
-
-    guard double != .infinity else {
-        return 255
-    }
-
-    guard !double.isNaN else {
-        return 0
-    }
-
-    guard double >= 0 else {
-        return 0
-    }
-
-    guard double <= 255 else {
-        return 255
-    }
-
-    return UInt8(double)
 }

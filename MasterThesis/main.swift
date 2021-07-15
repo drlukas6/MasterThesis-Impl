@@ -8,22 +8,26 @@ import Foundation
 import SwiftImage
 import AppKit
 
-let dataSource = LenaEdgeDetectionDataSource()
+let experiment = LargeAutoencoderExperiment()
+experiment.startExperiment()
+print()
 
-let opSet = EdgeDetectionOperationSet(numberOfInputs: 9)
-
-let graphParameters = CGPPopulation.GraphParameters(inputs: 9, outputs: 1, levelsBack: 2,
-                                                    dimension: .init(rows: 2, columns: 10),
-                                                    operationsSet: opSet) // EDGE DAJE OK REZ
-
-let population = CGPPopulation(fitnessCalculator: MSEFitnessCalculator(),
-                               graphParameters: graphParameters,
-                               populationSize: 8)
-
-let (_, history) = population.process(withDatasource: dataSource, runParameters: .init(generations: 25, error: 0.04))
-
-print("FINAL ERROR: \(history.errors.last!)")
-print("=== === === === === === === === === === === === === === ===")
+//let dataSource = LenaEdgeDetectionDataSource()
+//
+//let opSet = EdgeDetectionOperationSet(numberOfInputs: 9)
+//
+//let graphParameters = CGPPopulation.GraphParameters(inputs: 9, outputs: 1, levelsBack: 2,
+//                                                    dimension: .init(rows: 2, columns: 10),
+//                                                    operationsSet: opSet) // EDGE DAJE OK REZ
+//
+//let population = CGPPopulation(fitnessCalculator: MSEFitnessCalculator(),
+//                               graphParameters: graphParameters,
+//                               populationSize: 8)
+//
+//let (_, history) = population.process(withDatasource: dataSource, runParameters: .init(generations: 25, error: 0.04))
+//
+//print("FINAL ERROR: \(history.errors.last!)")
+//print("=== === === === === === === === === === === === === === ===")
 
 //for operationIndex in EdgeDetectionOperation.allCases.indices {
 //
